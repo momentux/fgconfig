@@ -1,0 +1,16 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "search.exclude": {
+      "**/Downloads": true,
+    },
+    "files.exclude": {
+      "**/Downloads": true
+    },
+    "editor.formatOnSave": true, // not needed
+  }
+}
