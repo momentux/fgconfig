@@ -1,0 +1,68 @@
+### Aircraft
+
+--fg-aircraft=C:\Users\scl\FlightGear\CustomAircraft\f16
+--aircraft=f16-block-60
+--addon=C:\Users\scl\FlightGear\Addons\fgcamera
+
+### Environment
+
+--timeofday=morning
+
+# Disabling real weather fetch speeds up startup.
+
+--disable-real-weather-fetch
+
+### Initial position
+
+--airport=VIDP
+--altitude=5000
+--heading=0
+--in-air
+--state=cruise
+--vc=600
+--visibility=5000
+
+### Rendering
+
+--bpp=32
+# --enable-wireframe
+# --prop:/sim/rendering/quality-level=1
+# --prop:/sim/rendering/shaders/quality-level=1
+# --prop:/sim/rendering/texture-compression=off
+# --prop:/sim/rendering/multi-sample-buffers=1
+# --prop:/sim/rendering/multi-samples=2
+
+### AI and Traffic
+
+# --disable-ai-traffic
+# --disable-ai-models
+# --prop:/sim/ai/enabled=0
+# --prop:/sim/traffic-manager/enabled=0
+
+### Network
+
+# --httpd=8080
+# --atlas=socket,out,1,localhost,5505,udp
+# --generic=socket,out,10,localhost,16661,udp,fgcom
+
+### System
+
+# --config="C:\Users\scl\FlightGear\camera-views.xml"
+--enable-fullscreen
+--enable-freeze
+--disable-sound
+--model-hz=120
+# --enable-hud-3d
+### Performance Optimizations
+
+# --disable-clouds
+# --disable-clouds3d
+# --fog-fastest
+# --disable-distance-attenuation
+# --prop:/sim/rendering/draw-mask/aircraft=1
+# --prop:/sim/rendering/draw-mask/models=1
+# --prop:/sim/rendering/draw-mask/clouds=0
+# --prop:/sim/rendering/draw-mask/terrain=1
+# --prop:/sim/current-view/internal=false
+--prop:/sim/view[122]/enabled=true
+--prop:/sim/view[102]/enabled=false
