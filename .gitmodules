@@ -1,6 +1,6 @@
 [submodule "Addons/fgcamera"]
 	path = Addons/fgcamera
 	url = https://github.com/PlayeRom/flightgear-addon-fgcamera.git
-[submodule "CustomAircraft/f16"]
-	path = CustomAircraft/f16
+[submodule "Aircrafts/f16"]
+	path = Aircrafts/f16
 	url = https://github.com/NikolaiVChr/f16.git
