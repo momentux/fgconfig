@@ -1,9 +1,16 @@
 ### Aircraft
-
+# mac 
 --download-dir=/Users/rverma2/.fgfs/Downloads
 --fg-scenery=/Users/rverma2/.fgfs/Scenery
 --fg-aircraft=/Users/rverma2/.fgfs/Aircrafts
-# --addon=/Users/rverma2/.fgfs/Addons/fgcamera
+--addon=/Users/rverma2/.fgfs/Addons/fgcamera
+
+# windows
+# --download-dir=C:\Users\scl/Flightgear\Downloads
+# --fg-scenery=C:\Users\scl/Flightgear\Scenery
+# --fg-aircraft=C:\Users\scl/Flightgear\Aircrafts
+# --addon=C:\Users\scl/Flightgear\Addons\fgcamera
+
 --aircraft=f16-block-60
 
 ### Environment
@@ -26,8 +33,8 @@
 
 ### Rendering
 
-# --bpp=8
-# --fov=130
+--bpp=32
+--fov=150
 
 ### AI and Traffic
 
@@ -44,9 +51,9 @@
 
 --config=/Users/rverma2/.fgfs/camera-views.xml
 --enable-fullscreen
---enable-panel
---enable-hud   
---enable-hud-3d  
+# --enable-panel
+# --enable-hud   
+# --enable-hud-3d  
 --enable-freeze
 --disable-sound
 --model-hz=120
@@ -56,4 +63,3 @@
 --disable-clouds
 --fog-fastest
 --disable-distance-attenuation
-# --prop:/sim/current-view/internal=false
