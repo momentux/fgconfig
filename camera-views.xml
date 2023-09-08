@@ -15,7 +15,7 @@
         <window>
           <name type="string">Front</name>
           <display>0</display>
-          <screen>0</screen>
+          <screen>1</screen>
           <fullscreen type="bool">true</fullscreen>
           <x>0</x>
           <y>0</y>
@@ -25,7 +25,7 @@
         <window>
           <name type="string">Left</name>
           <display>0</display>
-          <screen>0</screen>
+          <screen>2</screen>
           <fullscreen type="bool">true</fullscreen>
           <x>0</x>
           <y>0</y>
@@ -35,7 +35,7 @@
         <window>
           <name type="string">Right</name>
           <display>0</display>
-          <screen>0</screen>
+          <screen>3</screen>
           <fullscreen type="bool">true</fullscreen>
           <x>0</x>
           <y>0</y>
@@ -45,7 +45,7 @@
         <window>
           <name type="string">Cockpit</name>
           <display>0</display>
-          <screen>0</screen>
+          <screen>4</screen>
           <fullscreen type="bool">false</fullscreen>
           <x>0</x>
           <y>0</y>
