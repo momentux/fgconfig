@@ -2,6 +2,7 @@
 
 <PropertyList>
   <camera>
+    <name type="string">MFD</name>
     <dialog-show type="string">0</dialog-show>
     <tower>
       <roll-deg type="string">0</roll-deg>
@@ -27,7 +28,6 @@
     <panel-show type="string">0</panel-show>
     <dialog-name type="string"></dialog-name>
     <fov type="string">65</fov>
-    <name type="string">default</name>
     <head-tracker type="string">0</head-tracker>
     <enable-DHM type="string">1</enable-DHM>
     <movement>
