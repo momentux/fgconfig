@@ -7,7 +7,7 @@
       <quality-level>3</quality-level>
       <texture-compression type="string">off</texture-compression>
       <draw-mask>
-        <aircraft>1</aircraft>
+        <aircraft>0</aircraft>
         <models>1</models>
         <terrain>1</terrain>
       </draw-mask>
@@ -46,7 +46,7 @@
           <name type="string">Cockpit</name>
           <display>0</display>
           <screen>0</screen>
-          <fullscreen type="bool">true</fullscreen>
+          <fullscreen type="bool">false</fullscreen>
           <x>0</x>
           <y>0</y>
           <width>1920</width>
@@ -69,6 +69,7 @@
           <!-- <x-offset type="double">0.0</x-offset> -->
           <!-- <y-offset type="double">+-0.10</y-offset> -->
           <!-- </master-perspective> -->
+          <fullscreen type="bool">true</fullscreen>
         </camera>
         <camera>
           <name type="string">RightView</name>
@@ -82,6 +83,7 @@
           <right-of-perspective>
             <parent-camera>FrontView</parent-camera>
           </right-of-perspective>
+          <fullscreen type="bool">true</fullscreen>
         </camera>
         <camera>
           <name type="string">LeftView</name>
@@ -95,6 +97,7 @@
           <left-of-perspective>
             <parent-camera>FrontView</parent-camera>
           </left-of-perspective>
+          <fullscreen type="bool">true</fullscreen>
         </camera>
         <camera>
           <name type="string">CockpitView</name>
@@ -102,8 +105,10 @@
             <name>Cockpit</name>
           </window>
           <view>
-            <name>Tower View</name>
+            <heading-deg type="double">0</heading-deg>
+            <pitch-deg type="double">-25</pitch-deg>
           </view>
+          <fullscreen type="bool">false</fullscreen>
         </camera>
         <gui>
           <window>

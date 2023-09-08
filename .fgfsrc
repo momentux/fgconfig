@@ -42,7 +42,7 @@
 
 ### System
 
-# --config=/Users/rverma2/.fgfs/camera-views.xml
+--config=/Users/rverma2/.fgfs/camera-views.xml
 --enable-fullscreen
 --enable-panel
 --enable-hud   
@@ -56,4 +56,4 @@
 --disable-clouds
 --fog-fastest
 --disable-distance-attenuation
---prop:/sim/current-view/internal=false
+# --prop:/sim/current-view/internal=false
