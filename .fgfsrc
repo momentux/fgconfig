@@ -1,8 +1,10 @@
 ### Aircraft
 
---fg-aircraft=C:\Users\scl\FlightGear\CustomAircraft\f16
+--download-dir=/Users/rverma2/.fgfs/Downloads
+--fg-scenery=/Users/rverma2/.fgfs/Scenery
+--fg-aircraft=/Users/rverma2/.fgfs/Aircrafts
+# --addon=/Users/rverma2/.fgfs/Addons/fgcamera
 --aircraft=f16-block-60
---addon=C:\Users\scl\FlightGear\Addons\fgcamera
 
 ### Environment
 
@@ -14,8 +16,8 @@
 
 ### Initial position
 
---airport=VIDP
---altitude=5000
+--airport=KXTA
+--altitude=4000
 --heading=0
 --in-air
 --state=cruise
@@ -24,20 +26,13 @@
 
 ### Rendering
 
---bpp=32
-# --enable-wireframe
-# --prop:/sim/rendering/quality-level=1
-# --prop:/sim/rendering/shaders/quality-level=1
-# --prop:/sim/rendering/texture-compression=off
-# --prop:/sim/rendering/multi-sample-buffers=1
-# --prop:/sim/rendering/multi-samples=2
+# --bpp=8
+# --fov=130
 
 ### AI and Traffic
 
-# --disable-ai-traffic
-# --disable-ai-models
-# --prop:/sim/ai/enabled=0
-# --prop:/sim/traffic-manager/enabled=0
+--disable-ai-traffic
+--disable-ai-models
 
 ### Network
 
@@ -47,22 +42,18 @@
 
 ### System
 
-# --config="C:\Users\scl\FlightGear\camera-views.xml"
+# --config=/Users/rverma2/.fgfs/camera-views.xml
 --enable-fullscreen
+--enable-panel
+--enable-hud   
+--enable-hud-3d  
 --enable-freeze
 --disable-sound
 --model-hz=120
-# --enable-hud-3d
+
 ### Performance Optimizations
 
-# --disable-clouds
-# --disable-clouds3d
-# --fog-fastest
-# --disable-distance-attenuation
-# --prop:/sim/rendering/draw-mask/aircraft=1
-# --prop:/sim/rendering/draw-mask/models=1
-# --prop:/sim/rendering/draw-mask/clouds=0
-# --prop:/sim/rendering/draw-mask/terrain=1
-# --prop:/sim/current-view/internal=false
---prop:/sim/view[122]/enabled=true
---prop:/sim/view[102]/enabled=false
+--disable-clouds
+--fog-fastest
+--disable-distance-attenuation
+--prop:/sim/current-view/internal=false
