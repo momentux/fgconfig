@@ -1,154 +1,137 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <PropertyList>
   <sim>
-    <frame-rate-throttle-hz type="double">60</frame-rate-throttle-hz>
-    <multithreading-mode>CullDrawThreadPerContext</multithreading-mode>
     <rendering>
-      <quality-level>3</quality-level>
-      <texture-compression type="string">off</texture-compression>
-      <draw-mask>
-        <aircraft>1</aircraft>
-        <models>1</models>
-        <terrain>1</terrain>
-      </draw-mask>
       <camera-group>
         <window>
-          <name type="string">Front</name>
+          <name type="string">CockpitWin</name>
+          <display>0</display>
+          <screen>0</screen>
+          <fullscreen type="bool">true</fullscreen>
+          <decoration type="bool">true</decoration>
+          <x>0</x>
+          <y>0</y>
+          <width>1920</width>
+          <height>1080</height>
+        </window>
+        <window>
+          <name type="string">LeftWin</name>
+          <host-name type="string" />
           <display>0</display>
           <screen>1</screen>
           <fullscreen type="bool">true</fullscreen>
+          <decoration type="bool">false</decoration>
           <x>0</x>
           <y>0</y>
-          <width>1920</width>
-          <height>1080</height>
+          <width>3840</width>
+          <height>2160</height>
         </window>
         <window>
-          <name type="string">Left</name>
+          <name type="string">FrontWin</name>
+          <host-name type="string" />
           <display>0</display>
           <screen>2</screen>
           <fullscreen type="bool">true</fullscreen>
+          <decoration type="bool">false</decoration>
           <x>0</x>
           <y>0</y>
-          <width>1920</width>
-          <height>1080</height>
+          <width>3840</width>
+          <height>2160</height>
         </window>
         <window>
-          <name type="string">Right</name>
+          <name type="string">RightWin</name>
+          <host-name type="string" />
           <display>0</display>
           <screen>3</screen>
           <fullscreen type="bool">true</fullscreen>
+          <decoration type="bool">false</decoration>
           <x>0</x>
           <y>0</y>
-          <width>1920</width>
-          <height>1080</height>
+          <width>3840</width>
+          <height>2160</height>
         </window>
-        <window>
-          <name type="string">Cockpit</name>
-          <display>0</display>
-          <screen>4</screen>
-          <fullscreen type="bool">false</fullscreen>
-          <x>0</x>
-          <y>0</y>
-          <width>1920</width>
-          <height>1080</height>
-        </window>
-        <camera>
-          <name type="string">FrontView</name>
-          <window>
-            <name>Front</name>
-          </window>
-          <view>
-            <type>lookfrom</type>
-            <heading-offset-deg>0</heading-offset-deg>
-            <heading-deg type="double">0.0</heading-deg>
-            <roll-deg type="double">0.0</roll-deg>
-            <pitch-deg type="double">0.0</pitch-deg>
-          </view>
-          <master-perspective>
-            <eye-distance type="double">0.7</eye-distance>
-            <!-- <x-offset type="double">0.0</x-offset> -->
-            <!-- <y-offset type="double">+-0.10</y-offset> -->
-          </master-perspective>
-          <fullscreen type="bool">false</fullscreen>
-        </camera>
-        <camera>
-          <name type="string">RightView</name>
-          <window>
-            <name>Right</name>
-          </window>
-          <view>
-            <type>lookfrom</type>
-            <heading-offset-deg>45</heading-offset-deg>
-          </view>
-          <right-of-perspective>
-            <parent-camera>FrontView</parent-camera>
-          </right-of-perspective>
-          <fullscreen type="bool">true</fullscreen>
-        </camera>
-        <camera>
-          <name type="string">LeftView</name>
-          <window>
-            <name>Left</name>
-          </window>
-          <view>
-            <type>lookfrom</type>
-            <heading-offset-deg>-45</heading-offset-deg>
-          </view>
-          <left-of-perspective>
-            <parent-camera>FrontView</parent-camera>
-          </left-of-perspective>
-          <fullscreen type="bool">true</fullscreen>
-        </camera>
         <camera>
           <name type="string">CockpitView</name>
+          <type>lookfrom</type>
           <window>
-            <name>Cockpit</name>
+            <name>CockpitWin</name>
           </window>
           <view>
-            <name>MFD</name>
-            <enabled type="bool" userarchive="y">true</enabled>
-            <draw-mask>interior cockpit-panel</draw-mask>
             <type>lookfrom</type>
-            <internal type="bool">true</internal>
-            <config>
-              <from-model type="bool">true</from-model>
-              <from-model-idx type="int">0</from-model-idx>
-              <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
-              <default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
-              <default-pitch-deg type="double">0</default-pitch-deg>
-              <default-heading-deg type="double">0</default-heading-deg>
-              <front-direction-deg type="double">0</front-direction-deg>
-              <front-left-direction-deg type="double">45</front-left-direction-deg>
-              <left-direction-deg type="double">90</left-direction-deg>
-              <back-left-direction-deg type="double">135</back-left-direction-deg>
-              <back-direction-deg type="double">180</back-direction-deg>
-              <back-right-direction-deg type="double">225</back-right-direction-deg>
-              <right-direction-deg type="double">270</right-direction-deg>
-              <front-right-direction-deg type="double">315</front-right-direction-deg>
-              <dynamic-view type="bool">true</dynamic-view>
-
-              <x-offset-m archive="y">0</x-offset-m>
-              <y-offset-m archive="y">-0.15</y-offset-m>
-              <z-offset-m archive="y">0.6</z-offset-m>
-              <pitch-offset-deg>-8</pitch-offset-deg>
-            </config>
+            <heading-deg type="double">0</heading-deg>
+            <pitch-deg type = "double">-25</pitch-deg>
           </view>
-          <fullscreen type="bool">false</fullscreen>
+        </camera>
+        <camera>
+          <name type="string">Front</name>
+          <window>
+            <name>FrontWin</name>
+          </window>
+          <view>
+            <type>lookfrom</type>
+            <heading-deg type="double">0</heading-deg>
+            <pitch-deg type = "double">15</pitch-deg>
+          </view>
+          <!-- <frustum>
+						<top>0.133</top>
+						<bottom>-0.133</bottom>
+						<left>-.1668</left>
+						<right>.1668</right>
+						<near>0.4</near>
+						<far>120000.0</far>
+					</frustum> -->
+        </camera>
+
+        <camera>
+          <name type="string">Left</name>
+          <window>
+            <name>LeftWin</name>
+          </window>
+          <view>
+            <type>lookfrom</type>
+            <heading-deg type="double">60.3</heading-deg>
+            <pitch-deg type = "double">15</pitch-deg>
+          </view>
+          <left-perspective>
+            <parent-camera>Front</parent-camera>
+          </left-perspective>
+          <!-- <frustum>
+						<top>0.133</top>
+						<bottom>-0.133</bottom>
+						<left>-.1668</left>
+						<right>.1668</right>
+						<near>0.4</near>
+						<far>120000.0</far>
+					</frustum> -->
+        </camera>
+        <camera>
+          <name type="string">Right</name>
+          <window>
+            <name>RightWin</name>
+          </window>
+          <view>
+            <type>lookfrom</type>
+            <heading-deg type="double">-60.3</heading-deg>
+            <pitch-deg type = "double">15</pitch-deg>
+          </view>
+          <right-perspective>
+            <parent-camera>Front</parent-camera>
+          </right-perspective>
+          <!-- <frustum>
+						<top>0.133</top>
+						<bottom>-0.133</bottom>
+						<left>-.1668</left>
+						<right>.1668</right>
+						<near>0.4</near>
+						<far>120000.0</far>
+					</frustum> -->
         </camera>
         <gui>
           <window>
-            <name type="string">Cockpit</name>
+            <name type="string">CockpitWin</name>
           </window>
         </gui>
       </camera-group>
     </rendering>
-    <view n="120">
-      <name>FGCamera1</name>
-      <enabled type="bool" userarchive="y">true</enabled>
-    </view>
-    <view n="121">
-      <name>FGCamera2</name>
-      <enabled type="bool" userarchive="y">true</enabled>
-    </view>
   </sim>
 </PropertyList>

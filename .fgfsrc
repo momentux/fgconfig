@@ -1,14 +1,14 @@
 ### Aircraft
 # mac 
---download-dir=/Users/rverma2/.fgfs/Downloads
---fg-scenery=/Users/rverma2/.fgfs/Scenery
---fg-aircraft=/Users/rverma2/.fgfs/Aircrafts
---addon=/Users/rverma2/.fgfs/Addons/fgcamera
+# --download-dir=/Users/rverma2/.fgfs/Downloads
+# --fg-scenery=/Users/rverma2/.fgfs/Scenery
+# --fg-aircraft=/Users/rverma2/.fgfs/Aircrafts
+# --addon=/Users/rverma2/.fgfs/Addons/fgcamera
 
 # windows
-# --download-dir=C:\Users\scl/Flightgear\Downloads
-# --fg-scenery=C:\Users\scl/Flightgear\Scenery
-# --fg-aircraft=C:\Users\scl/Flightgear\Aircrafts
+--download-dir=C:\Users\scl/Flightgear\Downloads
+--fg-scenery=C:\Users\scl/Flightgear\Scenery
+--fg-aircraft=C:\Users\scl/Flightgear\Aircrafts
 # --addon=C:\Users\scl/Flightgear\Addons\fgcamera
 
 --aircraft=f16-block-60
@@ -24,22 +24,23 @@
 ### Initial position
 
 --airport=KXTA
---altitude=4000
---heading=0
---in-air
+# --altitude=4000
+# --heading=0
+# --in-air=true
 --state=cruise
---vc=600
---visibility=5000
+# --vc=600
+# --visibility=5000
 
 ### Rendering
 
 --bpp=32
---fov=150
+--fov=65
 
 ### AI and Traffic
 
---disable-ai-traffic
---disable-ai-models
+--enable-ai-traffic
+--enable-ai-models
+--disable-random-objects
 
 ### Network
 
@@ -49,17 +50,17 @@
 
 ### System
 
---config=/Users/rverma2/.fgfs/camera-views.xml
+# --config=/Users/rverma2/.fgfs/camera-views.xml
+--config=C:\Users\scl/Flightgear\camera-views.xml
 --enable-fullscreen
-# --enable-panel
-# --enable-hud   
-# --enable-hud-3d  
 --enable-freeze
 --disable-sound
 --model-hz=120
 
 ### Performance Optimizations
 
---disable-clouds
---fog-fastest
---disable-distance-attenuation
+--texture-filtering=16
+--enable-clouds3d
+# --fog-fastest
+--enable-distance-attenuation
+--prop:/sim/gui/current-style=0
