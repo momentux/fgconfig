@@ -55,7 +55,7 @@
 --enable-fullscreen
 --enable-freeze
 --disable-sound
---model-hz=120
+--model-hz=900
 
 ### Performance Optimizations
 
