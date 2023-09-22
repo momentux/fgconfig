@@ -1,0 +1,32 @@
+<generic>
+    <output>
+        <line_separator>newline</line_separator>
+        <var_separator>,</var_separator>
+        <chunk>
+            <name>combined-data</name>
+            
+            <node>
+                <name>property1</name>
+                <type>double</type>
+                <path>/path/to/property1</path>
+            </node>
+            
+            <node>
+                <name>property2</name>
+                <type>double</type>
+                <path>/path/to/property2</path>
+            </node>
+            
+            <output>
+                <nasal>
+                    <script>
+                        var value1 = getprop("/path/to/property1");
+                        var value2 = getprop("/path/to/property2");
+                        # Process or combine the values in some way
+                        # Optionally set properties or do other operations
+                    </script>
+                </nasal>
+            </output>
+        </chunk>
+    </output>
+</generic>
