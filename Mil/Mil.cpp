@@ -6,7 +6,7 @@ Get message results from BC stack
 * In order to read messages from Monitor stack, refer to Monitor code example
 ****************************************/
 
-//#include "stdafx.h"
+// #include "stdafx.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include "windows.h"
@@ -26,62 +26,6 @@ static UINT16 Element3 = 2;
 static UINT16 DB1 = 0;
 static UINT16 DB2 = 1;
 static UINT16 datablock32[64];
-
-int main()
-{
-	iResult = InitDevice();
-	if (iResult < 0)
-	{
-		mcx_GetReturnCodeDescription(iResult, errorCode);
-		printf("Error -> %s\n", errorCode);
-		return -1;
-	}
-
-	bool simulateRts = true;
-	iResult = CreateFrame(simulateRts);
-	if (iResult < 0)
-	{
-		mcx_GetReturnCodeDescription(iResult, errorCode);
-		printf("Error -> %s\n", errorCode);
-		return -1;
-	}
-
-	iResult = GetMessagesResults();
-	if (iResult < 0)
-	{
-		mcx_GetReturnCodeDescription(iResult, errorCode);
-		printf("Error -> %s\n", errorCode);
-		return -1;
-	}
-
-	mcx_Free(DeviceId);
-	printf("\n\n");
-	printf("\n\n");
-
-	// Get response from external device/unit or NoResponse in block status word
-	simulateRts = false;
-	iResult = CreateFrame(simulateRts);
-	if (iResult < 0)
-	{
-		mcx_GetReturnCodeDescription(iResult, errorCode);
-		printf("Error -> %s\n", errorCode);
-		return -1;
-	}
-
-	iResult = GetMessagesResults();
-	if (iResult < 0)
-	{
-		mcx_GetReturnCodeDescription(iResult, errorCode);
-		printf("Error -> %s\n", errorCode);
-		return -1;
-	}
-
-	printf("Ok, we are done, click Enter...");
-	getchar();
-	mcx_Free(DeviceId);
-
-	return 0;
-}
 
 INT16 InitDevice()
 {
@@ -192,4 +136,61 @@ INT16 GetMessagesResults()
 		printf("\n\n");
 	}
 	return results;
+}
+
+
+int main()
+{
+	iResult = InitDevice();
+	if (iResult < 0)
+	{
+		mcx_GetReturnCodeDescription(iResult, errorCode);
+		printf("Error -> %s\n", errorCode);
+		return -1;
+	}
+
+	bool simulateRts = true;
+	iResult = CreateFrame(simulateRts);
+	if (iResult < 0)
+	{
+		mcx_GetReturnCodeDescription(iResult, errorCode);
+		printf("Error -> %s\n", errorCode);
+		return -1;
+	}
+
+	iResult = GetMessagesResults();
+	if (iResult < 0)
+	{
+		mcx_GetReturnCodeDescription(iResult, errorCode);
+		printf("Error -> %s\n", errorCode);
+		return -1;
+	}
+
+	mcx_Free(DeviceId);
+	printf("\n\n");
+	printf("\n\n");
+
+	// Get response from external device/unit or NoResponse in block status word
+	simulateRts = false;
+	iResult = CreateFrame(simulateRts);
+	if (iResult < 0)
+	{
+		mcx_GetReturnCodeDescription(iResult, errorCode);
+		printf("Error -> %s\n", errorCode);
+		return -1;
+	}
+
+	iResult = GetMessagesResults();
+	if (iResult < 0)
+	{
+		mcx_GetReturnCodeDescription(iResult, errorCode);
+		printf("Error -> %s\n", errorCode);
+		return -1;
+	}
+
+	printf("Ok, we are done, click Enter...");
+	getchar();
+	mcx_Free(DeviceId);
+
+	return 0;
 }
