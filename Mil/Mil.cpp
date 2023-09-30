@@ -1,4 +1,4 @@
-/****************************************
+﻿/****************************************
 Create and transmit 1553 messages.
 Wait 1 ms to be sure that frame ended
 Get message results from BC stack
@@ -6,13 +6,13 @@ Get message results from BC stack
 * In order to read messages from Monitor stack, refer to Monitor code example
 ****************************************/
 
-// #include "stdafx.h"
+//#include "stdafx.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include "windows.h"
 #include "McxAPI.h"
 #include "McxAPIReturnCodes.h"
-// #include "BC.h"
+#include "Mil.h"
 
 #pragma comment(lib, "McxAPI")
 
