@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <scenario>
+    <name> Missiles over kxta</name>
+    <search-order>DATA_ONLY</search-order>
+    <nasal>
+      <load>
+        <![CDATA[
+          var up = 1;
+          var finish = 0;
+          var tanker18Roll = -90;  # Variable to track the roll of Tanker-18
+
+          # Function to apply the 9g turn to Tanker-18
+          var apply9gTurn = func () {
+              var tanker18 = props.globals.getNode("/ai/models/aircraft[name='Tanker-18']");
+              if (tanker18 != nil) {
+                  tanker18.getNode("controls/flight/target-roll", 1).setValue(tanker18Roll);
+              }
+              settimer(apply9gTurn, 120); 
+          }
+          
+          apply9gTurn();
+          
+        ]]>
+      </load>
+      <unload>
+        <![CDATA[
+          finish = 1;
+        ]]>
+      </unload>
+    </nasal>
+
+   <entry>
+      <type>aircraft</type>
+      <name>AGM-65</name>
+      <callsign>Fast-evading</callsign>
+      <model>Models/agm65/agm65.xml</model>
+      <latitude>37.7989</latitude>
+      <longitude>-116.7805</longitude>
+      <speed-ktas type="double">400</speed-ktas>
+      <speed>400</speed>
+      <heading>116</heading>
+      <altitude>14800</altitude>
+    </entry>
+
+    <entry>
+      <name>Tanker-18</name>
+      <callsign>Target 36k</callsign>
+      <type>aircraft</type>
+      <class>jet_fighter</class>
+      <altitude-ft>9900</altitude-ft>
+      <speed-ktas>500</speed-ktas>
+      <bank>0</bank>
+      <TACAN-channel-ID>041X</TACAN-channel-ID>
+      <model>Models/Aircraft/F-15.xml</model>
+      <fallback-model-index>515</fallback-model-index>
+      <latitude>37.258</latitude>
+      <longitude>-115.797</longitude>
+      <heading>113</heading>
+      <speed>500</speed>
+      <roll>0</roll>
+    </entry>
+  </scenario>
+</PropertyList>

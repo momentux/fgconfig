@@ -1,6 +1,3 @@
-[submodule "Addons/fgcamera"]
-	path = Addons/fgcamera
-	url = https://github.com/rverma-dev/flightgear-addon-fgcamera.git
 [submodule "Aircrafts/f16"]
 	path = Aircrafts/f16
 	url = https://github.com/NikolaiVChr/f16.git

@@ -1,0 +1,53 @@
+<PropertyList>
+
+  <scenario>
+    
+    <name>Moving targets around KXTA</name>
+
+    <description>
+      The following scenario puts 14 planes in orbit over
+      KXTA.
+
+      Nikolai V. Chr.
+    </description>
+    
+    <search-order>DATA_ONLY</search-order><!-- "DATA_ONLY", "PREFER_AI", "PREFER_DATA" -->
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee1</name>
+      <latitude type="double">37.258</latitude>
+      <longitude type="double">-115.797</longitude>
+      <speed-ktas type="double">40</speed-ktas>
+      <rudder type="double">0.5</rudder>
+      <heading type="double">030</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee2</name>
+      <latitude type="double">37.258</latitude>
+      <longitude type="double">-115.797</longitude>
+      <speed-fps type="double">40</speed-fps>
+      <rudder type="double">0.25</rudder>
+      <heading type="double">020</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee3</name>
+      <latitude type="double">37.258</latitude>
+      <longitude type="double">-115.797</longitude>
+      <speed type="double">40</speed>
+      <rudder type="double">0.75</rudder>
+      <heading type="double">010</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+  </scenario>
+
+</PropertyList>
