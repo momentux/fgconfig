@@ -1,14 +1,14 @@
 ### Aircraft
 # mac 
-# --download-dir=/Users/rverma2/.fgfs/Downloads
-# --fg-scenery=/Users/rverma2/.fgfs/Scenery
-# --fg-aircraft=/Users/rverma2/.fgfs/Aircrafts
+--download-dir=/Users/rverma/.fgfs/Downloads
+--fg-scenery=/Users/rverma/.fgfs/Scenery
+--fg-aircraft=/Users/rverma/.fgfs/Aircrafts
 # --addon=/Users/rverma2/.fgfs/Addons/fgcamera
 
 # windows
---download-dir=C:\Users\scl/Flightgear\Downloads
---fg-scenery=C:\Users\scl/Flightgear\Scenery
---fg-aircraft=C:\Users\scl/Flightgear\Aircrafts
+# --download-dir=C:\Users\scl/Flightgear\Downloads
+# --fg-scenery=C:\Users\scl/Flightgear\Scenery
+# --fg-aircraft=C:\Users\scl/Flightgear\Aircrafts
 # --addon=C:\Users\scl/Flightgear\Addons\fgcamera
 
 --aircraft=f16-block-60
@@ -24,9 +24,9 @@
 ### Initial position
 
 --airport=KXTA
-# --altitude=4000
+--altitude=9900
 # --heading=0
-# --in-air=true
+--in-air=true
 --state=cruise
 # --vc=600
 # --visibility=5000
@@ -51,7 +51,7 @@
 ### System
 
 # --config=/Users/rverma2/.fgfs/camera-views.xml
---config=C:\Users\scl/Flightgear\camera-views.xml
+# --config=C:\Users\scl/Flightgear\camera-views.xml
 --enable-fullscreen
 --enable-freeze
 --disable-sound

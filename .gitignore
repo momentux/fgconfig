@@ -3,3 +3,4 @@
 .vs
 **/Downloads
 out
+**/.DS_Store

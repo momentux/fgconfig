@@ -11,8 +11,8 @@ endif()
 
 project ("Mil")
 
-include_directories("C:/Sital/COMposer/COMposer_4.5.3.1.32bit/DevPackage")
-link_directories("C:/Sital/COMposer/COMposer_4.5.3.1.32bit/DevPackage")
+include_directories("lib")
+link_directories("lib")
 # Add source to this project's executable.
 add_executable (Mil "Mil.cpp" "Mil.h")
 target_link_libraries(Mil "McxAPI")
