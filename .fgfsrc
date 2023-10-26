@@ -53,11 +53,12 @@
 ### AI and Traffic
 --enable-ai-traffic
 --enable-ai-models
---prop:/f16/fcs/autopilot-on=1 
+--prop:/f16/fcs/autopilot-on=1
 --prop:/f16/fcs/switch-pitch-block20=1
 --prop:/f16/fcs/switch-roll-block20=-1
 --prop:/autopilot/route-manager/active=true
 --prop:/autopilot/route-manager/current-wp=1
+
 
 ### Network and logging
 --model-hz=500
