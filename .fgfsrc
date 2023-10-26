@@ -1,66 +1,70 @@
 ### Aircraft
 # mac 
---download-dir=/Users/rverma/.fgfs/Downloads
---fg-scenery=/Users/rverma/.fgfs/Scenery
---fg-aircraft=/Users/rverma/.fgfs/Aircrafts
-# --addon=/Users/rverma2/.fgfs/Addons/fgcamera
+--fg-aircraft=/Users/rverma2/.fgfs/Aircrafts
+--aircraft-dir=/Users/rverma2/.fgfs/Aircrafts/f16
+--download-dir=/Users/rverma2/.fgfs/Downloads
+--fg-scenery=/Users/rverma2/.fgfs/Scenery
+# --config=/Users/rverma2/.fgfs/camera-views.xml
 
 # windows
 # --download-dir=C:\Users\scl/Flightgear\Downloads
 # --fg-scenery=C:\Users\scl/Flightgear\Scenery
 # --fg-aircraft=C:\Users\scl/Flightgear\Aircrafts
-# --addon=C:\Users\scl/Flightgear\Addons\fgcamera
+# --aircraft-dir=C:\Users\scl/Flightgear\Aircraftsf\16
+# --config=C:\Users\scl/Flightgear\camera-views.xml
 
---aircraft=f16-block-60
-
-### Environment
-
---timeofday=morning
-
-# Disabling real weather fetch speeds up startup.
-
---disable-real-weather-fetch
-
-### Initial position
-
---airport=KXTA
---altitude=9900
-# --heading=0
---in-air=true
---state=cruise
-# --vc=600
-# --visibility=5000
-
-### Rendering
-
---bpp=32
---fov=65
-
-### AI and Traffic
-
---enable-ai-traffic
---enable-ai-models
---disable-random-objects
-
-### Network
-
-# --httpd=8080
-# --atlas=socket,out,1,localhost,5505,udp
-# --generic=socket,out,10,localhost,16661,udp,fgcom
 
 ### System
-
-# --config=/Users/rverma2/.fgfs/camera-views.xml
-# --config=C:\Users\scl/Flightgear\camera-views.xml
+# --composite-viewer=true
+--units-meters
 --enable-fullscreen
 --enable-freeze
 --disable-sound
---model-hz=900
+--disable-terrasync
+--disable-sentry
+--disable-rembrandt
+--disable-real-weather-fetch
+
+### Environment
+--aircraft=f16-block-60
+--timeofday=morning
+--prop:/sim/rendering/shaders/skydome=true
+--prop:/nasal/local_weather/enabled=false
+--prop:/sim/rendering/texture-cache/cache-enabled=false
+--prop:/environment/weather-scenario=Core high pressure region
+
+### Initial position
+--airport=KTNX
+--altitude=15000
+--heading=0
+--in-air
+--state=cruise
+--vc=600
+# --visibility=5000
+
+### Rendering
+--bpp=32
+--fov=65
+--prop:/sim/rendering/multi-sample-buffers=true
+
+### AI and Traffic
+--enable-ai-traffic
+--enable-ai-models
+
+
+### Network and logging
+--model-hz=500
+--httpd=8080
+# --atlas=socket,out,1,localhost,5505,udp
+# --generic=socket,out,1,localhost,5505,udp,insgps
+--generic=file,out,120,/tmp/fdr.csv,insgns-gps
+--jsbsim-output-directive-file=/Users/rverma2/.fgfs/config/jsb-out.xml
 
 ### Performance Optimizations
-
---texture-filtering=16
+--disable-random-objects
 --enable-clouds3d
-# --fog-fastest
+--fog-fastest
 --enable-distance-attenuation
 --prop:/sim/gui/current-style=0
+--prop:/sim/ai/scenario="moving_targets_around_KXTA"
+--prop:/sim/rendering/multithreading-mode=CullThreadPerCameraDrawThreadPerContext
