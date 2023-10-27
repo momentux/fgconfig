@@ -59,7 +59,6 @@
 --prop:/autopilot/route-manager/active=true
 --prop:/autopilot/route-manager/current-wp=1
 
-
 ### Network and logging
 --model-hz=500
 --httpd=8080
