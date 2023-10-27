@@ -4,6 +4,7 @@
 --aircraft-dir=/Users/rverma2/.fgfs/Aircrafts/f16
 --download-dir=/Users/rverma2/.fgfs/Downloads
 --fg-scenery=/Users/rverma2/.fgfs/Scenery
+--flight-plan=/Users/rverma2/.fgfs/config/route-kxta-ktnx.xml
 # --config=/Users/rverma2/.fgfs/camera-views.xml
 
 # windows
@@ -28,15 +29,17 @@
 ### Environment
 --aircraft=f16-block-60
 --timeofday=morning
+--prop:/autopilot/mode/heading-hold=true
 --prop:/sim/rendering/shaders/skydome=true
 --prop:/nasal/local_weather/enabled=false
 --prop:/sim/rendering/texture-cache/cache-enabled=false
 --prop:/environment/weather-scenario=Core high pressure region
 
 ### Initial position
---airport=KTNX
---altitude=15000
---heading=0
+--airport=KXTA
+--lon=-115.7965983
+--lat=37.25846241
+--altitude=4572
 --in-air
 --state=cruise
 --vc=600
@@ -50,7 +53,11 @@
 ### AI and Traffic
 --enable-ai-traffic
 --enable-ai-models
-
+--prop:/f16/fcs/autopilot-on=1 
+--prop:/f16/fcs/switch-pitch-block20=1
+--prop:/f16/fcs/switch-roll-block20=-1
+--prop:/autopilot/route-manager/active=true
+--prop:/autopilot/route-manager/current-wp=1
 
 ### Network and logging
 --model-hz=500

@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 <output name="/tmp/position.csv" type="CSV" rate="500">
     <simulation> ON </simulation>
-    <property> /sim/time/utc/day-seconds </property>
+    <velocities> ON </velocities>
+    <rates> ON </rates>
+    <moments> ON </moments>
     <property> position/lat-gc-deg </property>
     <property> position/long-gc-deg </property>
     <property> position/lat-geod-deg </property>
