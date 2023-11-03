@@ -8,8 +8,8 @@ class CustomMenu extends StatefulWidget {
   const CustomMenu({
     required this.themeMode,
     required this.onThemeChanged,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<CustomMenu> createState() => _CustomMenuState();

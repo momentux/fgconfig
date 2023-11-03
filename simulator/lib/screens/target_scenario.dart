@@ -6,7 +6,7 @@ import 'dart:io';
 import 'package:simulator/utils/xml.dart';
 
 class ScenarioManagementScreen extends StatefulWidget {
-  const ScenarioManagementScreen({Key? key}) : super(key: key);
+  const ScenarioManagementScreen({super.key});
 
   @override
   State<ScenarioManagementScreen> createState() =>
