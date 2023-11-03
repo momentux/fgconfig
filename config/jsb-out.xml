@@ -7,6 +7,22 @@
     <property> position/distance-from-start-lon-mt </property>
     <property> position/distance-from-start-lat-mt </property>
     <property> position/distance-from-start-mag-mt </property>
+    <property> position/longitude-string  </property> #long string
+    <property> position/latitude-string </property> #lat string
+    <property> position/altitude </property> #altitude
+    <property> orientation/roll-deg </property> #roll
+    <property> orientation/pitch-deg </property> #pitch
+    <property> orientation/yaw-deg </property> #yaw
+    <property> orientation/pitch-rate-degps </property> #pitch rate
+    <property> orientation/roll-rate-degps </property> #roll rate
+    <property> orientation/yaw-rate-degps </property> #yaw rate
+    <property> orientation/true-heading-deg </property> #true heading
+    <property> orientation/heading-magnetic-deg </property> #mag heading
+    <property> velocities/speed-down-fps </property> #down veolocities
+    <property> velocities/speed-east-fps </property> #east velocities
+    <property> velocities/speed-north-fps </property> #northvelocities
+    <property> velocities/groundspeed-kt </property>    #ground speed
+    <property> instrumentation/radar/az-field </property> #azimuth
     PG4_IN             3001
     PG4_LEFT           3002
     PG4_RIGHT          3003
