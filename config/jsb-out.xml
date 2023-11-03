@@ -1,36 +1,33 @@
 <?xml version="1.0"?>
 <output name="/tmp/position.csv" type="CSV" rate="500">
-    <property> position/lat-gc-deg </property>
+    <!-- Note the diff between FDM and FG values is too high, we are now considering FG values only -->
+
+    <property> /position/longitude-deg </property>
+    <property> /position/latitude-deg </property>
+    <property> /position/altitude-ft </property>
+    <property> /orientation/roll-deg </property>
+    <property> /orientation/pitch-deg </property>
+    <property> /orientation/pitch-rate-degps </property>
+    <property> /orientation/roll-rate-degps </property>
+    <property> /orientation/yaw-rate-degps </property>
+    <!-- <property> /orientation/yaw-deg </property>  -->
+    <!-- <property> /orientation/true-heading-deg </property>  -->
+    <property> /orientation/heading-magnetic-deg </property>
+    <property> /instrumentation/radar/az-field </property>
+    <property> /velocities/speed-down-fps </property>
+    <property> /velocities/speed-east-fps </property>
+    <property> /velocities/speed-north-fps </property>
+    <property> /velocities/groundspeed-kt </property>
+
+    <!-- <property> position/lat-gc-deg </property>
     <property> position/long-gc-deg </property>
     <property> position/geod-alt-ft </property>
     <property> position/h-agl-ft </property>
     <property> position/distance-from-start-lon-mt </property>
     <property> position/distance-from-start-lat-mt </property>
     <property> position/distance-from-start-mag-mt </property>
-    <property> /position/longitude-string  </property>
-    <property> /position/latitude-string </property> 
-    <property> /position/altitude </property> 
-
-
-    <property> /orientation/roll-deg </property> 
-    <property> /orientation/pitch-deg </property> 
-    <property> /orientation/yaw-deg </property> 
-    <property> /orientation/pitch-rate-degps </property> 
-    <property> /orientation/roll-rate-degps </property> 
-    <property> /orientation/yaw-rate-degps </property> 
-    <property> /orientation/true-heading-deg </property> 
-    <property> /orientation/heading-magnetic-deg </property> 
-
-    
-    <property> /instrumentation/radar/az-field </property>
-
-    
-    <property> /velocities/speed-down-fps </property> 
-    <property> /velocities/speed-east-fps </property> 
-    <property> /velocities/speed-north-fps </property>
-    <property> /velocities/groundspeed-kt </property>
     <property> velocities/u-fps </property>
     <property> velocities/v-fps </property>
     <property> velocities/w-fps </property>
-    <property> velocities/vt-fps </property>
+    <property> velocities/vt-fps </property> -->
 </output>
