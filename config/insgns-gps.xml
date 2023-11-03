@@ -11,12 +11,6 @@
             <var_separator>tab</var_separator>
 
             <chunk>
-                <name>time (utc)</name>
-                <type>double</type>
-                <node>/sim/time/utc</node>
-            </chunk>
-
-            <chunk>
                 <name>time (sec)</name>
                 <type>float</type>
                 <format>%.4f</format>
