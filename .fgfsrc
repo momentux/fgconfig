@@ -4,6 +4,7 @@
 --aircraft-dir=/Users/rverma2/.fgfs/Aircrafts/f16
 --download-dir=/Users/rverma2/.fgfs/Downloads
 --fg-scenery=/Users/rverma2/.fgfs/Scenery
+# --addon=/Users/rverma2/.fgfs/Addons/Bombable
 --flight-plan=/Users/rverma2/.fgfs/config/route-kxta-ktnx.xml
 # --config=/Users/rverma2/.fgfs/camera-views.xml
 
@@ -43,6 +44,7 @@
 --in-air
 --state=cruise
 --vc=600
+--heading=294
 # --visibility=5000
 
 ### Rendering
@@ -57,7 +59,7 @@
 --prop:/f16/fcs/switch-pitch-block20=1
 --prop:/f16/fcs/switch-roll-block20=-1
 --prop:/autopilot/route-manager/active=true
---prop:/autopilot/route-manager/current-wp=1
+--prop:/autopilot/route-manager/current-wp=0
 
 ### Network and logging
 --model-hz=500
