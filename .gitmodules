@@ -1,3 +1,6 @@
 [submodule "Aircrafts/f16"]
 	path = Aircrafts/f16
 	url = https://github.com/NikolaiVChr/f16.git
+[submodule "Addons/Bombable"]
+	path = Addons/Bombable
+	url = https://github.com/bhugh/Bombable.git
