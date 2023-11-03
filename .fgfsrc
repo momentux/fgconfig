@@ -63,7 +63,7 @@
 
 ### Network and logging
 --model-hz=500
---httpd=8080
+--httpd=8282
 # --atlas=socket,out,1,localhost,5505,udp
 # --generic=socket,out,1,localhost,5505,udp,insgps
 --generic=file,out,120,/tmp/fdr.csv,insgns-gps
