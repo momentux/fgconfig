@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simulator/utils/menu_bar.dart';
+import 'package:simulator/screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,10 +29,11 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(useMaterial3: true),
       darkTheme: ThemeData.dark(useMaterial3: true),
       themeMode: _themeMode,
-      home: CustomMenu(
-        themeMode: _themeMode,
-        onThemeChanged: _changeTheme,
-      ),
+      home: const HomeScreen(),
+      // CustomMenu(
+      //   themeMode: _themeMode,
+      //   onThemeChanged: _changeTheme,
+      // ),
     );
   }
 }
