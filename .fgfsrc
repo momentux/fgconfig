@@ -4,7 +4,7 @@
 --aircraft-dir=/Users/rverma2/.fgfs/Aircrafts/f16
 --download-dir=/Users/rverma2/.fgfs/Downloads
 --fg-scenery=/Users/rverma2/.fgfs/Scenery
-# --addon=/Users/rverma2/.fgfs/Addons/Bombable
+--addon=/Users/rverma2/.fgfs/Addons/Bombable
 --flight-plan=/Users/rverma2/.fgfs/config/route-kxta-ktnx.xml
 # --config=/Users/rverma2/.fgfs/camera-views.xml
 
@@ -27,8 +27,13 @@
 --disable-rembrandt
 --disable-real-weather-fetch
 
-### Environment
+### Aircraft specifics
 --aircraft=f16-block-60
+--prop:/f16/fcs/autopilot-on=1
+--prop:/f16/fcs/switch-pitch-block20=1
+--prop:/f16/fcs/switch-roll-block20=-1
+
+### Environment
 --timeofday=morning
 --prop:/autopilot/mode/heading-hold=true
 --prop:/sim/rendering/shaders/skydome=true
@@ -44,7 +49,7 @@
 --in-air
 --state=cruise
 --vc=600
---heading=294
+--heading=305.34
 # --visibility=5000
 
 ### Rendering
@@ -53,11 +58,9 @@
 --prop:/sim/rendering/multi-sample-buffers=true
 
 ### AI and Traffic
---enable-ai-traffic
+# --enable-ai-traffic
+--disable-ai-traffic
 --enable-ai-models
---prop:/f16/fcs/autopilot-on=1
---prop:/f16/fcs/switch-pitch-block20=1
---prop:/f16/fcs/switch-roll-block20=-1
 --prop:/autopilot/route-manager/active=true
 --prop:/autopilot/route-manager/current-wp=0
 
@@ -66,8 +69,8 @@
 --httpd=8282
 # --atlas=socket,out,1,localhost,5505,udp
 # --generic=socket,out,1,localhost,5505,udp,insgps
---generic=file,out,120,/tmp/fdr.csv,insgns-gps
---jsbsim-output-directive-file=/Users/rverma2/.fgfs/config/jsb-out.xml
+--generic=file,out,120,/tmp/fdr.csv,target-track
+# --jsbsim-output-directive-file=/Users/rverma2/.fgfs/config/jsb-out.xml
 
 ### Performance Optimizations
 --disable-random-objects
@@ -75,5 +78,5 @@
 --fog-fastest
 --enable-distance-attenuation
 --prop:/sim/gui/current-style=0
---prop:/sim/ai/scenario="moving_targets_around_KXTA"
+# --prop:/sim/ai/scenario="9g"
 --prop:/sim/rendering/multithreading-mode=CullThreadPerCameraDrawThreadPerContext
