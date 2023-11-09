@@ -117,7 +117,7 @@ class _CustomMenuState extends State<CustomMenu> {
           ],
         ),
       ],
-      child: const HomeScreen(),
+      child: HomeScreen(),
     );
   }
 }
