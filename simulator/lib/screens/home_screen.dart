@@ -1,67 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:simulator/screens/target_scenario.dart';
+import 'package:simulator/utils/app_sytels.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 3, vsync: this);
-  }
-
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('My Home Screen'),
-        bottom: TabBar(
-          controller: _tabController,
-          tabs: [
-            Tab(text: 'Tab 1'),
-            Tab(text: 'Tab 2'),
-            Tab(text: 'Tab 3'),
-          ],
-        ),
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          // Content for Tab 1
-          SingleChildScrollView(
-            child: const ScenarioManagementScreen(),
-          ),
-
-          // Content for Tab 2
-          SingleChildScrollView(
-            child: Container(
-              color: Colors.green,
-              child: Center(child: Text('Tab 2 Content')),
-            ),
-          ),
-
-          // Content for Tab 3
-          SingleChildScrollView(
-            child: Container(
-              color: Colors.blue,
-              child: Center(child: Text('Tab 3 Content')),
-            ),
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
+        child: Column(children: [
+          const ScenarioManagementScreen(),
+          Row(
+            children: [
+              _mainButton(() => null, 'Launch'),
+              Row(children: [_actionButton(() => null, Icons.folder)])
+            ],
+          )
+        ]),
       ),
     );
   }
 
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
+  ElevatedButton _mainButton(Function()? onPressed, String text) {
+    return ElevatedButton(
+        onPressed: onPressed, style: AppTheme.buttonStyle(), child: Text(text));
+  }
+
+  IconButton _actionButton(Function()? onPressed, IconData icon) {
+    return IconButton(
+      onPressed: onPressed,
+      splashRadius: 20,
+      splashColor: AppTheme.accent,
+      icon: Icon(
+        icon,
+        color: AppTheme.meduim,
+      ),
+    );
   }
 }
-
