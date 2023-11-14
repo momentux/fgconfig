@@ -1,8 +1,20 @@
 <?xml version="1.0"?>
-<output name="/tmp/position.csv" type="CSV" rate="500">
-    <!-- Note the diff between FDM and FG values is too high, we are now considering FG values only -->
+<output name="GroundTrack.kml.csv" type="CSV" rate="120">
+    <property> position/long-gc-deg </property>
+    <property> position/lat-gc-deg </property>
+    <property> position/h-sl-meters </property>
+</output>
 
-    <property> /position/longitude-deg </property>
+<!-- <output name="/tmp/position.csv" type="CSV" rate="500">
+    <property> velocities/vc-kts </property>
+    <velocities> ON </velocities>
+</output>
+
+<output name="/tmp/targets.csv" type="CSV" rate="500">
+    <property>/ai/models/aircraft/orientation/true-heading-deg</property>
+</output> -->
+
+<!-- <output name="/tmp/fg.csv" type="CSV" rate="500">
     <property> /position/latitude-deg </property>
     <property> /position/altitude-ft </property>
     <property> /orientation/roll-deg </property>
@@ -10,17 +22,15 @@
     <property> /orientation/pitch-rate-degps </property>
     <property> /orientation/roll-rate-degps </property>
     <property> /orientation/yaw-rate-degps </property>
-<!-- <property> /orientation/yaw-deg </property>  -->
-    <!-- <property> /orientation/true-heading-deg </property>  -->
     <property> /orientation/heading-magnetic-deg </property>
     <property> /instrumentation/radar/az-field </property>
     <property> /velocities/speed-down-fps </property>
     <property> /velocities/speed-east-fps </property>
     <property> /velocities/speed-north-fps </property>
     <property> /velocities/groundspeed-kt </property>
+</output>  -->
 
-    <!-- FDM values only -->
-    <position> ON </position>
+<!-- <property> /position/longitude-deg </property>
     <property> position/epa-rad </property>
     <property> position/h-sl-ft </property>
     <property> position/h-sl-meters </property>
@@ -40,8 +50,6 @@
     <property> position/vrp-gc-latitude_deg </property>
     <property> position/vrp-longitude_deg </property>
     <property> position/vrp-radius-ft </property>
-
-    <velocities> ON </velocities>
     <property> velocities/h-dot-fps </property>
     <property> velocities/v-north-fps </property>
     <property> velocities/v-east-fps </property>
@@ -72,8 +80,4 @@
     <property> velocities/w-aero-fps </property>
     <property> velocities/vt-fps </property>
     <property> velocities/mach </property>
-    <property> velocities/vg-fps </property>
-
-    <simulation> ON </simulation>
-    <atmosphere> ON </atmosphere>
-</output>
+    <property> velocities/vg-fps </property> -->

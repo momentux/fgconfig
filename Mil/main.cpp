@@ -9,10 +9,9 @@ Get message results from BC stack
 // #include "stdafx.h"
 #include <stdio.h>
 #include <stdlib.h>
-// #include "windows.h"
+#include "windows.h"
 #include "McxAPI.h"
 #include "McxAPIReturnCodes.h"
-#include "Mil.h"
 
 #pragma comment(lib, "McxAPI")
 
@@ -137,7 +136,6 @@ INT16 GetMessagesResults()
 	}
 	return results;
 }
-
 
 int main()
 {

@@ -1,0 +1,3 @@
+/Applications/CMake.app/Contents/bin/cmake -E rm -f CMakeFiles/mil.dir/objects.a
+/opt/homebrew/bin/x86_64-w64-mingw32-ar qc CMakeFiles/mil.dir/objects.a @CMakeFiles/mil.dir/objects1.rsp
+/opt/homebrew/bin/x86_64-w64-mingw32-g++ -Wl,--whole-archive CMakeFiles/mil.dir/objects.a -Wl,--no-whole-archive -o mil.exe -Wl,--out-implib,libmil.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles/mil.dir/linkLibs.rsp

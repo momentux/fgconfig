@@ -4,7 +4,7 @@
 --aircraft-dir=/Users/rverma2/.fgfs/Aircrafts/f16
 --download-dir=/Users/rverma2/.fgfs/Downloads
 --fg-scenery=/Users/rverma2/.fgfs/Scenery
---addon=/Users/rverma2/.fgfs/Addons/Bombable
+# --addon=/Users/rverma2/.fgfs/Addons/Bombable
 --flight-plan=/Users/rverma2/.fgfs/config/route-kxta-ktnx.xml
 # --config=/Users/rverma2/.fgfs/camera-views.xml
 
@@ -17,8 +17,7 @@
 
 
 ### System
-# --composite-viewer=true
---units-meters
+# --units-meters
 --enable-fullscreen
 --enable-freeze
 --disable-sound
@@ -35,11 +34,10 @@
 
 ### Environment
 --timeofday=morning
---prop:/autopilot/mode/heading-hold=true
 --prop:/sim/rendering/shaders/skydome=true
 --prop:/nasal/local_weather/enabled=false
---prop:/sim/rendering/texture-cache/cache-enabled=false
---prop:/environment/weather-scenario=Core high pressure region
+--prop:/sim/rendering/texture-cache/cache-enabled=true
+# --prop:/environment/weather-scenario='Core high pressure region'
 
 ### Initial position
 --airport=KXTA
@@ -58,9 +56,9 @@
 --prop:/sim/rendering/multi-sample-buffers=true
 
 ### AI and Traffic
-# --enable-ai-traffic
 --disable-ai-traffic
 --enable-ai-models
+--prop:/sim/ai/traffic-manager/enabled=false
 --prop:/autopilot/route-manager/active=true
 --prop:/autopilot/route-manager/current-wp=0
 
@@ -69,8 +67,9 @@
 --httpd=8282
 # --atlas=socket,out,1,localhost,5505,udp
 # --generic=socket,out,1,localhost,5505,udp,insgps
---generic=file,out,120,/tmp/fdr.csv,target-track
-# --jsbsim-output-directive-file=/Users/rverma2/.fgfs/config/jsb-out.xml
+# --generic=file,out,120,/tmp/fdr.csv,target-track
+--jsbsim-output-directive-file=/Users/rverma2/.fgfs/config/jsb-out.xml
+--jsbsim-output-directive-file=/Users/rverma2/.fgfs/config/jsb-out2.xml
 
 ### Performance Optimizations
 --disable-random-objects
@@ -78,5 +77,8 @@
 --fog-fastest
 --enable-distance-attenuation
 --prop:/sim/gui/current-style=0
-# --prop:/sim/ai/scenario="9g"
 --prop:/sim/rendering/multithreading-mode=CullThreadPerCameraDrawThreadPerContext
+
+### Scenarios
+--prop:/sim/ai/scenario="9g"
+--prop:double:/ai/models/aircraft/orientation/true-heading-deg=0
