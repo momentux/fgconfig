@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<output name="localhost" type="socket" port="8700" protocol="UDP" rate="240">
-    <property> position/lat-gc-deg </property>
-    <property> position/h-sl-meters </property>
-</output>
