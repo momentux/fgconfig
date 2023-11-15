@@ -7,8 +7,8 @@ Get message results from BC stack
 ****************************************/
 
 // #include "stdafx.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio.h>
+#include <cstdlib.h>
 #include "windows.h"
 #include "McxAPI.h"
 #include "McxAPIReturnCodes.h"
