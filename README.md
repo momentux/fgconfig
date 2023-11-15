@@ -1,12 +1,19 @@
-export  GNUTLS_CPUID_OVERRIDE=0x1 
+# How to use guide
 
-sudo apt-get install xserver-xorg-core --no-install-recommends --no-install-suggests
-sudo apt-get install openbox --no-install-recommends --no-install-suggests
-sudo apt-get install xinit
-sudo apt-get install slim
-sudo apt-get install x11-apps
+1. Clone this repo into ~/.fgfs
 
-sudo adduser rverma sudo
-sudo chown -R username:username /home/username/.ssh
-sudo chmod 0700 /home/username/.ssh
-sudo chmod 0600 /home/username/.ssh/authorized_keys
+```
+git clone --recurse-submodules 	https://github.com/momentux/fgconfig.git
+```
+
+2. Add symbolic link to fgfsrc
+
+```
+ln -sfn ~/.fgfs/.fgfsrc ~/.fgfsrc
+```
+
+3. Define scenarios in [Aircrafts/f16/Scenarios](Aircrafts/f16/Scenarios)
+
+4. Captur outputs by modifying [jsbsim config](Aircrafts/f16/f16b60.xml)
+
+5. Define routes [example](config/route-kxta-ktnx.xml) and pass them in [.fgfsrc](.fgfsrc)
