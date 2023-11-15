@@ -68,8 +68,6 @@
 # --atlas=socket,out,1,localhost,5505,udp
 # --generic=socket,out,1,localhost,5505,udp,insgps
 # --generic=file,out,120,/tmp/fdr.csv,target-track
-# --jsbsim-output-directive-file=/Users/rverma2/.fgfs/config/jsb-out.xml
-# --jsbsim-output-directive-file=/Users/rverma2/.fgfs/config/jsb-out2.xml
 
 ### Performance Optimizations
 --disable-random-objects
