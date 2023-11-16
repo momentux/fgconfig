@@ -7,16 +7,24 @@ Get message results from BC stack
 ****************************************/
 
 // #include "stdafx.h"
-#include <cstdio.h>
-#include <cstdlib.h>
-#include "windows.h"
+#include <cstdio>
+#include <cstdlib>
+#include <stdint.h> // For standard integer types
+#include <unistd.h> // For usleep
+
+// Assuming "McxAPI.h" and "McxAPIReturnCodes.h" are cross-platform
 #include "McxAPI.h"
 #include "McxAPIReturnCodes.h"
+
+// Define Windows-specific types for cross-platform compatibility
+typedef int16_t INT16;
+typedef uint16_t UINT16;
 
 #pragma comment(lib, "McxAPI")
 
 INT16 iResult = 0;
 UINT16 DeviceId = 0;
+
 char errorCode[1000];
 static UINT16 BusList1 = 0;
 static UINT16 Element1 = 0;
@@ -139,6 +147,8 @@ INT16 GetMessagesResults()
 
 int main()
 {
+	printf("Mil1553BcRtRt\n");
+	// Initialize device
 	iResult = InitDevice();
 	if (iResult < 0)
 	{
@@ -191,4 +201,9 @@ int main()
 	mcx_Free(DeviceId);
 
 	return 0;
+}
+
+void Sleep(int milliseconds)
+{
+	usleep(milliseconds * 1000);
 }
