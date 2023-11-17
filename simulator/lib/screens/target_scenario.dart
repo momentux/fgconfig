@@ -462,70 +462,96 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
       entries.add({
         'sourceAirport': waypoints[i].airport,
         'numberOfAirTargets': waypoints[i].numberofairtargets,
-        'numberOfGroundTargets':
-            waypoints[i].numberofgroundtargets,
+        'numberOfGroundTargets': waypoints[i].numberofgroundtargets,
         'seaTargets': waypoints[i].numberofseatargets,
         'Speed': waypoints[i].speed,
         'roll': waypoints[i].roll,
       });
     }
     inputs.add({'scenarioEntry': entries});
-    // Print the array of objects
+
     print(inputs);
 
     // Add your XML generation logic here
-        // Create a Scenario object with the entered parameters
+    // Create a Scenario object with the entered parameters
+    // Find the map containing the 'scenarioEntry' key
+    Map<String, dynamic>? scenarioEntryMap = inputs.firstWhere(
+      (map) => map.containsKey('scenarioEntry'),
+    );
+    List<dynamic> scenarioEntryList = scenarioEntryMap['scenarioEntry'];
+    print(scenarioEntryList);
+
     final scenario = Scenario(
       scenarioName: scenarioNameController.text,
       description: "Description goes here", // Replace with a description
       searchOrder: "DATA_ONLY", // Replace with your desired search order
+
       entries: [
-        for (int i = 0; i < 10; i++)
-          ScenarioEntry(
-            type: "ship",
-            model: "Models/Military/humvee-pickup-odrab-low-poly.ac",
-            name: sourceAirport, // Auto-generated name based on airport
-            latitude: 0.0, // Calculate latitude based on airport
-            longitude: 0.0, // Calculate longitude based on airport
-            speed: speed,
-            rudder: roll,
-            heading: 0.0, // Replace with your desired heading
-            altitude: 4750.0, // Replace with your desired altitude
-          ),
+        for (int i = 0; i < scenarioEntryList.length; i++)
+          if (scenarioEntryList[i].containsKey('numberOfAirTargets'))
+            for (int j = 0; j < scenarioEntryList[i]['numberOfAirTargets']; j++)
+              ScenarioEntry(
+                type: "ship",
+                model: "Models/Military/humvee-pickup-odrab-low-poly.ac",
+                name: scenarioEntryList[i]['sourceAirport'].toString(),
+                // Convert sourceAirport to String
+                latitude: 0.0, // Calculate latitude based on airport
+                longitude: 0.0, // Calculate longitude based on airport
+                speed: 12,
+                rudder: 123,
+                heading: 0.0, // Replace with your desired heading
+                altitude: 4750.0, // Replace with your desired altitude
+              ),
+          if (scenarioEntryList[i].containsKey('numberOfAirTargets'))
+            for (int j = 0; j < scenarioEntryList[i]['numberOfAirTargets']; j++)
+              ScenarioEntry(
+                type: "ship",
+                model: "Models/Military/humvee-pickup-odrab-low-poly.ac",
+                name: scenarioEntryList[i]['sourceAirport'].toString(),
+                // Convert sourceAirport to String
+                latitude: 0.0, // Calculate latitude based on airport
+                longitude: 0.0, // Calculate longitude based on airport
+                speed: 12,
+                rudder: 123,
+                heading: 0.0, // Replace with your desired heading
+                altitude: 4750.0, // Replace with your desired altitude
+              ),
       ],
     );
+
+    print(scenario);
 
     // Generate the XML content
     final xmlContent = buildScenarioXML(scenario);
 
-    // Save the XML to a file (you can specify the file path)
-    final xmlFile =
-        File('/Users/rverma/.fgfs/Aircrafts/f16/Scenarios/scenario.xml');
-    await xmlFile.writeAsString(xmlContent);
+    //   // Save the XML to a file (you can specify the file path)
+    //   final xmlFile =
+    //       File('/Users/rverma/.fgfs/Aircrafts/f16/Scenarios/scenario.xml');
+    //   await xmlFile.writeAsString(xmlContent);
 
-    // Show a dialog or toast indicating success
-    // ignore: use_build_context_synchronously
-    showDialog(
-      context: context,
-      builder: (context) {
-        // Capture the context before the async gap
-        final currentContext = context;
+    //   // Show a dialog or toast indicating success
+    //   // ignore: use_build_context_synchronously
+    //   showDialog(
+    //     context: context,
+    //     builder: (context) {
+    //       // Capture the context before the async gap
+    //       final currentContext = context;
 
-        return AlertDialog(
-          title: const Text("Scenario Created"),
-          content: const Text("Scenario XML file generated successfully!"),
-          actions: [
-            TextButton(
-              onPressed: () {
-                // Use the captured context to pop the dialog
-                Navigator.of(currentContext).pop();
-              },
-              child: const Text("Close"),
-            ),
-          ],
-        );
-      },
-    );
+    //       return AlertDialog(
+    //         title: const Text("Scenario Created"),
+    //         content: const Text("Scenario XML file generated successfully!"),
+    //         actions: [
+    //           TextButton(
+    //             onPressed: () {
+    //               // Use the captured context to pop the dialog
+    //               Navigator.of(currentContext).pop();
+    //             },
+    //             child: const Text("Close"),
+    //           ),
+    //         ],
+    //       );
+    //     },
+    //   );
   }
 }
 
@@ -541,6 +567,10 @@ class Scenario {
     required this.searchOrder,
     required this.entries,
   });
+  @override
+  String toString() {
+    return 'Scenario(scenarioName: $scenarioName, description: $description, searchOrder: $searchOrder, entries: $entries)';
+  }
 }
 
 class ScenarioEntry {
@@ -565,4 +595,8 @@ class ScenarioEntry {
     required this.heading,
     required this.altitude,
   });
+  @override
+  String toString() {
+    return 'ScenarioEntry(type: $type, model: $model, name: $name, latitude: $latitude, longitude: $longitude, speed: $speed, rudder: $rudder, heading: $heading, altitude: $altitude)';
+  }
 }
