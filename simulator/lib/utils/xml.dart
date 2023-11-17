@@ -1,8 +1,5 @@
 import 'package:simulator/screens/target_scenario.dart';
 
-
-
-
 String buildScenarioXML(Scenario scenario) {
   final xml = StringBuffer();
 
