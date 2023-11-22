@@ -1,8 +1,10 @@
+// ignore_for_file: unnecessary_string_escapes
+
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:simulator/data/airports.dart';
 import 'dart:io';
-
 import 'package:simulator/utils/xml.dart';
 
 class Waypoint {
@@ -462,45 +464,109 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
       entries.add({
         'sourceAirport': waypoints[i].airport,
         'numberOfAirTargets': waypoints[i].numberofairtargets,
-        'numberOfGroundTargets':
-            waypoints[i].numberofgroundtargets,
+        'numberOfGroundTargets': waypoints[i].numberofgroundtargets,
         'seaTargets': waypoints[i].numberofseatargets,
-        'Speed': waypoints[i].speed,
+        'speed': waypoints[i].speed,
         'roll': waypoints[i].roll,
       });
     }
     inputs.add({'scenarioEntry': entries});
-    // Print the array of objects
+
     print(inputs);
 
     // Add your XML generation logic here
-        // Create a Scenario object with the entered parameters
+    // Create a Scenario object with the entered parameters
+    // Find the map containing the 'scenarioEntry' key
+    Map<String, dynamic>? scenarioEntryMap = inputs.firstWhere(
+      (map) => map.containsKey('scenarioEntry'),
+    );
+    List<dynamic> scenarioEntryList = scenarioEntryMap['scenarioEntry'];
+    print(scenarioEntryList);
+    final List<ScenarioEntry> scenarioEntries = [];
+
+    for (int i = 0; i < scenarioEntryList.length; i++) {
+      // Outer loop: Iterate over scenarioEntryList
+
+      Map<String, dynamic> currentEntry = scenarioEntryList[i];
+
+      // Create a ScenarioEntry for the current scenarioEntry
+      ScenarioEntry air = ScenarioEntry(
+        type: 'ship',
+        model: 'Models/Military/humvee-pickup-odrab-low-poly.ac',
+        name: currentEntry['sourceAirport'],
+        latitude: 0.0,
+        longitude: 0.0,
+        speed: currentEntry['speed'],
+        rudder: currentEntry['roll'],
+        heading: 0.0,
+        altitude: 4750.0,
+      );
+      ScenarioEntry ground = ScenarioEntry(
+        type: 'tanker',
+        model: 'Models/Military/humvee-pickup-odrab-low-poly.ac',
+        name: currentEntry['sourceAirport'],
+        latitude: 0.0,
+        longitude: 0.0,
+        speed: currentEntry['speed'],
+        rudder: currentEntry['roll'],
+        heading: 0.0,
+        altitude: 4750.0,
+      );
+      ScenarioEntry sea = ScenarioEntry(
+        type: 'aircraft',
+        model: 'Models/Military/humvee-pickup-odrab-low-poly.ac',
+        name: currentEntry['sourceAirport'],
+        latitude: 0.0,
+        longitude: 0.0,
+        speed: currentEntry['speed'],
+        rudder: currentEntry['roll'],
+        heading: 0.0,
+        altitude: 4750.0,
+      );
+
+      for (int j = 0; j < currentEntry['numberOfAirTargets']; j++) {
+        // Inner loop 1: Iterate over numberOfAirTargets for the current scenarioEntry
+        print('Inner loop 1: i = $i, j = $j');
+
+        // Add the ScenarioEntry to the scenarioEntries list
+        scenarioEntries.add(air);
+      }
+
+      for (int k = 0; k < currentEntry['numberOfGroundTargets']; k++) {
+        // Inner loop 2: Iterate over numberOfGroundTargets for the current scenarioEntry
+        print('Inner loop 2: i = $i, k = $k');
+
+        // Add the ScenarioEntry to the scenarioEntries list
+        scenarioEntries.add(ground);
+      }
+
+      for (int k = 0; k < currentEntry['seaTargets']; k++) {
+        // Inner loop 2: Iterate over numberOfGroundTargets for the current scenarioEntry
+        print('Inner loop 2: i = $i, k = $k');
+
+        // Add the ScenarioEntry to the scenarioEntries list
+        scenarioEntries.add(sea);
+      }
+    }
+
+// Create the Scenario object
     final scenario = Scenario(
       scenarioName: scenarioNameController.text,
-      description: "Description goes here", // Replace with a description
-      searchOrder: "DATA_ONLY", // Replace with your desired search order
-      entries: [
-        for (int i = 0; i < 10; i++)
-          ScenarioEntry(
-            type: "ship",
-            model: "Models/Military/humvee-pickup-odrab-low-poly.ac",
-            name: sourceAirport, // Auto-generated name based on airport
-            latitude: 0.0, // Calculate latitude based on airport
-            longitude: 0.0, // Calculate longitude based on airport
-            speed: speed,
-            rudder: roll,
-            heading: 0.0, // Replace with your desired heading
-            altitude: 4750.0, // Replace with your desired altitude
-          ),
-      ],
+      description: "Description goes here",
+      searchOrder: "DATA_ONLY",
+      entries: scenarioEntries,
     );
+
+    print(scenario);
 
     // Generate the XML content
     final xmlContent = buildScenarioXML(scenario);
 
     // Save the XML to a file (you can specify the file path)
-    final xmlFile =
-        File('/Users/rverma/.fgfs/Aircrafts/f16/Scenarios/scenario.xml');
+    var filePath =
+        r'C:\Users\enggr\Desktop\pp\fgconfig\Aircrafts\f16\Scenarios\'+scenario.scenarioName+'.xml';
+
+    final xmlFile = File(filePath);
     await xmlFile.writeAsString(xmlContent);
 
     // Show a dialog or toast indicating success
@@ -541,18 +607,22 @@ class Scenario {
     required this.searchOrder,
     required this.entries,
   });
+  @override
+  String toString() {
+    return 'Scenario(scenarioName: $scenarioName, description: $description, searchOrder: $searchOrder, entries: $entries)';
+  }
 }
 
 class ScenarioEntry {
-  String type;
-  String model;
-  String name; // Auto-generated
-  double latitude; // Auto-generated based on sourceAirport
-  double longitude; // Auto-generated based on sourceAirport
-  double speed;
-  double rudder;
-  double heading;
-  double altitude;
+  final String type;
+  final String model;
+  final String name; // Auto-generated
+  final double latitude; // Auto-generated based on sourceAirport
+  final double longitude; // Auto-generated based on sourceAirport
+  final double speed;
+  final double rudder;
+  final double heading;
+  final double altitude;
 
   ScenarioEntry({
     required this.type,
@@ -565,4 +635,8 @@ class ScenarioEntry {
     required this.heading,
     required this.altitude,
   });
+  @override
+  String toString() {
+    return 'ScenarioEntry(type: $type, model: $model, name: $name, latitude: $latitude, longitude: $longitude, speed: $speed, rudder: $rudder, heading: $heading, altitude: $altitude)';
+  }
 }
