@@ -1,24 +1,44 @@
-﻿# CMakeList.txt : CMake project for Mil, include source and define
-# project specific logic here.
-#
-cmake_minimum_required (VERSION 3.8)
+﻿cmake_minimum_required(VERSION 3.10)
 
-# Enable Hot Reload for MSVC compilers if supported.
-if (POLICY CMP0141)
-  cmake_policy(SET CMP0141 NEW)
-  set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
-endif()
+# Set your project name
+project(Mil)
 
-project ("Mil")
+# Specify the C++ standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-include_directories("lib")
-link_directories("lib")
-# Add source to this project's executable.
-add_executable (Mil "Mil.cpp" "Mil.h")
-target_link_libraries(Mil "McxAPI")
+# Include directories for header files
+include_directories(${PROJECT_SOURCE_DIR}/include)
 
-if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET Mil PROPERTY CXX_STANDARD 20)
-endif()
+# Source files
+file(GLOB SOURCES "main.cpp")
 
-# TODO: Add tests and install targets if needed.
+# Add executable
+add_executable(Mil ${SOURCES})
+
+# Define the directory where your libraries are located
+set(LIBRARY_DIR "${PROJECT_SOURCE_DIR}/lib")
+
+# Collect all files in the specified directory
+file(GLOB LIB_FILES "${LIBRARY_DIR}/*")
+
+# Loop through each file
+foreach(LIB_FILE IN LISTS LIB_FILES)
+    # Get the filename without the path
+    get_filename_component(LIB_NAME ${LIB_FILE} NAME_WE)
+
+    # Attempt to find the library and add it
+    find_library(FOUND_LIB NAMES ${LIB_NAME} PATHS ${LIBRARY_DIR})
+
+    if(NOT FOUND_LIB)
+        message(WARNING "Library ${LIB_NAME} not found in ${LIBRARY_DIR}")
+    else()
+        message(STATUS "Found library: ${FOUND_LIB}")
+        target_link_libraries(Mil PRIVATE ${FOUND_LIB})
+    endif()
+endforeach()
+
+
+# Link the libraries with the executable
+target_link_libraries(Mil ${MCXAPI_LIBRARY})
+
