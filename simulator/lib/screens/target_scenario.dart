@@ -564,7 +564,7 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
 
     // Save the XML to a file (you can specify the file path)
     var filePath =
-        r'C:\Users\enggr\Desktop\pp\fgconfig\Aircrafts\f16\Scenarios\'+scenario.scenarioName+'.xml';
+        r'C:\Users\scl/Flightgear\Aircraftsf\16\Scenarios\'+scenario.scenarioName+'.xml';
 
     final xmlFile = File(filePath);
     await xmlFile.writeAsString(xmlContent);

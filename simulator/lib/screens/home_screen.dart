@@ -20,13 +20,12 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Home Screen'),
+        title: Text('Momentux FG Simulator'),
         bottom: TabBar(
           controller: _tabController,
           tabs: [
-            Tab(text: 'Tab 1'),
-            Tab(text: 'Tab 2'),
-            Tab(text: 'Tab 3'),
+            Tab(text: 'Scenario Planner'),
+            Tab(text: 'Route Manager'),
           ],
         ),
       ),
@@ -42,17 +41,10 @@ class _HomeScreenState extends State<HomeScreen>
           SingleChildScrollView(
             child: Container(
               color: Colors.green,
-              child: Center(child: Text('Tab 2 Content')),
+              child: Center(child: Text('Coming soon')),
             ),
           ),
 
-          // Content for Tab 3
-          SingleChildScrollView(
-            child: Container(
-              color: Colors.blue,
-              child: Center(child: Text('Tab 3 Content')),
-            ),
-          ),
         ],
       ),
     );
