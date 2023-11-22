@@ -18,13 +18,13 @@
           <name type="string">LeftWin</name>
           <host-name type="string" />
           <display>0</display>
-          <screen>1</screen>
+          <screen>3</screen>
           <fullscreen type="bool">true</fullscreen>
           <decoration type="bool">false</decoration>
           <x>0</x>
           <y>0</y>
-          <width>3840</width>
-          <height>2160</height>
+          <width>1920</width>
+          <height>1080</height>
         </window>
         <window>
           <name type="string">FrontWin</name>
@@ -35,21 +35,22 @@
           <decoration type="bool">false</decoration>
           <x>0</x>
           <y>0</y>
-          <width>3840</width>
-          <height>2160</height>
+          <width>1920</width>
+          <height>1080</height>
         </window>
         <window>
           <name type="string">RightWin</name>
           <host-name type="string" />
           <display>0</display>
-          <screen>3</screen>
+          <screen>1</screen>
           <fullscreen type="bool">true</fullscreen>
           <decoration type="bool">false</decoration>
           <x>0</x>
           <y>0</y>
-          <width>3840</width>
-          <height>2160</height>
+          <width>1920</width>
+          <height>1080</height>
         </window>
+        <!-- Configuring camera views for all windows -->
         <camera>
           <name type="string">CockpitView</name>
           <type>lookfrom</type>
@@ -59,7 +60,7 @@
           <view>
             <type>lookfrom</type>
             <heading-deg type="double">0</heading-deg>
-            <pitch-deg type = "double">-25</pitch-deg>
+            <pitch-deg type="double">-25</pitch-deg>
           </view>
         </camera>
         <camera>
@@ -70,16 +71,16 @@
           <view>
             <type>lookfrom</type>
             <heading-deg type="double">0</heading-deg>
-            <pitch-deg type = "double">15</pitch-deg>
+            <pitch-deg type="double">15</pitch-deg>
           </view>
-          <!-- <frustum>
-						<top>0.133</top>
-						<bottom>-0.133</bottom>
-						<left>-.1668</left>
-						<right>.1668</right>
-						<near>0.4</near>
-						<far>120000.0</far>
-					</frustum> -->
+          <frustum>
+            <top>0.133</top>
+            <bottom>-0.133</bottom>
+            <left>-.1668</left>
+            <right>.1668</right>
+            <near>0.4</near>
+            <far>120000.0</far>
+          </frustum>
         </camera>
 
         <camera>
@@ -89,20 +90,20 @@
           </window>
           <view>
             <type>lookfrom</type>
-            <heading-deg type="double">60.3</heading-deg>
-            <pitch-deg type = "double">15</pitch-deg>
+            <heading-deg type="double">45</heading-deg>
+            <pitch-deg type="double">15</pitch-deg>
           </view>
           <left-perspective>
             <parent-camera>Front</parent-camera>
           </left-perspective>
-          <!-- <frustum>
-						<top>0.133</top>
-						<bottom>-0.133</bottom>
-						<left>-.1668</left>
-						<right>.1668</right>
-						<near>0.4</near>
-						<far>120000.0</far>
-					</frustum> -->
+          <frustum>
+            <top>0.133</top>
+            <bottom>-0.133</bottom>
+            <left>-.1668</left>
+            <right>.1668</right>
+            <near>0.4</near>
+            <far>120000.0</far>
+          </frustum>
         </camera>
         <camera>
           <name type="string">Right</name>
@@ -111,20 +112,20 @@
           </window>
           <view>
             <type>lookfrom</type>
-            <heading-deg type="double">-60.3</heading-deg>
-            <pitch-deg type = "double">15</pitch-deg>
+            <heading-deg type="double">-45</heading-deg>
+            <pitch-deg type="double">15</pitch-deg>
           </view>
           <right-perspective>
             <parent-camera>Front</parent-camera>
           </right-perspective>
-          <!-- <frustum>
-						<top>0.133</top>
-						<bottom>-0.133</bottom>
-						<left>-.1668</left>
-						<right>.1668</right>
-						<near>0.4</near>
-						<far>120000.0</far>
-					</frustum> -->
+          <frustum>
+            <top>0.133</top>
+            <bottom>-0.133</bottom>
+            <left>-.1668</left>
+            <right>.1668</right>
+            <near>0.4</near>
+            <far>120000.0</far>
+          </frustum>
         </camera>
         <gui>
           <window>
