@@ -5,39 +5,27 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:simulator/data/airports.dart';
 import 'dart:io';
-import 'package:simulator/utils/xml.dart';
+import 'package:simulator/utils/route_sketch.dart';
 
 class Waypoint {
   var airport;
-  int numberofgroundtargets;
-  int numberofseatargets;
-  int numberofairtargets;
+
   double speed;
   double roll;
 
-  Waypoint(
-      {required this.airport,
-      required this.numberofgroundtargets,
-      required this.numberofseatargets,
-      required this.numberofairtargets,
-      required this.speed,
-      required this.roll});
+  Waypoint({required this.airport, required this.speed, required this.roll});
 }
 
-class ScenarioManagementScreen extends StatefulWidget {
-  const ScenarioManagementScreen({super.key});
+class RouteManagementScreen extends StatefulWidget {
+  const RouteManagementScreen({super.key});
 
   @override
-  State<ScenarioManagementScreen> createState() =>
-      _ScenarioManagementScreenState();
+  State<RouteManagementScreen> createState() => _RouteManagementScreenState();
 }
 
-class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
+class _RouteManagementScreenState extends State<RouteManagementScreen> {
   TextEditingController scenarioNameController = TextEditingController();
   String sourceAirport = "KXTA"; // Initial value for source airport
-  int numberOfAirTargets = 0;
-  int numberOfGroundTargets = 0;
-  int seaTargets = 0;
   double speed = 0.0;
   double roll = 0.0;
   double latitude = 0.0;
@@ -94,7 +82,7 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
           ExpansionPanel(
             headerBuilder: (BuildContext context, bool isExpanded) {
               return ListTile(
-                title: const Text("Scenario Settings"),
+                title: const Text("Routes Waypoints"),
               );
             },
             body: Padding(
@@ -120,56 +108,57 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  const Text("Targets"),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          keyboardType: TextInputType.number,
-                          onChanged: (value) {
-                            setState(() {
-                              numberOfAirTargets = int.tryParse(value) ?? 0;
-                            });
-                          },
-                          decoration: const InputDecoration(
-                            labelText: "Air",
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 16),
-                      Expanded(
-                        child: TextFormField(
-                          keyboardType: TextInputType.number,
-                          onChanged: (value) {
-                            setState(() {
-                              numberOfGroundTargets = int.tryParse(value) ?? 0;
-                            });
-                          },
-                          decoration: const InputDecoration(
-                            labelText: "Ground",
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 16),
-                      Expanded(
-                        child: TextFormField(
-                          keyboardType: TextInputType.number,
-                          onChanged: (value) {
-                            setState(() {
-                              seaTargets = int.tryParse(value) ?? 0;
-                            });
-                          },
-                          decoration: const InputDecoration(
-                            labelText: "Sea",
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  // const SizedBox(height: 16),
+                  // const Text("Targets"),
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       child: TextFormField(
+                  //         keyboardType: TextInputType.number,
+                  //         onChanged: (value) {
+                  //           setState(() {
+                  //             numberOfAirTargets = int.tryParse(value) ?? 0;
+                  //           });
+                  //         },
+                  //         decoration: const InputDecoration(
+                  //           labelText: "Air",
+                  //           border: OutlineInputBorder(),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     SizedBox(width: 16),
+                  //     Expanded(
+                  //       child: TextFormField(
+                  //         keyboardType: TextInputType.number,
+                  //         onChanged: (value) {
+                  //           setState(() {
+                  //             numberOfGroundTargets = int.tryParse(value) ?? 0;
+                  //           });
+                  //         },
+                  //         decoration: const InputDecoration(
+                  //           labelText: "Ground",
+                  //           border: OutlineInputBorder(),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     SizedBox(width: 16),
+                  //     Expanded(
+                  //       child: TextFormField(
+                  //         keyboardType: TextInputType.number,
+                  //         onChanged: (value) {
+                  //           setState(() {
+                  //             seaTargets = int.tryParse(value) ?? 0;
+                  //           });
+                  //         },
+                  //         decoration: const InputDecoration(
+                  //           labelText: "Sea",
+                  //           border: OutlineInputBorder(),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+
                   const SizedBox(height: 16),
                   const Text("Speed and Roll"),
                   Row(
@@ -259,57 +248,57 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
                 border: OutlineInputBorder(),
               ),
             ),
-            const SizedBox(height: 16),
-            const Text("Targets"),
-            Row(
-              children: [
-                Expanded(
-                  child: TextFormField(
-                    keyboardType: TextInputType.number,
-                    onChanged: (value) {
-                      setState(() {
-                        waypoint.numberofairtargets = int.tryParse(value) ?? 0;
-                      });
-                    },
-                    decoration: const InputDecoration(
-                      labelText: "Air",
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 16),
-                Expanded(
-                  child: TextFormField(
-                    keyboardType: TextInputType.number,
-                    onChanged: (value) {
-                      setState(() {
-                        waypoint.numberofgroundtargets =
-                            int.tryParse(value) ?? 0;
-                      });
-                    },
-                    decoration: const InputDecoration(
-                      labelText: "Ground",
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 16),
-                Expanded(
-                  child: TextFormField(
-                    keyboardType: TextInputType.number,
-                    onChanged: (value) {
-                      setState(() {
-                        waypoint.numberofseatargets = int.tryParse(value) ?? 0;
-                      });
-                    },
-                    decoration: const InputDecoration(
-                      labelText: "Sea",
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // const SizedBox(height: 16),
+            // const Text("Targets"),
+            // Row(
+            //   children: [
+            //     Expanded(
+            //       child: TextFormField(
+            //         keyboardType: TextInputType.number,
+            //         onChanged: (value) {
+            //           setState(() {
+            //             waypoint.numberofairtargets = int.tryParse(value) ?? 0;
+            //           });
+            //         },
+            //         decoration: const InputDecoration(
+            //           labelText: "Air",
+            //           border: OutlineInputBorder(),
+            //         ),
+            //       ),
+            //     ),
+            //     SizedBox(width: 16),
+            //     Expanded(
+            //       child: TextFormField(
+            //         keyboardType: TextInputType.number,
+            //         onChanged: (value) {
+            //           setState(() {
+            //             waypoint.numberofgroundtargets =
+            //                 int.tryParse(value) ?? 0;
+            //           });
+            //         },
+            //         decoration: const InputDecoration(
+            //           labelText: "Ground",
+            //           border: OutlineInputBorder(),
+            //         ),
+            //       ),
+            //     ),
+            //     SizedBox(width: 16),
+            //     Expanded(
+            //       child: TextFormField(
+            //         keyboardType: TextInputType.number,
+            //         onChanged: (value) {
+            //           setState(() {
+            //             waypoint.numberofseatargets = int.tryParse(value) ?? 0;
+            //           });
+            //         },
+            //         decoration: const InputDecoration(
+            //           labelText: "Sea",
+            //           border: OutlineInputBorder(),
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
             const SizedBox(height: 16),
             const Text("Speed and Roll"),
             Row(
@@ -359,17 +348,17 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "Create a Scenario",
+            "Create a Routes",
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 16),
-          TextFormField(
-            controller: scenarioNameController,
-            decoration: const InputDecoration(
-              labelText: "Scenario Name",
-              border: OutlineInputBorder(),
-            ),
-          ),
+          // const SizedBox(height: 16),
+          // TextFormField(
+          //   controller: scenarioNameController,
+          //   decoration: const InputDecoration(
+          //     labelText: "Scenario Name",
+          //     border: OutlineInputBorder(),
+          //   ),
+          // ),
 
           const SizedBox(height: 16),
           buildScenarioInputContainer(),
@@ -394,7 +383,7 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(16),
                 ),
-                child: const Text("Create Scenario"),
+                child: const Text("Create Routes"),
               ),
               const SizedBox(width: 16),
               ElevatedButton(
@@ -441,14 +430,7 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
   void addWaypoint() {
     setState(() {
       waypoints.add(
-        Waypoint(
-            airport: "KSTA",
-            numberofgroundtargets:
-                0, // Set to the default value or adjust as needed
-            numberofseatargets: 0,
-            numberofairtargets: 0,
-            speed: 300.0,
-            roll: 20.0),
+        Waypoint(airport: "KSTA", speed: 300.0, roll: 20.0),
       );
     });
   }
@@ -470,9 +452,6 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
     // Add scenario data to the array
     entries.add({
       'sourceAirport': sourceAirport,
-      'numberOfAirTargets': numberOfAirTargets,
-      'numberOfGroundTargets': numberOfGroundTargets,
-      'seaTargets': seaTargets,
       'speed': speed,
       'roll': roll,
     });
@@ -481,9 +460,6 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
     for (int i = 0; i < waypoints.length; i++) {
       entries.add({
         'sourceAirport': waypoints[i].airport,
-        'numberOfAirTargets': waypoints[i].numberofairtargets,
-        'numberOfGroundTargets': waypoints[i].numberofgroundtargets,
-        'seaTargets': waypoints[i].numberofseatargets,
         'speed': waypoints[i].speed,
         'roll': waypoints[i].roll,
       });
@@ -507,70 +483,27 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
       // Outer loop: Iterate over scenarioEntryList
 
       Map<String, dynamic> currentEntry = scenarioEntryList[i];
-      var a = currentEntry['sourceAirport']; //kxta
+      var a = currentEntry['sourceAirport'];
       var b = latitudes;
       var c = longitudes;
-      var d = airports; //kxta,goa,blr
+      var d = airports;
 
       for (int j = 0; j < airports.length; j++) {
         if (a == d[j]) {
-          for (int k = 0; k < currentEntry['numberOfAirTargets']; k++) {
-            // Inner loop 1: Iterate over numberOfAirTargets for the current scenarioEntry
-            print('Inner loop 1: i = $i, k = $k');
-
-            // Create a ScenarioEntry for the current scenarioEntry
-            ScenarioEntry air = ScenarioEntry(
-              type: 'ship',
-              model: 'Models/Military/humvee-pickup-odrab-low-poly.ac',
-              name: 'aircraft_$k',
-              latitude: double.parse(latitudes[j]),
-              longitude: double.parse(longitudes[j]),
-              speed: currentEntry['speed'],
-              rudder: currentEntry['roll'],
-              heading: 0.0,
-              altitude: 1500.0,
-            );
-            // Add the ScenarioEntry to the scenarioEntries list
-            scenarioEntries.add(air);
-          }
-
-          for (int l = 0; l < currentEntry['numberOfGroundTargets']; l++) {
-            // Inner loop 2: Iterate over numberOfGroundTargets for the current scenarioEntry
-
-            ScenarioEntry ground = ScenarioEntry(
-              type: 'ship',
-              model: 'Models/Military/humvee-pickup-odrab-low-poly.ac',
-              name: 'tanker_$l',
-              latitude: double.parse(latitudes[j]),
-              longitude: double.parse(longitudes[j]),
-              speed: currentEntry['speed'],
-              rudder: currentEntry['roll'],
-              heading: 0.0,
-              altitude: 1500.0,
-            );
-
-            // Add the ScenarioEntry to the scenarioEntries list
-            scenarioEntries.add(ground);
-          }
-
-          for (int m = 0; m < currentEntry['seaTargets']; m++) {
-            // Inner loop 2: Iterate over numberOfGroundTargets for the current scenarioEntry
-
-            ScenarioEntry sea = ScenarioEntry(
-              type: 'ship',
-              model: 'Models/Military/humvee-pickup-odrab-low-poly.ac',
-              name: 'ship_$m',
-              latitude: double.parse(latitudes[j]),
-              longitude: double.parse(longitudes[j]),
-              speed: currentEntry['speed'],
-              rudder: currentEntry['roll'],
-              heading: 0.0,
-              altitude: 1500.0,
-            );
-
-            // Add the ScenarioEntry to the scenarioEntries list
-            scenarioEntries.add(sea);
-          }
+          // Create a ScenarioEntry for the current scenarioEntry
+          ScenarioEntry route = ScenarioEntry(
+            type: 'navaid',
+            name: currentEntry['sourceAirport'],
+            latitude: double.parse(b[j]),
+            longitude: double.parse(c[j]),
+            speed: currentEntry['speed'],
+            rudder: currentEntry['roll'],
+            heading: 0.0,
+            altitude: 1500.0,
+            sno: i,
+          );
+          // Add the ScenarioEntry to the scenarioEntries list
+          scenarioEntries.add(route);
         }
       }
     }
@@ -586,14 +519,12 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
     print(scenario);
 
     // Generate the XML content
-    final xmlContent = buildScenarioXML(scenario);
+    final xmlContent = buildRouteXML(scenario);
 
     // Save the XML to a file (you can specify the file path)
     var filePath =
         // ignore: prefer_interpolation_to_compose_strings
-        r'C:\Users\enggr\Desktop\pp\fgconfig\Aircrafts\f16\Scenarios\' +
-            scenario.scenarioName +
-            '.xml';
+        r'C:\Users\enggr\Desktop\pp\fgconfig\config\' + 'routes' + '.xml';
 
     final xmlFile = File(filePath);
     await xmlFile.writeAsString(xmlContent);
@@ -644,7 +575,7 @@ class Scenario {
 
 class ScenarioEntry {
   final String type;
-  final String model;
+
   final String name; // Auto-generated
   final double latitude; // Auto-generated based on sourceAirport
   final double longitude; // Auto-generated based on sourceAirport
@@ -652,10 +583,10 @@ class ScenarioEntry {
   final double rudder;
   final double heading;
   final double altitude;
+  final int sno;
 
   ScenarioEntry({
     required this.type,
-    required this.model,
     required this.name,
     required this.latitude,
     required this.longitude,
@@ -663,9 +594,10 @@ class ScenarioEntry {
     required this.rudder,
     required this.heading,
     required this.altitude,
+    required this.sno,
   });
   @override
   String toString() {
-    return 'ScenarioEntry(type: $type, model: $model, name: $name, latitude: $latitude, longitude: $longitude, speed: $speed, rudder: $rudder, heading: $heading, altitude: $altitude)';
+    return 'ScenarioEntry(type: $type, name: $name, latitude: $latitude, longitude: $longitude, speed: $speed, rudder: $rudder, heading: $heading, altitude: $altitude, sno:$sno)';
   }
 }
