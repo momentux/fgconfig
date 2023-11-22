@@ -1,0 +1,86 @@
+<PropertyList>
+  <scenario>
+    <name>Moving targets 9G around KXTA</name>
+    <description>
+      The following scenario puts 1 planes in orbit over
+      KXTA with 9G acceleration.
+    </description>
+    <!-- "DATA_ONLY", "PREFER_AI", "PREFER_DATA" -->
+    <!-- <search-order>DATA_ONLY</search-order> -->
+    <nasal>
+      <load>
+          <![CDATA[
+          var finish = 0;
+          var interval = 30; # Time between checks in seconds
+          var turnRate = 0.218; # turn rate in radians per second
+          var turnDuration = 7.21; # duration of the turn in seconds
+          var targetHeading = nil; # Target heading placeholder
+          var bank = 48.37; # Bank angle
+          var startTime = nil;
+          var hasTurned = 0; # Flag to indicate if the turn has been made
+          
+          var setup = func {
+              foreach( var ship; props.globals.getNode("/ai/models", 1).getChildren("aircraft") ) {
+                  var callsign = ship.getNode("name");
+                  if( callsign == nil or callsign.getValue() == nil) continue;
+          
+                  if( string.match(callsign.getValue(), "Agate*") ) {
+                      targetHeading = ship.getNode("orientation/heading-deg", 1);
+                      ship.getNode("orientation/bank-deg", 1).setValue(bank);
+                      print("Target found: ", callsign.getValue()," as ",ship.getPath());
+                      startTime = getprop("/sim/time/elapsed-sec");
+                      settimer(turn, interval); # Schedule the first turn
+                      break;
+                  }
+              }
+          };
+          
+          var turn = func {
+              if (targetHeading == nil) {print("Did not find the target"); return;}
+              if (finish) {print("Turn cancelled"); return;}
+              if (hasTurned) {print("Turn already completed"); return;}
+          
+              var elapsedTime = getprop("/sim/time/elapsed-sec") - startTime;
+              if (elapsedTime > turnDuration) {
+                  print("Turn completed");
+                  hasTurned = 1; # Turn is complete
+                  return;
+              }
+          
+              var deltaHeading = turnRate * elapsedTime * R2D; # Convert radians to degrees
+              var newHeading = targetHeading.getValue() + deltaHeading;
+              if (newHeading >= 360) {
+                  newHeading -= 360;
+              }
+              targetHeading.setValue(newHeading); # Update the heading
+              setlistener("/fdm/jsbsim/sim/time", turn);
+          };
+          
+          setup(); # Start the setup process
+          debug.dump('Target 9G turn script loaded');
+          
+          ]]>
+          </load>
+      <unload>
+          <![CDATA[
+            finish = 1;
+            debug.dump('Target 9G turn script unloaded');
+          ]]>
+          </unload>
+    </nasal>
+    <entry>
+      <search-order>PREFER_AI</search-order>
+      <type>aircraft</type>
+      <callsign>Agate</callsign>
+      <name>F6F21</name>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <latitude type="double">37.258</latitude>
+      <longitude type="double">-115.797</longitude>
+      <altitude type="double">13000</altitude>
+      <speed>700</speed>
+      <bank type="double">0</bank>
+      <heading type="double">10</heading>
+      <!-- <performance-class>ww2_fighter</performance-class> -->
+    </entry>
+  </scenario>
+</PropertyList>
