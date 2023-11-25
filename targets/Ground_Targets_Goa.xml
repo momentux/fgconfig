@@ -1,0 +1,1381 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+  <scenario>
+    
+    <name>Test Ground targets in Goa</name>
+
+    <description>
+      The following scenario puts 130 target near GOA.
+
+      Nikolai V. Chr.
+    </description>
+    
+    <search-order>DATA_ONLY</search-order><!-- "DATA_ONLY", "PREFER_AI", "PREFER_DATA" -->
+
+    <nasal>
+      <load>
+        <![CDATA[
+          var finish = 0;
+
+               
+          var loop2 = func () {
+              foreach( var tanker; props.globals.getNode("/ai/models",1).getChildren("ship") ) {
+                var lat = tanker.getNode("position/latitude-deg").getValue();
+                var lon = tanker.getNode("position/longitude-deg").getValue();
+                var node = tanker.getNode("position/altitude-ft", 1 );
+                var alt = geo.elevation(lat, lon);
+                node.setDoubleValue(alt==nil?0:alt*M2FT);
+              }
+              if (finish == 0) {
+                settimer(loop2, 20);
+                return;
+              }
+              print("Scenario proper unloaded.");
+          }
+          loop2();
+          finish = 1;
+          print('Tonopah target range scenario load 17 targets: complete');
+        ]]>
+      </load>
+      <unload>
+        <![CDATA[
+          finish = 1;
+          print('Tonopah target range scenario unload script complete');
+          ]]>
+      </unload>
+    </nasal>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>trucke1</name>
+      <latitude type="double">15.382601</latitude>
+      <longitude type="double">73.831464</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">0</heading>
+      <altitude type="double">0</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>wtruck2</name>
+      <latitude type="double">15.379813</latitude>
+      <longitude type="double">73.831542</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">0</heading>
+      <altitude type="double">0</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory3</name>
+      <latitude type="double">15.384107</latitude>
+      <longitude type="double">73.825056</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">0</heading>
+      <altitude type="double">0</altitude>
+    </entry>
+    
+    <entry>
+      <type>ship</type>
+      <model>Scenery/Models/Military/us-hush-house-hangar-sand.xml</model>
+      <name>hush4</name>
+      <latitude type="double">15.383580</latitude>
+      <longitude type="double">73.82689</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">0</heading>
+      <altitude type="double">0</altitude>
+    </entry>
+    
+    <entry>
+      <type>ship</type>
+      <model>Scenery/Models/Military/usaf-water-tower-39m.xml</model>
+      <name>water5</name>
+      <latitude type="double">15.383581</latitude>
+      <longitude type="double">73.82688</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">0</heading>
+      <altitude type="double">0</altitude>
+    </entry>
+    
+    <entry>
+      <type>ship</type>
+      <model>Scenery/Models/Military/tower-usaf-40m.xml</model>
+      <name>twr406</name>
+      <latitude type="double">15.373969</latitude>
+      <longitude type="double">73.828907</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">0</heading>
+      <altitude type="double">0</altitude>
+    </entry>
+    
+    <entry>
+      <type>ship</type>
+      <model>Scenery/Models/Military/TAB-VEE-C_Shelter.xml</model>
+      <name>tabvee7</name>
+      <latitude type="double">15.375166</latitude>
+      <longitude type="double">73.836293</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">0</heading>
+      <altitude type="double">0</altitude>
+    </entry>
+    
+    <entry>
+      <type>ship</type>
+      <model>Scenery/Models/Military/SPAF_Barracks_3.xml</model>
+      <name>barrack8</name>
+      <latitude type="double">15.381366</latitude>
+      <longitude type="double">73.823586</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">0</heading>
+      <altitude type="double">0</altitude>
+    </entry>
+    
+    <entry>
+      <type>ship</type>
+      <model>Scenery/Models/Military/SA-2_Van.xml</model>
+      <name>sa-9</name>
+      <latitude type="double">15.380152</latitude>
+      <longitude type="double">73.822679</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">0</heading>
+      <altitude type="double">0</altitude>
+    </entry>
+    
+    <entry>
+      <type>ship</type>
+      <model>Scenery/Models/Military/radar-shelter-mil.xml</model>
+      <name>radshel10</name>
+      <latitude type="double">15.381633</latitude>
+      <longitude type="double">73.824526</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">0</heading>
+      <altitude type="double">0</altitude>
+    </entry>
+    
+    <entry>
+      <type>ship</type>
+      <model>Scenery/Models/Military/Radar_Avia.xml</model>
+      <name>avia11</name>
+      <latitude type="double">15.380985</latitude>
+      <longitude type="double">73.822108</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">0</heading>
+      <altitude type="double">0</altitude>
+    </entry>
+    
+    <entry>
+      <type>ship</type>
+      <model>Scenery/Models/Military/KOFF_Bldg594.xml</model>
+      <name>bldg12</name>
+      <latitude type="double">15.378011</latitude>
+      <longitude type="double">73.823020</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">0</heading>
+      <altitude type="double">0</altitude>
+    </entry>
+    
+    <entry>
+      <type>ship</type>
+      <model>Scenery/Models/Military/GenericStorageTank30m-sand.xml</model>
+      <name>stortank13</name>
+      <latitude type="double">15.380561</latitude>
+      <longitude type="double">73.822650</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">0</heading>
+      <altitude type="double">0</altitude>
+    </entry>
+    
+    <entry>
+      <type>ship</type>
+      <model>Scenery/Models/Military/Bloodhound.xml</model>
+      <name>hound14</name>
+      <latitude type="double">15.380384</latitude>
+      <longitude type="double">73.821825</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">0</heading>
+      <altitude type="double">0</altitude>
+    </entry>
+    
+    <entry>
+      <type>ship</type>
+      <model>Scenery/Models/Military/beacon-mil-nt.xml</model>
+      <name>beacon15</name>
+      <latitude type="double">15.833930</latitude>
+      <longitude type="double">73.835930</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">0</heading>
+      <altitude type="double">0</altitude>
+    </entry>
+    
+    <entry>
+      <type>ship</type>
+      <model>Scenery/Models/Military/BAK-12.xml</model>
+      <name>bak16</name>
+      <latitude type="double">15.378198</latitude>
+      <longitude type="double">73.831424</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">0</heading>
+      <altitude type="double">0</altitude>
+    </entry>
+    
+    <entry>
+      <type>ship</type>
+      <model>Scenery/Models/Military/SPAF_Tower.xml</model>
+      <name>tower-s17</name>
+      <latitude type="double">15.376688</latitude>
+      <longitude type="double">73.816515</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">0</heading>
+      <altitude type="double">0</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee18</name>
+      <latitude type="double">15.380968</latitude>
+      <longitude type="double">73.825594</longitude>
+      <speed-ktas type="double">40</speed-ktas>
+      <rudder type="double">0.5</rudder>
+      <heading type="double">030</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee19</name>
+      <latitude type="double">15.380902</latitude>
+      <longitude type="double">73.824788</longitude>
+      <speed-fps type="double">40</speed-fps>
+      <rudder type="double">0.25</rudder>
+      <heading type="double">020</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee20</name>
+      <latitude type="double">15.380921</latitude>
+      <longitude type="double">73.824911</longitude>
+      <speed type="double">40</speed>
+      <rudder type="double">0.75</rudder>
+      <heading type="double">010</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee21</name>
+      <latitude type="double">15.380920</latitude>
+      <longitude type="double">73.824913</longitude>
+      <speed-ktas type="double">40</speed-ktas>
+      <rudder type="double">1</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory22</name>
+      <latitude type="double">15.389302</latitude>
+      <longitude type="double">73.820954</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee23</name>
+      <latitude type="double">15.380182</latitude>
+      <longitude type="double">73.816556</longitude>
+      <speed-ktas type="double">40</speed-ktas>
+      <rudder type="double">0.5</rudder>
+      <heading type="double">030</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee24</name>
+      <latitude type="double">15.375314</latitude>
+      <longitude type="double">73.817122</longitude>
+      <speed-fps type="double">40</speed-fps>
+      <rudder type="double">0.25</rudder>
+      <heading type="double">020</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee25</name>
+      <latitude type="double">15.378817</latitude>
+      <longitude type="double">73.813017</longitude>
+      <speed type="double">40</speed>
+      <rudder type="double">0.75</rudder>
+      <heading type="double">010</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee26</name>
+      <latitude type="double">15.380493</latitude>
+      <longitude type="double">73.818160</longitude>
+      <speed-ktas type="double">40</speed-ktas>
+      <rudder type="double">1</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory27</name>
+      <latitude type="double">15.385223</latitude>
+      <longitude type="double">73.827336</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee28</name>
+      <latitude type="double">15.380092</latitude>
+      <longitude type="double">73.828166</longitude>
+      <speed-ktas type="double">40</speed-ktas>
+      <rudder type="double">0.5</rudder>
+      <heading type="double">030</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee29</name>
+      <latitude type="double">15.380698</latitude>
+      <longitude type="double">73.830378</longitude>
+      <speed-fps type="double">40</speed-fps>
+      <rudder type="double">0.25</rudder>
+      <heading type="double">020</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee30</name>
+      <latitude type="double">15.380762</latitude>
+      <longitude type="double">73.830774</longitude>
+      <speed type="double">40</speed>
+      <rudder type="double">0.75</rudder>
+      <heading type="double">010</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee31</name>
+      <latitude type="double">15.380731</latitude>
+      <longitude type="double">73.832694</longitude>
+      <speed-ktas type="double">40</speed-ktas>
+      <rudder type="double">1</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory32</name>
+      <latitude type="double">15.380240</latitude>
+      <longitude type="double">73.835024</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee33</name>
+      <latitude type="double">15.383684</latitude>
+      <longitude type="double">73.809538</longitude>
+      <speed-ktas type="double">40</speed-ktas>
+      <rudder type="double">0.5</rudder>
+      <heading type="double">030</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee34</name>
+      <latitude type="double">15.386391</latitude>
+      <longitude type="double">73.808710</longitude>
+      <speed-fps type="double">40</speed-fps>
+      <rudder type="double">0.25</rudder>
+      <heading type="double">020</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee35</name>
+      <latitude type="double">15.384658</latitude>
+      <longitude type="double">73.816896</longitude>
+      <speed type="double">40</speed>
+      <rudder type="double">0.75</rudder>
+      <heading type="double">010</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee36</name>
+      <latitude type="double">15.373119</latitude>
+      <longitude type="double">73.836720</longitude>
+      <speed-ktas type="double">40</speed-ktas>
+      <rudder type="double">1</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory37</name>
+      <latitude type="double">15.377165</latitude>
+      <longitude type="double">73.850946</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee38</name>
+      <latitude type="double">15.36154</latitude>
+      <longitude type="double">73.845129</longitude>
+      <speed-ktas type="double">40</speed-ktas>
+      <rudder type="double">0.5</rudder>
+      <heading type="double">030</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee39</name>
+      <latitude type="double">15.368198</latitude>
+      <longitude type="double">73.860132</longitude>
+      <speed-fps type="double">40</speed-fps>
+      <rudder type="double">0.25</rudder>
+      <heading type="double">020</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee40</name>
+      <latitude type="double">15.385069</latitude>
+      <longitude type="double">73.854780</longitude>
+      <speed type="double">40</speed>
+      <rudder type="double">0.75</rudder>
+      <heading type="double">010</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee41</name>
+      <latitude type="double">15.381194</latitude>
+      <longitude type="double">73.853346</longitude>
+      <speed-ktas type="double">40</speed-ktas>
+      <rudder type="double">1</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory42</name>
+      <latitude type="double">15.378867</latitude>
+      <longitude type="double">73.852436</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory43</name>
+      <latitude type="double">15.377165</latitude>
+      <longitude type="double">73.850946</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory44</name>
+      <latitude type="double">15.396065</latitude>
+      <longitude type="double">73.821947</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory45</name>
+      <latitude type="double">15.397933</latitude>
+      <longitude type="double">73.821857</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory46</name>
+      <latitude type="double">15.399339</latitude>
+      <longitude type="double">73.822819</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory47</name>
+      <latitude type="double">15.402264</latitude>
+      <longitude type="double">73.814513</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory48</name>
+      <latitude type="double">15.401631</latitude>
+      <longitude type="double">73.813432</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory49</name>
+      <latitude type="double">15.401406</latitude>
+      <longitude type="double">73.812789</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory50</name>
+      <latitude type="double">15.400899</latitude>
+      <longitude type="double">73.811164</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory51</name>
+      <latitude type="double">15.377165</latitude>
+      <longitude type="double">73.850946</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory52</name>
+      <latitude type="double">15.401978</latitude>
+      <longitude type="double">73.814199</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory53</name>
+      <latitude type="double">15.401720</latitude>
+      <longitude type="double">73.822869</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory54</name>
+      <latitude type="double">15.401106</latitude>
+      <longitude type="double">73.826239</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory55</name>
+      <latitude type="double">15.401144</latitude>
+      <longitude type="double">73.826239</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory56</name>
+      <latitude type="double">15.409879</latitude>
+      <longitude type="double">73.820449</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory57</name>
+      <latitude type="double">15.408025</latitude>
+      <longitude type="double">73.834991</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory58</name>
+      <latitude type="double">15.409416</latitude>
+      <longitude type="double">73.840158</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory59</name>
+      <latitude type="double">15.407098</latitude>
+      <longitude type="double">73.843002</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory60</name>
+      <latitude type="double">15.400456</latitude>
+      <longitude type="double">73.843643</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory61</name>
+      <latitude type="double">15.399645</latitude>
+      <longitude type="double">73.844505</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory62</name>
+      <latitude type="double">15.401111</latitude>
+      <longitude type="double">73.853671</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory63</name>
+      <latitude type="double">15.398785</latitude>
+      <longitude type="double">73.858462</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory64</name>
+      <latitude type="double">15.396943</latitude>
+      <longitude type="double">73.871193</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory65</name>
+      <latitude type="double">15.389819</latitude>
+      <longitude type="double">73.883867</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Scenery/Models/Military/Bloodhound.xml</model>
+      <name>hound66</name>
+      <latitude type="double">15.414651</latitude>
+      <longitude type="double">73.821825</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">0</heading>
+      <altitude type="double">0</altitude>
+    </entry>
+    
+    <entry>
+      <type>ship</type>
+      <model>Scenery/Models/Military/beacon-mil-nt.xml</model>
+      <name>beacon67</name>
+      <latitude type="double">15.414168</latitude>
+      <longitude type="double">73.792253</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">0</heading>
+      <altitude type="double">0</altitude>
+    </entry>
+    
+    <entry>
+      <type>ship</type>
+      <model>Scenery/Models/Military/BAK-12.xml</model>
+      <name>bak68</name>
+      <latitude type="double">15.414219</latitude>
+      <longitude type="double">73.790485</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">0</heading>
+      <altitude type="double">0</altitude>
+    </entry>
+    
+    <entry>
+      <type>ship</type>
+      <model>Scenery/Models/Military/SPAF_Tower.xml</model>
+      <name>tower-s69</name>
+      <latitude type="double">15.414295</latitude>
+      <longitude type="double">73.791194</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">0</heading>
+      <altitude type="double">0</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee70</name>
+      <latitude type="double">15.412630</latitude>
+      <longitude type="double">73.792590</longitude>
+      <speed-ktas type="double">40</speed-ktas>
+      <rudder type="double">0.5</rudder>
+      <heading type="double">030</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+	
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee71</name>
+      <latitude type="double">15.401603</latitude>
+      <longitude type="double">73.803545</longitude>
+      <speed-ktas type="double">40</speed-ktas>
+      <rudder type="double">0.5</rudder>
+      <heading type="double">030</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee72</name>
+      <latitude type="double">15.405622</latitude>
+      <longitude type="double">73.799720</longitude>
+      <speed-fps type="double">40</speed-fps>
+      <rudder type="double">0.25</rudder>
+      <heading type="double">020</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee73</name>
+      <latitude type="double">15.407478</latitude>
+      <longitude type="double">73.797002</longitude>
+      <speed type="double">40</speed>
+      <rudder type="double">0.75</rudder>
+      <heading type="double">010</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee74</name>
+      <latitude type="double">15.375314</latitude>
+      <longitude type="double">73.817122</longitude>
+      <speed-fps type="double">40</speed-fps>
+      <rudder type="double">0.25</rudder>
+      <heading type="double">020</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee75</name>
+      <latitude type="double">15.223147</latitude>
+      <longitude type="double">74.023465</longitude>
+      <speed type="double">40</speed>
+      <rudder type="double">0.75</rudder>
+      <heading type="double">010</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee76</name>
+      <latitude type="double">15.244321</latitude>
+      <longitude type="double">74.007693</longitude>
+      <speed-ktas type="double">40</speed-ktas>
+      <rudder type="double">1</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory77</name>
+      <latitude type="double">15.239469</latitude>
+      <longitude type="double">73.994434</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee78</name>
+      <latitude type="double">15.229764</latitude>
+      <longitude type="double">73.995120</longitude>
+      <speed-ktas type="double">40</speed-ktas>
+      <rudder type="double">0.5</rudder>
+      <heading type="double">030</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Military/humvee-pickup-odrab-low-poly.ac</model>
+      <name>Humvee79</name>
+      <latitude type="double">15.197559</latitude>
+      <longitude type="double">73.984833</longitude>
+      <speed-fps type="double">40</speed-fps>
+      <rudder type="double">0.25</rudder>
+      <heading type="double">020</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Buildings/factory.ac</model>
+      <name>Factory80</name>
+      <latitude type="double">15.199103</latitude>
+      <longitude type="double">73.977747</longitude>
+      <speed-ktas type="double">0</speed-ktas>
+      <rudder type="double">0</rudder>
+      <heading type="double">000</heading>
+      <altitude type="double">4750</altitude>
+    </entry>
+
+    <entry>
+      <type>ship</type>
+      <model>Models/Geometry/sailboat1/sailboat.xml</model>
+      <name>Ship-81</name>
+      <latitude>15.046262</latitude>
+      <longitude>73.953506</longitude>
+      <speed>6.0</speed>
+      <rudder>3.0</rudder>
+    </entry>
+    <entry>
+      <type>ship</type>
+      <model>Models/Geometry/sailboat1/sailboat.xml</model>
+      <latitude>15.100853</latitude>
+      <longitude>73.917008</longitude>
+      <speed>6.0</speed>
+      <rudder>3.0</rudder>
+    </entry>
+    <entry>
+      <type>ship</type>
+      <model>Models/Geometry/sailboat1/sailboat.xml</model>
+      <latitude>15.139542</latitude>
+      <longitude>73.73.933468</longitude>
+      <speed>6.0</speed>
+      <rudder>3.0</rudder>
+    </entry>
+    <entry>
+      <type>ship</type>
+      <model>Models/Geometry/sailboat1/sailboat.xml</model>
+      <latitude>15.176152</latitude>
+      <longitude>73.929174</longitude>
+      <speed>6.0</speed>
+      <rudder>3.0</rudder>
+    </entry>
+    <entry>
+      <type>ship</type>
+      <model>Models/Geometry/sailboat1/sailboat.xml</model>
+      <latitude>15.215518</latitude>
+      <longitude>73.919870</longitude>
+      <speed>6.0</speed>
+      <rudder>3.0</rudder>
+    </entry>
+    <entry>
+      <type>ship</type>
+      <model>Models/Geometry/sailboat1/sailboat.xml</model>
+      <latitude>15.308034</latitude>
+      <longitude>73.886950</longitude>
+      <speed>6.0</speed>
+      <rudder>3.0</rudder>
+    </entry>
+    <entry>
+      <type>ship</type>
+      <model>Models/Geometry/sailboat1/sailboat.xml</model>
+      <latitude>15.351516</latitude>
+      <longitude>73.873353</longitude>
+      <speed>6.0</speed>
+      <rudder>3.0</rudder>
+    </entry>
+    <entry>
+      <type>ship</type>
+      <model>Models/Geometry/sailboat1/sailboat.xml</model>
+      <latitude>15.360488</latitude>
+      <longitude>73.832560</longitude>
+      <speed>6.0</speed>
+      <rudder>3.0</rudder>
+    </entry>
+    <entry>
+      <type>ship</type>
+      <model>Models/Geometry/sailboat1/sailboat.xml</model>
+      <latitude>15.370839</latitude>
+      <longitude>73.816816</longitude>
+      <speed>6.0</speed>
+      <rudder>3.0</rudder>
+    </entry>
+    <entry>
+      <type>ship</type>
+      <model>Models/Geometry/sailboat1/sailboat.xml</model>
+      <latitude>15.377880</latitude>
+      <longitude>73.804584</longitude>
+      <speed>6.0</speed>
+      <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.376472</latitude>
+       <longitude>73.806958</longitude>
+       <speed>6.0</speed>
+      <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.375239</latitude>
+       <longitude>73.799290</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.392489</latitude>
+       <longitude>73.793266</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.405690</latitude>
+       <longitude>73.783225</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.412721</latitude>
+       <longitude>73.798367</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.404995</latitude>
+       <longitude>73.813502</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.407190</latitude>
+       <longitude>73.815779</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.410043</latitude>
+       <longitude>73.821471</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.407629</latitude>
+       <longitude>73.824431</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.407627</latitude>
+       <longitude>73.828530</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.407409</latitude>
+       <longitude>73.830351</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.401921</latitude>
+       <longitude>73.856309</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.373382</latitude>
+       <longitude>73.792554</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.377334</latitude>
+       <longitude>73.765458</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.372394</latitude>
+       <longitude>73.762042</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.368771</latitude>
+       <longitude>73.763409</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.388420</latitude>
+       <longitude>73.801662</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.378322</latitude>
+       <longitude>73.791529</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.377004</latitude>
+       <longitude>73.785267</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.375138</latitude>
+       <longitude>73.788683</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.365807</latitude>
+       <longitude>73.789935</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.363831</latitude>
+       <longitude>73.778437</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.364161</latitude>
+       <longitude>73.775590</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.365258</latitude>
+       <longitude>73.772630</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.366795</latitude>
+       <longitude>73.769784</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.368991</latitude>
+       <longitude>73.768418</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.416409</latitude>
+       <longitude>73.788228</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.366905</latitude>
+       <longitude>73.872362</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.361965</latitude>
+       <longitude>73.875549</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.368222</latitude>
+       <longitude>73.869174</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.368661</latitude>
+       <longitude>73.865986</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.399397</latitude>
+       <longitude>73.880673</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.397970</latitude>
+       <longitude>73.874183</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.403129</latitude>
+       <longitude>73.870312</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.409165</latitude>
+       <longitude>73.861660</longitude>
+       <speed>6.0</speed>
+       <rudder>3.0</rudder>
+    </entry>
+    <entry>
+       <type>ship</type>
+       <model>Models/Geometry/sailboat1/sailboat.xml</model>
+       <latitude>15.391823</latitude>
+       <longitude>73.821471</longitude>
+       <speed>1.0</speed>
+       <rudder>1.0</rudder>
+    </entry>
+  </scenario>
+
+</PropertyList>

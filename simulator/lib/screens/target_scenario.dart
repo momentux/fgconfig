@@ -1,10 +1,8 @@
-// ignore_for_file: unnecessary_string_escapes
-
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:simulator/data/airports.dart';
 import 'dart:io';
+
 import 'package:simulator/utils/xml.dart';
 
 class Waypoint {
@@ -47,6 +45,7 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
   List<Waypoint> waypoints = []; // List to store waypoints
   List<String> latitudes = []; // List to store source airports
   List<String> longitudes = []; // List to store source airports
+
   @override
   void initState() {
     super.initState();
@@ -56,24 +55,17 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
   Future<void> loadAirportsFromJson() async {
     try {
       final parsedJson = json.decode(airportsJson);
-
       final List<String> airportCodes = List<String>.from(
           parsedJson.map((airport) => airport['airportCode']));
-
       final List<String> lat =
           List<String>.from(parsedJson.map((latitude) => latitude['latitude']));
-
       final List<String> long = List<String>.from(
           parsedJson.map((longitude) => longitude['longitude']));
-
       setState(() {
         airports = airportCodes;
         latitudes = lat;
         longitudes = long;
       });
-
-      print(latitudes);
-      print(longitudes);
     } catch (e) {
       print('Error loading airports from JSON: $e');
     }
@@ -490,8 +482,6 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
     }
     inputs.add({'scenarioEntry': entries});
 
-    print(inputs);
-
     // Add your XML generation logic here
     // Create a Scenario object with the entered parameters
     // Find the map containing the 'scenarioEntry' key
@@ -578,12 +568,23 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
 // Create the Scenario object
     final scenario = Scenario(
       scenarioName: scenarioNameController.text,
-      description: "Description goes here",
-      searchOrder: "DATA_ONLY",
-      entries: scenarioEntries,
+      description: "Description goes here", // Replace with a description
+      searchOrder: "DATA_ONLY", // Replace with your desired search order
+      entries: [
+        for (int i = 0; i < 10; i++)
+          ScenarioEntry(
+            type: "ship",
+            model: "Models/Military/humvee-pickup-odrab-low-poly.ac",
+            name: sourceAirport, // Auto-generated name based on airport
+            latitude: 0.0, // Calculate latitude based on airport
+            longitude: 0.0, // Calculate longitude based on airport
+            speed: speed,
+            rudder: roll,
+            heading: 0.0, // Replace with your desired heading
+            altitude: 4750.0, // Replace with your desired altitude
+          ),
+      ],
     );
-
-    print(scenario);
 
     // Generate the XML content
     final xmlContent = buildScenarioXML(scenario);
@@ -591,7 +592,7 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
     // Save the XML to a file (you can specify the file path)
     var filePath =
         // ignore: prefer_interpolation_to_compose_strings
-        r'C:\Users\enggr\Desktop\pp\fgconfig\Aircrafts\f16\Scenarios\' +
+        r'C:\Users\scl\Flightgear\Aircrafts\f16\Scenarios\' +
             scenario.scenarioName +
             '.xml';
 
