@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simulator/screens/target_scenario.dart';
+import 'package:simulator/screens/route_manager.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -39,10 +40,7 @@ class _HomeScreenState extends State<HomeScreen>
 
           // Content for Tab 2
           SingleChildScrollView(
-            child: Container(
-              color: Colors.green,
-              child: Center(child: Text('Coming soon')),
-            ),
+            child: const RouteManagementScreen(),
           ),
 
         ],
@@ -56,4 +54,3 @@ class _HomeScreenState extends State<HomeScreen>
     super.dispose();
   }
 }
-
