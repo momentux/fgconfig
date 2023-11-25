@@ -3,7 +3,8 @@ import datetime
 
 # Define the Vendor and Product IDs for your Thrustmaster MFD Cougar V.2
 VENDOR_ID = 0x044f  # Replace with your actual Vendor ID
-PRODUCT_ID = 0xb352  # Replace with your actual Product ID
+PRODUCT_ID = 0xb352
+PRODUCT_ID = 0xb351  # Replace with your actual Product ID
 
 # Define a dictionary to map raw data patterns to button numbers
 raw_data_to_button = {

@@ -1,10 +1,8 @@
-// ignore_for_file: unnecessary_string_escapes
-
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:simulator/data/airports.dart';
 import 'dart:io';
+
 import 'package:simulator/utils/xml.dart';
 
 class Waypoint {
@@ -40,9 +38,13 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
   int seaTargets = 0;
   double speed = 0.0;
   double roll = 0.0;
+  double latitude = 0.0;
+  double longitude = 0.0;
 
   List<String> airports = []; // List to store source airports
   List<Waypoint> waypoints = []; // List to store waypoints
+  List<String> latitudes = []; // List to store source airports
+  List<String> longitudes = []; // List to store source airports
 
   @override
   void initState() {
@@ -55,8 +57,14 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
       final parsedJson = json.decode(airportsJson);
       final List<String> airportCodes = List<String>.from(
           parsedJson.map((airport) => airport['airportCode']));
+      final List<String> lat =
+          List<String>.from(parsedJson.map((latitude) => latitude['latitude']));
+      final List<String> long = List<String>.from(
+          parsedJson.map((longitude) => longitude['longitude']));
       setState(() {
         airports = airportCodes;
+        latitudes = lat;
+        longitudes = long;
       });
     } catch (e) {
       print('Error loading airports from JSON: $e');
@@ -393,20 +401,7 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
               const SizedBox(width: 16),
               ElevatedButton(
                 onPressed: () {
-                  // Replace "notepad.exe" with the actual command to launch Notepad on your system
-                  Process.run('notepad.exe', []).then((ProcessResult result) {
-                    // Check if the process was successfully started
-                    if (result.exitCode == 0) {
-                      // Minimize the Notepad window
-                      Process.run('powershell.exe', [
-                        '-command',
-                        '(New-Object -ComObject Shell.Application).MinimizeAll()'
-                      ]);
-                    } else {
-                      // Handle the case where launching Notepad failed
-                      print('Failed to launch Notepad: ${result.stderr}');
-                    }
-                  });
+                  _launchFlightGear();
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(16),
@@ -418,6 +413,21 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
         ],
       ),
     );
+  }
+
+  final String flightGearExecutablePath =
+      r'C:\Program Files\FlightGear 2020.3\bin\fgfs.exe';
+
+  _launchFlightGear() async {
+    try {
+      await Process.start(
+        flightGearExecutablePath,
+        ['/min'], // Add any other arguments if needed
+        mode: ProcessStartMode.detached,
+      );
+    } catch (e) {
+      print('Error launching FlightGear: $e');
+    }
   }
 
   void addWaypoint() {
@@ -472,8 +482,6 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
     }
     inputs.add({'scenarioEntry': entries});
 
-    print(inputs);
-
     // Add your XML generation logic here
     // Create a Scenario object with the entered parameters
     // Find the map containing the 'scenarioEntry' key
@@ -482,89 +490,111 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
     );
     List<dynamic> scenarioEntryList = scenarioEntryMap['scenarioEntry'];
     print(scenarioEntryList);
+
     final List<ScenarioEntry> scenarioEntries = [];
 
     for (int i = 0; i < scenarioEntryList.length; i++) {
       // Outer loop: Iterate over scenarioEntryList
 
       Map<String, dynamic> currentEntry = scenarioEntryList[i];
+      var a = currentEntry['sourceAirport']; //kxta
+      var b = latitudes;
+      var c = longitudes;
+      var d = airports; //kxta,goa,blr
 
-      // Create a ScenarioEntry for the current scenarioEntry
-      ScenarioEntry air = ScenarioEntry(
-        type: 'ship',
-        model: 'Models/Military/humvee-pickup-odrab-low-poly.ac',
-        name: currentEntry['sourceAirport'],
-        latitude: 0.0,
-        longitude: 0.0,
-        speed: currentEntry['speed'],
-        rudder: currentEntry['roll'],
-        heading: 0.0,
-        altitude: 4750.0,
-      );
-      ScenarioEntry ground = ScenarioEntry(
-        type: 'tanker',
-        model: 'Models/Military/humvee-pickup-odrab-low-poly.ac',
-        name: currentEntry['sourceAirport'],
-        latitude: 0.0,
-        longitude: 0.0,
-        speed: currentEntry['speed'],
-        rudder: currentEntry['roll'],
-        heading: 0.0,
-        altitude: 4750.0,
-      );
-      ScenarioEntry sea = ScenarioEntry(
-        type: 'aircraft',
-        model: 'Models/Military/humvee-pickup-odrab-low-poly.ac',
-        name: currentEntry['sourceAirport'],
-        latitude: 0.0,
-        longitude: 0.0,
-        speed: currentEntry['speed'],
-        rudder: currentEntry['roll'],
-        heading: 0.0,
-        altitude: 4750.0,
-      );
+      for (int j = 0; j < airports.length; j++) {
+        if (a == d[j]) {
+          for (int k = 0; k < currentEntry['numberOfAirTargets']; k++) {
+            // Inner loop 1: Iterate over numberOfAirTargets for the current scenarioEntry
+            print('Inner loop 1: i = $i, k = $k');
 
-      for (int j = 0; j < currentEntry['numberOfAirTargets']; j++) {
-        // Inner loop 1: Iterate over numberOfAirTargets for the current scenarioEntry
-        print('Inner loop 1: i = $i, j = $j');
+            // Create a ScenarioEntry for the current scenarioEntry
+            ScenarioEntry air = ScenarioEntry(
+              type: 'ship',
+              model: 'Models/Military/humvee-pickup-odrab-low-poly.ac',
+              name: 'aircraft_$k',
+              latitude: double.parse(latitudes[j]),
+              longitude: double.parse(longitudes[j]),
+              speed: currentEntry['speed'],
+              rudder: currentEntry['roll'],
+              heading: 0.0,
+              altitude: 1500.0,
+            );
+            // Add the ScenarioEntry to the scenarioEntries list
+            scenarioEntries.add(air);
+          }
 
-        // Add the ScenarioEntry to the scenarioEntries list
-        scenarioEntries.add(air);
-      }
+          for (int l = 0; l < currentEntry['numberOfGroundTargets']; l++) {
+            // Inner loop 2: Iterate over numberOfGroundTargets for the current scenarioEntry
 
-      for (int k = 0; k < currentEntry['numberOfGroundTargets']; k++) {
-        // Inner loop 2: Iterate over numberOfGroundTargets for the current scenarioEntry
-        print('Inner loop 2: i = $i, k = $k');
+            ScenarioEntry ground = ScenarioEntry(
+              type: 'ship',
+              model: 'Models/Military/humvee-pickup-odrab-low-poly.ac',
+              name: 'tanker_$l',
+              latitude: double.parse(latitudes[j]),
+              longitude: double.parse(longitudes[j]),
+              speed: currentEntry['speed'],
+              rudder: currentEntry['roll'],
+              heading: 0.0,
+              altitude: 1500.0,
+            );
 
-        // Add the ScenarioEntry to the scenarioEntries list
-        scenarioEntries.add(ground);
-      }
+            // Add the ScenarioEntry to the scenarioEntries list
+            scenarioEntries.add(ground);
+          }
 
-      for (int k = 0; k < currentEntry['seaTargets']; k++) {
-        // Inner loop 2: Iterate over numberOfGroundTargets for the current scenarioEntry
-        print('Inner loop 2: i = $i, k = $k');
+          for (int m = 0; m < currentEntry['seaTargets']; m++) {
+            // Inner loop 2: Iterate over numberOfGroundTargets for the current scenarioEntry
 
-        // Add the ScenarioEntry to the scenarioEntries list
-        scenarioEntries.add(sea);
+            ScenarioEntry sea = ScenarioEntry(
+              type: 'ship',
+              model: 'Models/Military/humvee-pickup-odrab-low-poly.ac',
+              name: 'ship_$m',
+              latitude: double.parse(latitudes[j]),
+              longitude: double.parse(longitudes[j]),
+              speed: currentEntry['speed'],
+              rudder: currentEntry['roll'],
+              heading: 0.0,
+              altitude: 1500.0,
+            );
+
+            // Add the ScenarioEntry to the scenarioEntries list
+            scenarioEntries.add(sea);
+          }
+        }
       }
     }
 
 // Create the Scenario object
     final scenario = Scenario(
       scenarioName: scenarioNameController.text,
-      description: "Description goes here",
-      searchOrder: "DATA_ONLY",
-      entries: scenarioEntries,
+      description: "Description goes here", // Replace with a description
+      searchOrder: "DATA_ONLY", // Replace with your desired search order
+      entries: [
+        for (int i = 0; i < 10; i++)
+          ScenarioEntry(
+            type: "ship",
+            model: "Models/Military/humvee-pickup-odrab-low-poly.ac",
+            name: sourceAirport, // Auto-generated name based on airport
+            latitude: 0.0, // Calculate latitude based on airport
+            longitude: 0.0, // Calculate longitude based on airport
+            speed: speed,
+            rudder: roll,
+            heading: 0.0, // Replace with your desired heading
+            altitude: 4750.0, // Replace with your desired altitude
+          ),
+      ],
     );
-
-    print(scenario);
 
     // Generate the XML content
     final xmlContent = buildScenarioXML(scenario);
 
     // Save the XML to a file (you can specify the file path)
     var filePath =
-        r'C:\Users\scl/Flightgear\Aircraftsf\16\Scenarios\'+scenario.scenarioName+'.xml';
+        // ignore: prefer_interpolation_to_compose_strings
+        r'C:\Users\scl\Flightgear\Aircrafts\f16\Scenarios\' +
+            scenario.scenarioName +
+            '.xml';
 
     final xmlFile = File(filePath);
     await xmlFile.writeAsString(xmlContent);
