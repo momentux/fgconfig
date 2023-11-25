@@ -4,3 +4,6 @@
 [submodule "Addons/Bombable"]
 	path = Addons/Bombable
 	url = https://github.com/bhugh/Bombable.git
+[submodule "Mil1553"]
+	path = Mil1553
+	url = https://github.com/momentux/Mil1553.git
