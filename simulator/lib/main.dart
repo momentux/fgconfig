@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:simulator/screens/home_screen.dart';
-import 'package:simulator/utils/menu_bar.dart';
+import 'package:simulator/utils/data_load.dart';
+// import 'package:simulator/utils/menu_bar.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  DataLoader().loadAirportsFromJson();
   runApp(const MyApp());
 }
 
@@ -14,8 +17,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  ThemeMode _themeMode = ThemeMode.system;
-
+  ThemeMode _themeMode = ThemeMode.light;
 
   @override
   Widget build(BuildContext context) {
