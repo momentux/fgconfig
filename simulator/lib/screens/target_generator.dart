@@ -11,13 +11,7 @@ class Target extends Waypoint {
   String namePrefix;
   String type;
 
-  Target(
-      {required this.numberofTargets,
-      required super.airport,
-      super.speed,
-      super.roll,
-      this.namePrefix = "ship-",
-      this.type = "Air"});
+  Target({required this.numberofTargets, required super.airport, super.speed, super.roll, this.namePrefix = "ship-", this.type = "Air"});
 }
 
 class ScenarioMeta {}
@@ -26,14 +20,12 @@ class ScenarioManagementScreen extends StatefulWidget {
   const ScenarioManagementScreen({super.key});
 
   @override
-  State<ScenarioManagementScreen> createState() =>
-      _ScenarioManagementScreenState();
+  State<ScenarioManagementScreen> createState() => _ScenarioManagementScreenState();
 }
 
 class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
   final TextEditingController scenarioNameController = TextEditingController();
-  final TextEditingController scenarioDescriptionController =
-      TextEditingController();
+  final TextEditingController scenarioDescriptionController = TextEditingController();
 
   List<String> airports = DataLoader().getAllAirportCodes();
   List<Target> _targets = []; // List to store waypoints
@@ -69,8 +61,7 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
                       );
                     }).toList(),
                     decoration: InputDecoration(
-                      labelText:
-                          _targets.length == 1 ? "Source Airport" : "Waypoint",
+                      labelText: _targets.length == 1 ? "Source Airport" : "Waypoint",
                       border: OutlineInputBorder(),
                     ),
                   ),
@@ -179,8 +170,7 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 16),
-          const Text("Create a Scenario",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+          const Text("Create a Scenario", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
           const SizedBox(height: 16),
           Row(
             children: [
@@ -213,7 +203,7 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
             elevation: 3,
             expansionCallback: (index, isExpanded) {
               setState(() {
-                // _isExpandedList[index] = !isExpanded;
+                _targets[index - 1].isExpand = false;
               });
             },
             animationDuration: Duration(milliseconds: 600),
@@ -223,11 +213,9 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
                 Target item = entry.value;
                 return ExpansionPanel(
                   canTapOnHeader: true,
-                  headerBuilder: (_, isExpanded) =>
-                      ListTile(title: Text("Target ${index + 1}")),
+                  headerBuilder: (_, isExpanded) => ListTile(title: Text("Target ${index + 1}")),
                   body: buildScenarioEntryCard(item, index),
-                  isExpanded:
-                      true, // You can control this with _isExpandedList[index] if needed
+                  isExpanded: item.isExpand,
                 );
               },
             ).toList(),
@@ -252,7 +240,7 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
               ),
               const SizedBox(width: 16),
               ElevatedButton(
-               onPressed: uploadXml,
+                onPressed: uploadXml,
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(16),
                 ),
@@ -312,14 +300,11 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
     // r'C:\Users\scl\Flightgear\Aircrafts\f16\Scenarios\' + scenario.name + '.xml';;
 
     final xmlFile = File(filePath);
-    xmlFile.writeAsString(xmlContent.toXmlString(pretty: true),
-        mode: FileMode.write);
+    xmlFile.writeAsString(xmlContent.toXmlString(pretty: true), mode: FileMode.write);
 
     showDialog(
       context: context,
       builder: (context) {
-        final currentContext = context;
-
         return AlertDialog(
           title: const Text("Scenario Created"),
           content: const Text("Scenario XML file generated successfully!"),
@@ -327,7 +312,7 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
             TextButton(
               onPressed: () {
                 // Use the captured context to pop the dialog
-                Navigator.of(currentContext).pop();
+                Navigator.of(context).pop();
               },
               child: const Text("Close"),
             ),
@@ -344,23 +329,37 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
       final document = XmlDocument.parse(contents);
       final rootElement = document.rootElement;
       PropertyList propertyList = PropertyList.fromXmlElement(rootElement);
-      Scenario scenario = propertyList.scenario;
-      AlertDialog(
-          title: const Text("Scenario file loaded"),
-          content: const Text("Scenario XML file is valid!"),
-          actions: [
-            TextButton(
-              onPressed: () {
-                // Use the captured context to pop the dialog
-                Navigator.of(context).pop();
-              },
-              child: const Text("Close"),
-            ),
-          ],
-      )
+      if(propertyList.scenario.entries.isNotEmpty) {
+          AlertDialog(
+            title: const Text("Scenario file loaded"),
+            content: const Text("Scenario XML file is valid!"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  // Use the captured context to pop the dialog
+                  Navigator.of(context).pop();
+                },
+                child: const Text("Close"),
+              ),
+            ],
+          );
+      } else {
+        AlertDialog(
+        title: const Text("Scenario file failed to load"),
+        content: const Text("Scenario XML file is not valid!"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              // Use the captured context to pop the dialog
+              Navigator.of(context).pop();
+            },
+            child: const Text("Close"),
+          ),
+        ],
+      );
+      }
     }
   }
-
 
   Future<File?> pickXmlFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(

@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:simulator/utils/data_load.dart';
 import 'package:simulator/models/scenario.dart';
@@ -7,8 +6,9 @@ class Waypoint {
   String airport;
   double speed;
   double roll;
+  bool isExpand;
 
-  Waypoint({required this.airport, this.speed = 0.0, this.roll = 0.0});
+  Waypoint({required this.airport, this.speed = 0.0, this.roll = 0.0, this.isExpand = true});
 }
 
 class RouteManagementScreen extends StatefulWidget {
