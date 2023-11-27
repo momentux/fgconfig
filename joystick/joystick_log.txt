@@ -1,0 +1,13 @@
+Sender 1 connected to the receiver.
+[2023-11-27 09:03:29.296263] No joystick detected.
+Sender 2 connected to the receiver.
+[2023-11-27 09:03:29.297261] No joystick detected.
+Joystick not initialized. Exiting.
+[2023-11-27 09:03:29.298261] Sender 3 connected to the receiver.
+[2023-11-27 09:03:29.299262] No joystick detected.
+Joystick not initialized. Exiting.
+[2023-11-27 09:03:29.299262] Sender 4 connected to the receiver.
+Thrustmaster MFD Cougar V.2 not found. Check Vendor and Product IDs.
+[2023-11-27 09:03:29.301261] Sender 5 connected to the receiver.
+Sender 5 connected to the receiver.
+Thrustmaster MFD Cougar V.2 not found. Check Vendor and Product IDs.

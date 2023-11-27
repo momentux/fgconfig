@@ -1,4 +1,3 @@
-```
 PG4_IN             3001
 PG4_LEFT           3002
 PG4_RIGHT          3003
@@ -61,4 +60,3 @@ SSP_NAV_TA          1005
 SSP_STBY            1006
 SSP_INTRLVD_ON      1007
 SSP_INTRLVD_OFF     1008
-```
