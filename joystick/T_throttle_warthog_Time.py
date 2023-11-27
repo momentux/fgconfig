@@ -2,6 +2,7 @@ import pygame
 import time
 from datetime import datetime
 
+
 # Initialize pygame
 pygame.init()
 
@@ -107,3 +108,4 @@ while running:
 
 # Quit pygame and clean up
 pygame.quit()
+

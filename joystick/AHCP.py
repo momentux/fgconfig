@@ -2,6 +2,7 @@ import pygame
 import time
 from datetime import datetime
 
+
 # Initialize pygame
 pygame.init()
 
@@ -98,4 +99,8 @@ while running:
     time.sleep(0.01)  # Reduce sleep time for more accurate button press timing
 
 # Quit pygame and clean up
+
+
 pygame.quit()
+
+

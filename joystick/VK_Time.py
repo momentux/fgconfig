@@ -4,9 +4,10 @@ import datetime
 # Define the Vendor and Product IDs for your Thrustmaster MFD Cougar V.2
 VENDOR_ID = 0x044f  # Replace with your actual Vendor ID
 PRODUCT_ID = 0xb352
-PRODUCT_ID = 0xb351  # Replace with your actual Product ID
 
 # Define a dictionary to map raw data patterns to button numbers
+
+
 raw_data_to_button = {
     (0, 0, 0, 0, 4): 1,
     (0, 0, 0, 0, 8): 2,
@@ -50,6 +51,14 @@ button_to_vk = {
     # Add more button-to-VK mappings as needed
 }
 
+
+# file1.py
+def get_message():
+    return "Hello from file 1"
+
+
+
+
 # Define the button press callback function
 def on_button_pressed(data):
     button_number = raw_data_to_button.get(tuple(data))
@@ -79,3 +88,4 @@ if devices:
         device.close()
 else:
     print("Thrustmaster MFD Cougar V.2 not found. Check Vendor and Product IDs.")
+
