@@ -1,12 +1,13 @@
 ### Aircraft
+# --config=/Users/rverma2/.fgfs/camera-views.xml
+
 # mac 
---fg-aircraft=/Users/rverma2/.fgfs/Aircrafts
---aircraft-dir=/Users/rverma2/.fgfs/Aircrafts/f16
 --download-dir=/Users/rverma2/.fgfs/Downloads
 --fg-scenery=/Users/rverma2/.fgfs/Scenery
-# --addon=/Users/rverma2/.fgfs/Addons/Bombable
+--fg-aircraft=/Users/rverma2/.fgfs/Aircrafts
+--aircraft-dir=/Users/rverma2/.fgfs/Aircrafts/f16
 --flight-plan=/Users/rverma2/.fgfs/config/route-kxta-ktnx.xml
-# --config=/Users/rverma2/.fgfs/camera-views.xml
+# --addon=/Users/rverma2/.fgfs/Addons/Bombable
 
 # windows
 # --download-dir=C:\Users\scl/Flightgear\Downloads
@@ -17,7 +18,6 @@
 
 
 ### System
-# --units-meters
 --enable-fullscreen
 --enable-freeze
 --disable-sound
@@ -37,7 +37,6 @@
 --prop:/sim/rendering/shaders/skydome=true
 --prop:/nasal/local_weather/enabled=false
 --prop:/sim/rendering/texture-cache/cache-enabled=true
-# --prop:/environment/weather-scenario='Core high pressure region'
 
 ### Initial position
 --airport=KXTA
@@ -48,7 +47,6 @@
 --state=cruise
 --vc=600
 --heading=305.34
-# --visibility=5000
 
 ### Rendering
 --bpp=32
@@ -64,8 +62,7 @@
 
 ### Network and logging
 --model-hz=500
-# --httpd=8282
-# --atlas=socket,out,1,localhost,5505,udp
+--httpd=8181
 # --generic=socket,out,1,localhost,5505,udp,insgps
 # --generic=file,out,120,/tmp/fdr.csv,target-track
 
