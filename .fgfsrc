@@ -75,5 +75,5 @@
 --prop:/sim/rendering/multithreading-mode=CullThreadPerCameraDrawThreadPerContext
 
 ### Scenarios
-# --prop:/sim/ai/scenario="9g"
+# --prop:/sim/ai/scenario="moving_targets_around_KXTA"
 --prop:double:/ai/models/aircraft/orientation/true-heading-deg=0

@@ -18,8 +18,6 @@
       <load>
         <![CDATA[
           var finish = 0;
-
-               
           var loop2 = func () {
               foreach( var tanker; props.globals.getNode("/ai/models",1).getChildren("ship") ) {
                 var lat = tanker.getNode("position/latitude-deg").getValue();
