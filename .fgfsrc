@@ -6,7 +6,7 @@
 --fg-scenery=/Users/rverma2/.fgfs/Scenery
 --fg-aircraft=/Users/rverma2/.fgfs/Aircrafts
 --aircraft-dir=/Users/rverma2/.fgfs/Aircrafts/f16
---flight-plan=/Users/rverma2/.fgfs/config/route-kxta-ktnx.xml
+--flight-plan=/Users/rverma2/.fgfs/config/vobg.xml
 # --addon=/Users/rverma2/.fgfs/Addons/Bombable
 
 # windows
@@ -39,10 +39,10 @@
 --prop:/sim/rendering/texture-cache/cache-enabled=true
 
 ### Initial position
---airport=KXTA
---lon=-115.7965983
---lat=37.25846241
---altitude=4572
+--airport=VOBG
+# --lon=-115.7965983
+# --lat=37.25846241
+--altitude=10000
 --in-air
 --state=cruise
 --vc=600
