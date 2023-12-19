@@ -1,20 +1,18 @@
-### Aircraft
-# --config=/Users/rverma2/.fgfs/camera-views.xml
-
 # mac 
---download-dir=/Users/rverma2/.fgfs/Downloads
---fg-scenery=/Users/rverma2/.fgfs/Scenery
---fg-aircraft=/Users/rverma2/.fgfs/Aircrafts
---aircraft-dir=/Users/rverma2/.fgfs/Aircrafts/f16
---flight-plan=/Users/rverma2/.fgfs/config/vobg.xml
+# --download-dir=/Users/rverma2/.fgfs/Downloads
+# --fg-scenery=/Users/rverma2/.fgfs/Scenery
+# --fg-aircraft=/Users/rverma2/.fgfs/Aircrafts
+# --aircraft-dir=/Users/rverma2/.fgfs/Aircrafts/f16
+# --flight-plan=/Users/rverma2/.fgfs/config/modified_vobg.xml
 # --addon=/Users/rverma2/.fgfs/Addons/Bombable
 
 # windows
-# --download-dir=C:\Users\scl/Flightgear\Downloads
-# --fg-scenery=C:\Users\scl/Flightgear\Scenery
-# --fg-aircraft=C:\Users\scl/Flightgear\Aircrafts
-# --aircraft-dir=C:\Users\scl/Flightgear\Aircraftsf\16
-# --config=C:\Users\scl/Flightgear\camera-views.xml
+--download-dir=C:\Users\scl\Flightgear\Downloads
+--fg-scenery=C:\Users\scl\Flightgear\Scenery
+--fg-aircraft=C:\Users\scl\Flightgear\Aircrafts
+--aircraft-dir=C:\Users\scl\Flightgear\Aircraftsf\16
+--config=C:\Users\scl\Flightgear\config\camera-views.xml
+--flight-plan=C:\Users\scl\Flightgear\config\modified_vobg.xml
 
 
 ### System
@@ -28,25 +26,21 @@
 
 ### Aircraft specifics
 --aircraft=f16-block-60
---prop:/f16/fcs/autopilot-on=1
---prop:/f16/fcs/switch-pitch-block20=1
---prop:/f16/fcs/switch-roll-block20=-1
 
 ### Environment
 --timeofday=morning
---prop:/sim/rendering/shaders/skydome=true
+--prop:/sim/rendering/shaders/skydome=0 #turn off ALS
 --prop:/nasal/local_weather/enabled=false
 --prop:/sim/rendering/texture-cache/cache-enabled=true
 
 ### Initial position
---airport=VOBG
-# --lon=-115.7965983
-# --lat=37.25846241
---altitude=10000
+--lon=77.568334
+--lat=13.006054
+--altitude=6000
 --in-air
 --state=cruise
 --vc=600
---heading=305.34
+--heading=10.08
 
 ### Rendering
 --bpp=32
@@ -58,22 +52,17 @@
 --enable-ai-models
 --prop:/sim/ai/traffic-manager/enabled=false
 --prop:/autopilot/route-manager/active=true
---prop:/autopilot/route-manager/current-wp=0
 
 ### Network and logging
 --model-hz=500
 --httpd=8181
 # --generic=socket,out,1,localhost,5505,udp,insgps
-# --generic=file,out,120,/tmp/fdr.csv,target-track
+--generic=file,out,120,/tmp/targets.csv,PTFM
 
 ### Performance Optimizations
 --disable-random-objects
---enable-clouds3d
 --fog-fastest
---enable-distance-attenuation
---prop:/sim/gui/current-style=0
 --prop:/sim/rendering/multithreading-mode=CullThreadPerCameraDrawThreadPerContext
 
 ### Scenarios
-# --prop:/sim/ai/scenario="moving_targets_around_KXTA"
---prop:double:/ai/models/aircraft/orientation/true-heading-deg=0
+# --prop:/sim/ai/scenario="lrde"

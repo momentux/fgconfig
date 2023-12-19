@@ -1,0 +1,603 @@
+<?xml version="1.0"?>
+<PropertyList>
+    <generic>
+        <output>
+            <line_separator>newline</line_separator>
+            <var_separator>,</var_separator>
+            <chunk>
+                <name>PARAM1</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>position/latitude-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM2</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>position/longitude-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM3</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>position/altitude-ft</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM4</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>velocities/airspeed-kt</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM5</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>velocities/groundspeed-kt</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM6</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>velocities/speed-north-fps</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM7</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>velocities/speed-east-fps</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM8</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>velocities/speed-down-fps</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM9</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>orientation/roll-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM10</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>orientation/pitch-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM11</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>orientation/yaw-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM12</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>orientation/heading-magnetic-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM13</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft/position/latitude-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM14</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft/position/longitude-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM15</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft/position/altitude-ft</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM16</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft/velocities/true-airspeed-kt</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM17</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft/orientation/roll-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM18</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft/orientation/pitch-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM19</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft/orientation/true-heading-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM20</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[1]/position/latitude-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM21</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[1]/position/longitude-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM22</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[1]/position/altitude-ft</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM23</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[1]/velocities/true-airspeed-kt</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM24</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[1]/orientation/roll-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM25</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[1]/orientation/pitch-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM26</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[1]/orientation/true-heading-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM27</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[2]/position/latitude-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM28</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[2]/position/longitude-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM29</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[2]/position/altitude-ft</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM30</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[2]/velocities/true-airspeed-kt</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM31</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[2]/orientation/roll-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM32</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[2]/orientation/pitch-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM33</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[2]/orientation/true-heading-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM34</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/position/latitude-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM35</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/position/longitude-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM36</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/position/altitude-ft</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM37</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/velocities/true-airspeed-kt</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM38</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/orientation/roll-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM39</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/orientation/pitch-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM40</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/orientation/true-heading-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM41</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/position/latitude-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM42</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/position/longitude-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM43</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/position/altitude-ft</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM44</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/velocities/true-airspeed-kt</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM45</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/orientation/roll-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM46</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/orientation/pitch-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM47</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/orientation/true-heading-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM48</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/position/latitude-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM49</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/position/longitude-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM50</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/position/altitude-ft</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM51</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/velocities/true-airspeed-kt</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM52</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/orientation/roll-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM53</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/orientation/pitch-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM54</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/orientation/true-heading-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM55</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/position/latitude-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM56</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/position/longitude-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM57</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/position/altitude-ft</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM58</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/velocities/true-airspeed-kt</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM59</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/orientation/roll-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM60</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/orientation/pitch-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM61</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/orientation/true-heading-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM62</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/position/latitude-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM63</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/position/longitude-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM64</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/position/altitude-ft</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM65</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/velocities/true-airspeed-kt</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM66</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/orientation/roll-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM67</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/orientation/pitch-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM68</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/orientation/true-heading-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM69</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/position/latitude-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM70</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/position/longitude-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM71</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/position/altitude-ft</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM72</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/velocities/true-airspeed-kt</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM73</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/orientation/roll-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM74</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/orientation/pitch-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM75</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/orientation/true-heading-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM76</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/position/latitude-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM77</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/position/longitude-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM78</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/position/altitude-ft</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM79</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/velocities/true-airspeed-kt</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM80</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/orientation/roll-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM81</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/orientation/pitch-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM82</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>ai/models/aircraft[3]/orientation/true-heading-deg</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM83</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>sim/time/elapsed-sec</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM84</name>
+                <format>%lf</format>
+                <type>double</type>
+                <node>sim/time/delta-sec</node>
+            </chunk>
+
+            <chunk>
+                <name>PARAM85</name>
+                <format>%d</format>
+                <type>int</type>
+                <node>ai/models/count</node>
+            </chunk>
+        </output>
+    </generic>
+</PropertyList>
