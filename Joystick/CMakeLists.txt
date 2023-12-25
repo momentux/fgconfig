@@ -5,13 +5,13 @@ project(Joystick CXX)
 ################################################################################
 # Set target arch type if empty. Visual studio solution generator provides it.
 ################################################################################
-if(NOT CMAKE_VS_PLATFORM_NAME)
-    set(CMAKE_VS_PLATFORM_NAME "x64")
+if(NOT CMAKE_VS_PLATFORM_NAME OR "${CMAKE_VS_PLATFORM_NAME}" STREQUAL "win32")
+    set(CMAKE_VS_PLATFORM_NAME "x86")
 endif()
 message("${CMAKE_VS_PLATFORM_NAME} architecture in use")
 
-if(NOT ("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "Win32"
-     OR "${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64"))
+if(NOT ("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64"
+     OR "${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x86"))
     message(FATAL_ERROR "${CMAKE_VS_PLATFORM_NAME} arch is not supported!")
 endif()
 
@@ -23,6 +23,7 @@ set(CMAKE_CONFIGURATION_TYPES
     "Release"
     CACHE STRING "" FORCE
 )
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 ################################################################################
 # Global compiler options
@@ -81,38 +82,12 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 # Sub-projects
 ################################################################################
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 set(PROJECT_NAME JsApp)
 
 ################################################################################
 # Source groups
 ################################################################################
-set(no_group_source_files
+set(Header_Files
     "include/DeviceInterface.h"
     "include/js.h"
     "include/JsApp.h"
@@ -122,9 +97,8 @@ set(no_group_source_files
     "include/stdafx.h"
     "include/targetver.h"
     "include/ul.h"
-    "ReadMe.txt"
 )
-source_group("" FILES ${no_group_source_files})
+source_group("Header Files" FILES ${Header_Files})
 
 set(Resource_Files
     "res/bitmap1.bmp"
@@ -134,18 +108,18 @@ set(Resource_Files
 source_group("Resource Files" FILES ${Resource_Files})
 
 set(Source_Files
-    "js.cxx"
-    "JsApp.cpp"
-    "JsAppDlg.cpp"
-    "jsWindows.cxx"
-    "stdafx.cpp"
-    "UDPLanInterface.cpp"
-    "ul.cxx"
+    "src/js.cxx"
+    "src/JsApp.cpp"
+    "src/JsAppDlg.cpp"
+    "src/jsWindows.cxx"
+    "src/stdafx.cpp"
+    "src/UDPLanInterface.cpp"
+    "src/ul.cxx"
 )
 source_group("Source Files" FILES ${Source_Files})
 
 set(ALL_FILES
-    ${no_group_source_files}
+    ${Header_Files}
     ${Resource_Files}
     ${Source_Files}
 )
@@ -165,19 +139,36 @@ set(ROOT_NAMESPACE Joystick)
 set_target_properties(${PROJECT_NAME} PROPERTIES
     VS_GLOBAL_KEYWORD "MFCProj"
 )
-if("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "Win32")
+if("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64")
     set_target_properties(${PROJECT_NAME} PROPERTIES
         INTERPROCEDURAL_OPTIMIZATION_RELEASE "TRUE"
     )
-elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64")
+elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x86")
     set_target_properties(${PROJECT_NAME} PROPERTIES
         INTERPROCEDURAL_OPTIMIZATION_RELEASE "TRUE"
     )
 endif()
 ################################################################################
+# Include directories
+################################################################################
+if("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64")
+    target_include_directories(${PROJECT_NAME} PUBLIC
+        "$<$<CONFIG:Debug>:"
+            "${CMAKE_CURRENT_SOURCE_DIR}/include"
+        ">"
+    )
+elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x86")
+    target_include_directories(${PROJECT_NAME} PUBLIC
+        "$<$<CONFIG:Debug>:"
+            "${CMAKE_CURRENT_SOURCE_DIR}/include"
+        ">"
+    )
+endif()
+
+################################################################################
 # Compile definitions
 ################################################################################
-if("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "Win32")
+if("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64")
     target_compile_definitions(${PROJECT_NAME} PRIVATE
         "$<$<CONFIG:Debug>:"
             "_DEBUG"
@@ -190,7 +181,7 @@ if("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "Win32")
         "UNICODE;"
         "_UNICODE"
     )
-elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64")
+elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x86")
     target_compile_definitions(${PROJECT_NAME} PRIVATE
         "$<$<CONFIG:Debug>:"
             "_DEBUG"
@@ -209,7 +200,7 @@ endif()
 # Compile and link options
 ################################################################################
 if(MSVC)
-    if("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "Win32")
+    if("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64")
         target_compile_options(${PROJECT_NAME} PRIVATE
             $<$<CONFIG:Debug>:
                 /Od
@@ -223,7 +214,7 @@ if(MSVC)
             ${DEFAULT_CXX_DEBUG_INFORMATION_FORMAT};
             ${DEFAULT_CXX_EXCEPTION_HANDLING}
         )
-    elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64")
+    elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x86")
         target_compile_options(${PROJECT_NAME} PRIVATE
             $<$<CONFIG:Debug>:
                 /Od
@@ -238,7 +229,7 @@ if(MSVC)
             ${DEFAULT_CXX_EXCEPTION_HANDLING}
         )
     endif()
-    if("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "Win32")
+    if("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64")
         target_link_options(${PROJECT_NAME} PRIVATE
             $<$<CONFIG:Debug>:
                 /INCREMENTAL
@@ -251,7 +242,7 @@ if(MSVC)
             /DEBUG;
             /SUBSYSTEM:WINDOWS
         )
-    elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x64")
+    elseif("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x86")
         target_link_options(${PROJECT_NAME} PRIVATE
             $<$<CONFIG:Debug>:
                 /INCREMENTAL
@@ -270,7 +261,7 @@ endif()
 ################################################################################
 # Dependencies
 ################################################################################
-if("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "Win32")
+if("${CMAKE_VS_PLATFORM_NAME}" STREQUAL "x86")
     set(ADDITIONAL_LIBRARY_DEPENDENCIES
         "$<$<CONFIG:Debug>:"
             "kernel32;"
