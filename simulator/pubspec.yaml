@@ -8,14 +8,19 @@ environment:
   sdk: '>=3.1.4 <4.0.0'
 
 dependencies:
+  path_provider: ^2.0.15
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
   path: any
+  udp: ^5.0.3
   logger: ^2.0.2+1
   accordion: ^2.6.0
-  xml: ^6.4.2
-  file_picker: ^6.1.1
+  file_picker: ^4.2.0
+  xml: ^5.3.1
+  process_run: ^0.13.3
+  url_launcher: ^6.0.12
+  http: ^1.1.2
 
 
 dev_dependencies:
