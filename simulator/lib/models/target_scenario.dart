@@ -32,7 +32,9 @@ class Scenario {
       builder.element('description', nest: description);
       builder.element('search-order', nest: searchOrder);
       nasal?.buildXmlElement(builder);
-      entries.forEach((entry) => entry.buildXmlElement(builder));
+      for (var entry in entries) {
+        entry.buildXmlElement(builder);
+      }
     });
   }
 }

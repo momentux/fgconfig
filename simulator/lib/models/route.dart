@@ -25,13 +25,13 @@ class FgRoute {
 }
 
 class ScenarioEntry {
-  final String sno;
-  final String type;
+  final String? sno;
+  final String? type;
   final String name; // Auto-generated
-  final String latitude; // Auto-generated based on sourceAirport
-  final String longitude; // Auto-generated based on sourceAirport
-  final String speed;
-  final String altitude;
+  final double latitude; // Auto-generated based on sourceAirport
+  final double longitude; // Auto-generated based on sourceAirport
+  final double speed;
+  final int altitude;
 
   ScenarioEntry({
     required this.sno,
@@ -63,7 +63,7 @@ String buildRouteXML(FgRoute route) {
     xml.writeln('           <type type="string">${entry.type}</type>');
     xml.writeln('           <altitude-ft>${entry.altitude}</altitude-ft>');
     xml.writeln('          <speed>${entry.speed}</speed>');
-    xml.writeln('          <ident type="string">${entry.name}</ident>');
+    xml.writeln('          <ident>${entry.name}</ident>');
     xml.writeln('          <lon>${entry.longitude}</lon>');
     xml.writeln('          <lat>${entry.latitude}</lat>');
     xml.writeln('       </wp>');

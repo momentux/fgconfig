@@ -1,7 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
-Widget buildTitle(String title) {
+Widget titleText(String title) {
   return Padding(
     padding: EdgeInsets.only(bottom: 22.0), // Adjust the value as needed
     child: Text(
@@ -14,7 +14,7 @@ Widget buildTitle(String title) {
   );
 }
 
-Widget buildRow(List<Widget> children) {
+Widget sizedRow(List<Widget> children) {
   return Row(
     children: children
         .expand((child) => [SizedBox(width: 16.0), Expanded(child: child)])
@@ -22,7 +22,7 @@ Widget buildRow(List<Widget> children) {
   );
 }
 
-Widget buildDropdownFormField(String? value, List<String> items,
+Widget dropdownFormField(String? value, List<String> items,
     ValueChanged<String?> onChanged, String labelText) {
   return DropdownButtonFormField<String>(
       value: value,
@@ -44,7 +44,7 @@ Widget buildDropdownFormField(String? value, List<String> items,
   );
 }
 
-Widget buildUploadButton(Future<void> Function(String filePath) onPressed) {
+Widget fileUploadButton(Future<void> Function(String filePath) onPressed) {
   return ElevatedButton(
     onPressed: () async {
       FilePickerResult? result = await FilePicker.platform.pickFiles();
@@ -60,7 +60,7 @@ Widget buildUploadButton(Future<void> Function(String filePath) onPressed) {
   );
 }
 
-Widget buildTextFormField(TextEditingController controller,
+Widget textFormField(TextEditingController controller,
     ValueChanged<String> onChanged, String labelText) {
   return TextFormField(
     controller: controller,

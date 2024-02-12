@@ -1,4 +1,4 @@
-import 'package:simulator/screens/target_generator.dart';
+import '../../models/protocol.dart';
 
 String buildGroundScenarioXML(Scenario3 scenario) {
   final xml = StringBuffer();

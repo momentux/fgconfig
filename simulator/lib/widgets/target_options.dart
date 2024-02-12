@@ -40,9 +40,9 @@ class _TargetOptionsCardState extends State<TargetOptionsCard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              buildTitle('Target Options'),
-              buildRow([
-                buildDropdownFormField(
+              titleText('Target Options'),
+              sizedRow([
+                dropdownFormField(
                     targetOption, ['FG AI Scenario', 'Manual AI Scenario'],
                     (newValue) {
                   setState(() {
@@ -56,9 +56,9 @@ class _TargetOptionsCardState extends State<TargetOptionsCard> {
                   });
                 }, targetOptionHint),
                 if (targetOption == 'FG AI Scenario')
-                  buildUploadButton(movefileforfgaiscenario),
+                  fileUploadButton(movefileforfgaiscenario),
                 if (targetOption == 'Manual AI Scenario')
-                  buildDropdownFormField(
+                  dropdownFormField(
                       typeOfTarget, ['Air Target', 'Sea Target', 'Ground Target'],
                       (newValue) {
                     setState(() {
@@ -67,7 +67,7 @@ class _TargetOptionsCardState extends State<TargetOptionsCard> {
                     });
                   }, typeOfTargetHint),
                 if (targetOption == 'Manual AI Scenario')
-                  buildDropdownFormField(
+                  dropdownFormField(
                       targetSubOption, ['Replay Recorded Data', 'Bypass FG'],
                       (newValue) {
                     setState(() {
@@ -77,7 +77,7 @@ class _TargetOptionsCardState extends State<TargetOptionsCard> {
                   }, targetSubOptionHint),
                 if (targetOption == 'Manual AI Scenario' &&
                     targetSubOption == 'Replay Recorded Data')
-                  buildUploadButton(movefileformanualai),
+                  fileUploadButton(movefileformanualai),
                 // if (targetSubOption == 'Bypass FG') buildUploadButton(_pickFile),
               ]),
             ],
