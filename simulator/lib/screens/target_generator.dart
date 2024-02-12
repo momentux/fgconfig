@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
@@ -24,7 +26,6 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
   String type = "";
   String model = "";
   String classi = "";
-
 
   final TextEditingController scenarioDescriptionController =
       TextEditingController();
@@ -327,41 +328,42 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
     );
   }
 
- String generateXml(String groupName, List<List<double>> coordinates) {
-  final StringBuffer xml = StringBuffer('<?xml version="1.0"?>');
+  String generateXml(String groupName, List<List<double>> coordinates) {
+    final StringBuffer xml = StringBuffer('<?xml version="1.0"?>');
 
-  xml.writeln('<PropertyList>');
-  xml.writeln(' <flightplan>');
-  for (int i = 1; i < coordinates.length; i++) {
-    var coord = coordinates[i - 1];
-    xml.writeln('  <wpt>');
-    xml.writeln('   <name>WPT$i</name>');
-    xml.writeln('   <lat>${coord[0]}</lat>');
-    xml.writeln('   <lon>${coord[1]}</lon>');
-    xml.writeln('   <alt>${coord[2]}</alt>');
-    xml.writeln('   <ktas>$speed</ktas>');
-    xml.writeln('  </wpt>');
+    xml.writeln('<PropertyList>');
+    xml.writeln(' <flightplan>');
+    for (int i = 1; i < coordinates.length; i++) {
+      var coord = coordinates[i - 1];
+      xml.writeln('  <wpt>');
+      xml.writeln('   <name>WPT$i</name>');
+      xml.writeln('   <lat>${coord[0]}</lat>');
+      xml.writeln('   <lon>${coord[1]}</lon>');
+      xml.writeln('   <alt>${coord[2]}</alt>');
+      xml.writeln('   <ktas>$speed</ktas>');
+      xml.writeln('  </wpt>');
+    }
+
+    // Handle the last coordinate separately
+    if (coordinates.isNotEmpty) {
+      var lastCoord = coordinates.last;
+      xml.writeln('  <wpt>');
+      xml.writeln('   <name>END</name>');
+      xml.writeln('   <lat>${lastCoord[0]}</lat>');
+      xml.writeln('   <lon>${lastCoord[1]}</lon>');
+      xml.writeln('   <alt>${lastCoord[2]}</alt>');
+      xml.writeln('   <ktas>$speed</ktas>');
+      xml.writeln('  </wpt>');
+    }
+
+    xml.writeln(' </flightplan>');
+    xml.writeln('</PropertyList>');
+
+    return xml.toString();
   }
 
-  // Handle the last coordinate separately
-  if (coordinates.isNotEmpty) {
-    var lastCoord = coordinates.last;
-    xml.writeln('  <wpt>');
-    xml.writeln('   <name>END</name>');
-    xml.writeln('   <lat>${lastCoord[0]}</lat>');
-    xml.writeln('   <lon>${lastCoord[1]}</lon>');
-    xml.writeln('   <alt>${lastCoord[2]}</alt>');
-    xml.writeln('   <ktas>$speed</ktas>');
-    xml.writeln('  </wpt>');
-  }
-
-  xml.writeln(' </flightplan>');
-  xml.writeln('</PropertyList>');
-
-  return xml.toString();
-}
-late int rows;
-late int interval; 
+  late int rows;
+  late int interval;
   void uploadCoordinates(String filePath) async {
     try {
       if (filePath.isNotEmpty) {
@@ -428,40 +430,38 @@ late int interval;
         interval = 5; //waypionts
 
         // Calculate the number of targets
-        int targets = (rows / interval).ceil();//50/5 = 10
+        int targets = (rows / interval).ceil(); //50/5 = 10
 
-        if (selectedScenarioType == 'Air'){
+        if (selectedScenarioType == 'Air') {
           // Create empty maps for target arrays
-        Map<String, List<String>> targetArrays = {
-          for (int i = 0; i < targets; i++) "airtgt${i + 1}": [],
-        };
+          Map<String, List<String>> targetArrays = {
+            for (int i = 0; i < targets; i++) "airtgt${i + 1}": [],
+          };
 
-        // Populate the target arrays
-        for (int i = 0; i < rows; i++) {
-          int targetIndex = (i / interval).floor();
-          print(targetIndex);
-          targetArrays["airtgt${targetIndex + 1}"]?.add(contents[i].trim());
-        }
-        print(targetArrays);
-        
-        // Print the target arrays
-        targetArrays.forEach((target, data) {
-          print("$target: $data");
-        });
-        print(targetArrays);
-        // Create and save XML files
-        targetArrays.forEach((target, data) {
-          final coordinates = _parseCoordinates(data);
-          final xmlString = generateXml(target, coordinates);
-          final fileName = '$target.xml';
-          final file = File(r'C:\Program Files\FlightGear 2020.3\data\AI\Flightplans\' + '$fileName');
-          file.writeAsStringSync(xmlString);
-        });
-        }
-        
-        
+          // Populate the target arrays
+          for (int i = 0; i < rows; i++) {
+            int targetIndex = (i / interval).floor();
+            print(targetIndex);
+            targetArrays["airtgt${targetIndex + 1}"]?.add(contents[i].trim());
+          }
+          print(targetArrays);
 
-        
+          // Print the target arrays
+          targetArrays.forEach((target, data) {
+            print("$target: $data");
+          });
+          print(targetArrays);
+          // Create and save XML files
+          targetArrays.forEach((target, data) {
+            final coordinates = _parseCoordinates(data);
+            final xmlString = generateXml(target, coordinates);
+            final fileName = '$target.xml';
+            final file = File(
+                r'C:\Program Files\FlightGear 2020.3\data\AI\Flightplans\' +
+                    '$fileName');
+            file.writeAsStringSync(xmlString);
+          });
+        }
       } else {
         // No file selected
         // Handle or inform the user about the issue
@@ -510,158 +510,154 @@ late int interval;
     final List<ScenarioEntry1> scenarioEntries1 = [];
 
     //final List<ProtocolEntry> protocolEntries = [];
-int targets = (rows / interval).ceil();
-if(selectedScenarioType == "Air"){
-   
-for (int i = 0; i < targets; i++) {
-      
-
-      // Create a ScenarioEntry for the current scenarioEntry
-      ScenarioEntry1 air = ScenarioEntry1(
-        type: type != ""? type : 'aircraft',
-        model: model != ""? model : 'AI/Aircraft/F-15/Models/F-15.xml',
-        callsign: 'AIRTGT${i + 1}',
-        classi: classi != ""? classi : 'ufo',
-        flightplan: 'airtgt${i + 1}.xml',
-        
-      );
-      // Add the ScenarioEntry to the scenarioEntries list
-      scenarioEntries1.add(air);
-}
+    int targets = (rows / interval).ceil();
+    if (selectedScenarioType == "Air") {
+      for (int i = 0; i < targets; i++) {
+        // Create a ScenarioEntry for the current scenarioEntry
+        ScenarioEntry1 air = ScenarioEntry1(
+          type: type != "" ? type : 'aircraft',
+          model: model != "" ? model : 'AI/Aircraft/F-15/Models/F-15.xml',
+          callsign: 'AIRTGT${i + 1}',
+          classi: classi != "" ? classi : 'ufo',
+          flightplan: 'airtgt${i + 1}.xml',
+        );
+        // Add the ScenarioEntry to the scenarioEntries list
+        scenarioEntries1.add(air);
+      }
       // Create a ProtocolEntry for the current protocolEntry
-       //ProtocolEntry ptm = ProtocolEntry(
-         //name: 'PARAM$i',
-         //format: '%lf',
-         //type: 'double',
-         //node: 'ai/models/aircraft[$i]/velocities/true-airspeed-kt',
-       //);
+      //ProtocolEntry ptm = ProtocolEntry(
+      //name: 'PARAM$i',
+      //format: '%lf',
+      //type: 'double',
+      //node: 'ai/models/aircraft[$i]/velocities/true-airspeed-kt',
+      //);
       // // Add the ScenarioEntry to the scenarioEntries list
-       //protocolEntries.add(ptm);
+      //protocolEntries.add(ptm);
 
       // Create the Scenario object
-    final scenario = Scenario1(
-      scenarioName: scenarioNameController.text,
-      description: scenarioDescriptionController.text,
-      searchOrder: "DATA_ONLY",
-      entries: scenarioEntries1,
-    );
+      final scenario = Scenario1(
+        scenarioName: scenarioNameController.text,
+        description: scenarioDescriptionController.text,
+        searchOrder: "DATA_ONLY",
+        entries: scenarioEntries1,
+      );
 
-    print(scenario);
-        // Generate the XML content
-    final xmlContent = buildAirScenarioXML(scenario);
-        // Save XML to file
-    saveXMLToFile(xmlContent);
-      
+      print(scenario);
+      // Generate the XML content
+      final xmlContent = buildAirScenarioXML(scenario);
+      // Save XML to file
+      saveXMLToFile(xmlContent);
+    }
+
+    if (selectedScenarioType == "Sea") {
+      for (int i = 0; i < targets; i++) {
+        print(
+            'Scenario $i: Latitude: ${latitudes[i]}, Longitude: ${longitudes[i]}, Altitude: ${altitudes[i]}');
+
+        // Create a ScenarioEntry for the current scenarioEntry
+        ScenarioEntry2 sea = ScenarioEntry2(
+          type: type != "" ? type : 'ship',
+          model:
+              model != "" ? model : 'Models/Maritime/Military/Carrier_A01.xml',
+          name: 'ship_$i',
+          latitude: '${latitudes[i]}',
+          longitude: '${longitudes[i]}',
+          speed: speed.toString(),
+          rudder: rudder.toString(),
+        );
+        // Add the ScenarioEntry to the scenarioEntries list
+        scenarioEntries2.add(sea);
+      }
+      // Create a ProtocolEntry for the current protocolEntry
+      //ProtocolEntry ptm = ProtocolEntry(
+      //name: 'PARAM$i',
+      //format: '%lf',
+      //type: 'double',
+      //node: 'ai/models/aircraft[$i]/velocities/true-airspeed-kt',
+      //);
+      // // Add the ScenarioEntry to the scenarioEntries list
+      //protocolEntries.add(ptm);
+
+      // Create the Scenario object
+      final scenario = Scenario2(
+        scenarioName: scenarioNameController.text,
+        description: scenarioDescriptionController.text,
+        searchOrder: "DATA_ONLY",
+        entries: scenarioEntries2,
+      );
+
+      print(scenario);
+      // Generate the XML content
+      final xmlContent = buildSeaScenarioXML(scenario);
+      // Save XML to file
+      saveXMLToFile(xmlContent);
+    }
+
+    if (selectedScenarioType == "Ground") {
+      for (int i = 0; i < targets; i++) {
+        print(
+            'Scenario $i: Latitude: ${latitudes[i]}, Longitude: ${longitudes[i]}, Altitude: ${altitudes[i]}');
+
+        // Create a ScenarioEntry for the current scenarioEntry
+        ScenarioEntry3 ground = ScenarioEntry3(
+          type: type != "" ? type : 'ship',
+          model: model != ""
+              ? model
+              : 'Models/Military/humvee-pickup-odrab-low-poly.ac',
+          speedktas: speed.toString(),
+          name: 'Hamvee_$i',
+          latitude: '${latitudes[i]}',
+          longitude: '${longitudes[i]}',
+          heading: heading.toString(),
+          altitude: altitude.toString(),
+        );
+        // Add the ScenarioEntry to the scenarioEntries list
+        scenarioEntries3.add(ground);
+      }
+      // Create a ProtocolEntry for the current protocolEntry
+      //ProtocolEntry ptm = ProtocolEntry(
+      //name: 'PARAM$i',
+      //format: '%lf',
+      //type: 'double',
+      //node: 'ai/models/aircraft[$i]/velocities/true-airspeed-kt',
+      //);
+      // // Add the ScenarioEntry to the scenarioEntries list
+      //protocolEntries.add(ptm);
+      // Create the Scenario object
+      final scenario = Scenario3(
+        scenarioName: scenarioNameController.text,
+        description: scenarioDescriptionController.text,
+        searchOrder: "DATA_ONLY",
+        entries: scenarioEntries3,
+      );
+
+      print(scenario);
+      // Generate the XML content
+      final xmlContent = buildGroundScenarioXML(scenario);
+      // Save XML to file
+      saveXMLToFile(xmlContent);
+    }
   }
 
-      if(selectedScenarioType == "Sea"){
-    for (int i = 0; i < targets; i++) {
-      print(
-          'Scenario $i: Latitude: ${latitudes[i]}, Longitude: ${longitudes[i]}, Altitude: ${altitudes[i]}');
-      
-      // Create a ScenarioEntry for the current scenarioEntry
-      ScenarioEntry2 sea = ScenarioEntry2(
-        type: type != ""? type : 'ship',
-        model: model != ""? model :'Models/Maritime/Military/Carrier_A01.xml',
-        name: 'ship_$i',
-        latitude: '${latitudes[i]}',
-        longitude: '${longitudes[i]}',
-        speed: speed.toString(),
-        rudder: rudder.toString(),
-      );
-      // Add the ScenarioEntry to the scenarioEntries list
-      scenarioEntries2.add(sea);
-    }
-      // Create a ProtocolEntry for the current protocolEntry
-       //ProtocolEntry ptm = ProtocolEntry(
-         //name: 'PARAM$i',
-         //format: '%lf',
-         //type: 'double',
-         //node: 'ai/models/aircraft[$i]/velocities/true-airspeed-kt',
-       //);
-      // // Add the ScenarioEntry to the scenarioEntries list
-       //protocolEntries.add(ptm);
+  // Create the Scenario object
+  //final protocol = Protocol(
+  //scenarioName: scenarioNameController.text,
+  //description: scenarioDescriptionController.text,
+  //searchOrder: "DATA_ONLY",
+  //entries: protocolEntries,
+  //);
 
-             // Create the Scenario object
-    final scenario = Scenario2(
-      scenarioName: scenarioNameController.text,
-      description: scenarioDescriptionController.text,
-      searchOrder: "DATA_ONLY",
-      entries: scenarioEntries2,
-    );
+  //print(protocol);
 
-    print(scenario);
-        // Generate the XML content
-    final xmlContent = buildSeaScenarioXML(scenario);
-        // Save XML to file
-    saveXMLToFile(xmlContent);
-      }
-      
-      if(selectedScenarioType == "Ground"){
-    for (int i = 0; i < targets; i++) {
-      print(
-          'Scenario $i: Latitude: ${latitudes[i]}, Longitude: ${longitudes[i]}, Altitude: ${altitudes[i]}');
-      
-      // Create a ScenarioEntry for the current scenarioEntry
-      ScenarioEntry3 ground = ScenarioEntry3(
-        type: type != ""? type :'ship',
-        model: model != ""? model : 'Models/Military/humvee-pickup-odrab-low-poly.ac',
-        speedktas: speed.toString(),
-        name: 'Hamvee_$i',
-        latitude: '${latitudes[i]}',
-        longitude: '${longitudes[i]}',
-        heading: heading.toString(),
-        altitude: altitude.toString(),
-      );
-      // Add the ScenarioEntry to the scenarioEntries list
-      scenarioEntries3.add(ground);
-    }
-      // Create a ProtocolEntry for the current protocolEntry
-       //ProtocolEntry ptm = ProtocolEntry(
-         //name: 'PARAM$i',
-         //format: '%lf',
-         //type: 'double',
-         //node: 'ai/models/aircraft[$i]/velocities/true-airspeed-kt',
-       //);
-      // // Add the ScenarioEntry to the scenarioEntries list
-       //protocolEntries.add(ptm);
-                    // Create the Scenario object
-    final scenario = Scenario3(
-      scenarioName: scenarioNameController.text,
-      description: scenarioDescriptionController.text,
-      searchOrder: "DATA_ONLY",
-      entries: scenarioEntries3,
-    );
+  // Specify the desired file paths for saving XML content
+  //String protocolXmlFilePath =
+  //r'C:\Program Files\FlightGear 2020.3\data\Protocol\TARGET.xml';
 
-    print(scenario);
-        // Generate the XML content
-    final xmlContent = buildGroundScenarioXML(scenario);
-        // Save XML to file
-    saveXMLToFile(xmlContent);
-      }
-      }
-    
+  // Generate the XML content
+  //final xmlContentptm = buildProtocolXML(protocol);
 
-    // Create the Scenario object
-    //final protocol = Protocol(
-      //scenarioName: scenarioNameController.text,
-      //description: scenarioDescriptionController.text,
-      //searchOrder: "DATA_ONLY",
-      //entries: protocolEntries,
-    //);
-
-    //print(protocol);
-
-    // Specify the desired file paths for saving XML content
-     //String protocolXmlFilePath =
-    //r'C:\Program Files\FlightGear 2020.3\data\Protocol\TARGET.xml';
-
-    // Generate the XML content
-    //final xmlContentptm = buildProtocolXML(protocol);
-
-    // Save XML to file
-    //saveXMLToFileptm(xmlContentptm, protocolXmlFilePath);
-  
+  // Save XML to file
+  //saveXMLToFileptm(xmlContentptm, protocolXmlFilePath);
 
   // void saveXMLToFileptm(String xmlContentptm, String filePath) {
   //   File file = File(filePath);
@@ -730,6 +726,7 @@ class Scenario1 {
     return 'Scenario(scenarioName: $scenarioName, description: $description, searchOrder: $searchOrder, entries: $entries)';
   }
 }
+
 class Scenario2 {
   String scenarioName;
   String description;
@@ -747,6 +744,7 @@ class Scenario2 {
     return 'Scenario(scenarioName: $scenarioName, description: $description, searchOrder: $searchOrder, entries: $entries)';
   }
 }
+
 class Scenario3 {
   String scenarioName;
   String description;
@@ -827,7 +825,6 @@ class ScenarioEntry3 {
   }
 }
 
-
 class ScenarioEntry2 {
   final String type;
   final String model;
@@ -857,7 +854,7 @@ class ScenarioEntry1 {
   final String model;
   final String callsign;
   final String classi;
-  
+
   final String flightplan;
 
   ScenarioEntry1({
@@ -865,9 +862,7 @@ class ScenarioEntry1 {
     required this.model,
     required this.callsign,
     required this.classi,
-    
     required this.flightplan,
-
   });
   @override
   String toString() {

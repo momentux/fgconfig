@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'fg_telnet.dart';
@@ -23,16 +22,22 @@ class ServiceHandler {
   final String serverUrl = "http://134.32.20.102:5003";
   final FlightGearTelnet _flightGearTelnet = FlightGearTelnet();
 
-  Future<void> _runFlightGear(launchData) async {
+  Future<void> runFlightGear(Map<String, dynamic> launchData) async {
     try {
-      flightGearProcess = await Process.start(
-        r'C:\Program Files\FlightGear 2020.3\bin\fgfs.exe',
-        [],
-      );
+      String fgfsPath;
+      if (Platform.isWindows) {
+        fgfsPath = r'C:\Program Files\FlightGear 2020.3\bin\fgfs.exe';
+      } else if (Platform.isMacOS) {
+        fgfsPath = '/Applications/FlightGear.app/Contents/MacOS/fgfs';
+      } else {
+        throw Exception('Unsupported operating system');
+      }
+      await modifyFgSrcFile(launchData);
+
+      flightGearProcess = await Process.start(fgfsPath, []);
       _serviceStates[Service.flightGear] = true;
       print('FlightGear process ID: ${flightGearProcess.pid}');
-      String json = jsonEncode(launchData);
-      await modifyFgSrcFile(json);
+
 
 
       // If serviceOption is "Autopilot", send a command to FlightGear via telnet
@@ -48,7 +53,7 @@ class ServiceHandler {
     }
   }
 
-  Future<void> _stopFlightGear() async {
+  Future<void> stopFlightGear() async {
     if (_serviceStates[Service.flightGear]!) {
       await flightGearProcess.kill();
       _serviceStates[Service.flightGear] = false;
@@ -162,7 +167,7 @@ class ServiceHandler {
 
   void runAllServices(Map<String, dynamic> collectData) {
     if (collectData['selectedOption'] == 'FlightGear') {
-      _runFlightGear(collectData);
+      runFlightGear(collectData);
     }
     if (collectData['selectedOption'] == 'JsApp') {
       _runJsApp();
@@ -179,7 +184,7 @@ class ServiceHandler {
   }
 
   void stopAllServices() {
-    _stopFlightGear();
+    stopFlightGear();
     _stopJsApp();
     _stopMil();
     _stopHeadSensor();

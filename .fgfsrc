@@ -34,9 +34,6 @@
 --prop:/sim/rendering/texture-cache/cache-enabled=true
 
 ### Initial position
---lon=77.568334
---lat=13.006054
---altitude=6000
 --in-air
 --state=cruise
 --vc=600
@@ -55,9 +52,8 @@
 
 ### Network and logging
 --model-hz=500
+--telnet=5401
 --httpd=8181
-# --generic=socket,out,1,localhost,5505,udp,insgps
---generic=file,out,120,/tmp/targets.csv,PTFM
 
 ### Performance Optimizations
 --disable-random-objects
@@ -65,4 +61,3 @@
 --prop:/sim/rendering/multithreading-mode=CullThreadPerCameraDrawThreadPerContext
 
 ### Scenarios
-# --prop:/sim/ai/scenario="lrde"

@@ -1,5 +1,3 @@
-import '../screens/route_generator.dart';
-
 class Waypoint {
   String airport;
   double speed;
