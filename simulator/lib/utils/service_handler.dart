@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import 'fg_telnet.dart';
 import 'fgfsrc.dart';
 
 enum Service {
@@ -20,6 +21,7 @@ class ServiceHandler {
   };
   Map<Service, bool> get serviceStates => _serviceStates;
   final String serverUrl = "http://134.32.20.102:5003";
+  final FlightGearTelnet _flightGearTelnet = FlightGearTelnet();
 
   Future<void> _runFlightGear(launchData) async {
     try {
@@ -31,6 +33,16 @@ class ServiceHandler {
       print('FlightGear process ID: ${flightGearProcess.pid}');
       String json = jsonEncode(launchData);
       await modifyFgSrcFile(json);
+
+
+      // If serviceOption is "Autopilot", send a command to FlightGear via telnet
+      if (launchData['serviceOption'] == "Autopilot") {
+        await Future.delayed(Duration(seconds: 2), () async {
+          await _flightGearTelnet.connect('localhost', 5401);
+          _flightGearTelnet.sendCommand('set /f16/fcs/switch-roll-block20 1');
+        });
+      }
+
     } catch (e) {
       print('Error running FlightGear: $e');
     }
