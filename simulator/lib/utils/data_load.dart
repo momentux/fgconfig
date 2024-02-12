@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:simulator/data/airports.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 class Airport {
   final String code;
@@ -21,7 +21,8 @@ class DataLoader {
 
   Future<void> loadAirportsFromJson() async {
     try {
-      final parsedJson = json.decode(airportsJson) as List<dynamic>;
+      final fileContent = await rootBundle.loadString('data/airports.json');
+      final parsedJson = json.decode(fileContent) as List<dynamic>;
       _airports.clear();
 
       for (var airport in parsedJson) {

@@ -1,31 +1,5 @@
 import 'package:xml/xml.dart';
 
-class PropertyList {
-  final Scenario scenario;
-
-  PropertyList({required this.scenario});
-
-  factory PropertyList.fromXmlElement(XmlElement element) {
-    return PropertyList(
-      scenario: Scenario.fromXmlElement(element.findElements('scenario').first),
-    );
-  }
-
-  factory PropertyList.fromFile(String xmlString) {
-    final document = XmlDocument.parse(xmlString);
-    return PropertyList.fromXmlElement(document.rootElement);
-  }
-
-  XmlDocument toXmlDocument() {
-    final builder = XmlBuilder();
-    builder.processing('xml', 'version="1.0"');
-    builder.element('PropertyList', nest: () {
-      scenario.buildXmlElement(builder);
-    });
-    return builder.buildDocument();
-  }
-}
-
 class Scenario {
   final String name;
   final String description;
@@ -36,19 +10,18 @@ class Scenario {
   Scenario({
     required this.name,
     required this.description,
-    String? searchOrder,
+    this.searchOrder = "PREFER_DATA",
     this.nasal,
-    List<ScenarioEntry>? entries,
-  })  : searchOrder = searchOrder ?? "PREFER_DATA",
-        entries = entries ?? [];
+    this.entries = const [],
+  });
 
   factory Scenario.fromXmlElement(XmlElement element) {
-    var name = element.findElements('name').first.value!;
+    final nasalElement = element.findElements('nasal').firstOrNull;
     return Scenario(
-      name: name,
-      description: element.findElements('description').first.value!,
-      searchOrder: element.findElements('search-order').first.value ?? "PREFER_DATA",
-      nasal: element.findElements('nasal').isEmpty ? null : ScenarioNasal.fromXmlElement(element.findElements('nasal').first, name),
+      name: getElementText(element, 'name'),
+      description: getElementText(element, 'description'),
+      searchOrder: getElementText(element, 'search-order', defaultValue: "PREFER_DATA"),
+      nasal: nasalElement != null ? ScenarioNasal.fromXmlElement(nasalElement, getElementText(element, 'name')) : null,
       entries: element.findElements('entry').map(ScenarioEntry.fromXmlElement).toList(),
     );
   }
@@ -58,12 +31,8 @@ class Scenario {
       builder.element('name', nest: name);
       builder.element('description', nest: description);
       builder.element('search-order', nest: searchOrder);
-      if (nasal != null) {
-        nasal!.buildXmlElement(builder);
-      }
-      for (var entry in entries) {
-        entry.buildXmlElement(builder);
-      }
+      nasal?.buildXmlElement(builder);
+      entries.forEach((entry) => entry.buildXmlElement(builder));
     });
   }
 }
@@ -74,84 +43,71 @@ class ScenarioNasal {
 
   ScenarioNasal({
     required String scenarioName,
-    String? load,
-    String? unload,
-  })  : load = load ?? "debug.dump('Scenario $scenarioName loaded');",
-        unload = unload ?? "debug.dump('Scenario $scenarioName unloaded');";
+    required this.load,
+    required this.unload,
+  });
 
   factory ScenarioNasal.fromXmlElement(XmlElement element, String scenarioName) {
     return ScenarioNasal(
       scenarioName: scenarioName,
-      load: element.findElements('load').first.value!,
-      unload: element.findElements('unload').first.value!,
+      load: getElementText(element, 'load', defaultValue: "debug.dump('Scenario $scenarioName loaded');"),
+      unload: getElementText(element, 'unload', defaultValue: "debug.dump('Scenario $scenarioName unloaded');"),
     );
   }
 
   void buildXmlElement(XmlBuilder builder) {
     builder.element('nasal', nest: () {
-      builder.element('load', nest: () {
-        builder.cdata(load);
-      });
-      builder.element('unload', nest: () {
-        builder.cdata(unload);
-      });
+      builder.element('load', nest: () => builder.cdata(load));
+      builder.element('unload', nest: () => builder.cdata(unload));
     });
   }
 }
 
 class ScenarioEntry {
-  String type;
+  final String type;
   final String model;
   final String name;
-  String callSign;
-  int altitude;
+  final String callSign;
+  final int altitude;
   final double speed;
   final double latitude;
   final double longitude;
-  double heading;
-  double roll;
-  double bank;
-  double rudder;
+  final double heading;
+  final double roll;
+  final double bank;
+  final double rudder;
 
   ScenarioEntry({
-    String? type,
+    this.type = 'ship',
     required this.model,
     required this.name,
-    String? callsign,
-    int? altitude,
+    this.callSign = 'ship1',
+    this.altitude = 15000,
     required this.speed,
     required this.latitude,
     required this.longitude,
-    double? heading,
-    double? roll,
-    double? bank,
-    double? rudder,
-  })  : type = type ?? 'ship',
-        callSign = callsign ?? '$type-$name',
-        altitude = altitude ?? 15000,
-        heading = heading ?? 0.0,
-        roll = roll ?? 0.0,
-        bank = bank ?? 0.0,
-        rudder = rudder ?? 0.0;
+    this.heading = 0.0,
+    this.roll = 0.0,
+    this.bank = 0.0,
+    this.rudder = 0.0,
+  });
 
   factory ScenarioEntry.fromXmlElement(XmlElement element) {
-    var typeElement = element.findElements('type').firstOrNull;
-    var callsignElement = element.findElements('callsign').firstOrNull;
-    var rollElement = element.findElements('roll').firstOrNull;
-    var bankElement = element.findElements('bank').firstOrNull;
-
+    String type = getElementText(element, 'type', defaultValue: 'ship');
+    String name = getElementText(element, 'name');
     return ScenarioEntry(
-      type: typeElement?.value!,
-      model: element.findElements('model').first.value!,
-      name: element.findElements('name').first.value!,
-      callsign: callsignElement?.value!,
-      altitude: int.parse(element.findElements('altitude').first.value!),
-      speed: double.parse(element.findElements('speed').first.value!),
-      latitude: double.parse(element.findElements('latitude').first.value!),
-      longitude: double.parse(element.findElements('longitude').first.value!),
-      heading: double.parse(element.findElements('heading').first.value!),
-      roll: rollElement != null ? double.parse(rollElement.value!) : null,
-      bank: bankElement != null ? double.parse(bankElement.value!) : null,
+      type: getElementText(element, 'type', defaultValue: 'ship'),
+      model: getElementText(element, 'model'),
+      name: getElementText(element, 'name'),
+      callSign: getElementText(element, 'callsign', defaultValue: '$type-$name'),
+      altitude: int.tryParse(getElementText(element, 'altitude')) ?? 15000,
+      speed: double.tryParse(getElementText(element, 'speed')) ?? 0.0,
+      latitude: double.tryParse(getElementText(element, 'latitude')) ?? 0.0,
+      longitude: double.tryParse(getElementText(element, 'longitude')) ?? 0.0,
+      heading: double.tryParse(getElementText(element, 'heading')) ?? 0.0,
+      roll: double.tryParse(getElementText(element, 'roll', defaultValue: '0.0')) ?? 0.0,
+      bank: double.tryParse(getElementText(element, 'bank', defaultValue: '0.0')) ?? 0.0,
+      rudder: double.tryParse(getElementText(element, 'rudder', defaultValue: '0.0')) ?? 0.0,
     );
   }
 
@@ -175,5 +131,41 @@ class ScenarioEntry {
         builder.element('bank', nest: bank.toString());
       }
     });
+  }
+}
+
+// Standalone utility function
+String getElementText(XmlElement element, String tagName, {String defaultValue = ''}) {
+  return element.findElements(tagName).firstOrNull?.innerText ?? defaultValue;
+}
+
+extension on Iterable<XmlElement> {
+  XmlElement? get firstOrNull => isEmpty ? null : first;
+}
+
+class PropertyList {
+  final Scenario scenario;
+
+  PropertyList({required this.scenario});
+
+  factory PropertyList.fromXmlElement(XmlElement element) {
+    final scenarioElement = element.findElements('scenario').first;
+    return PropertyList(
+      scenario: Scenario.fromXmlElement(scenarioElement),
+    );
+  }
+
+  factory PropertyList.fromFile(String xmlString) {
+    final document = XmlDocument.parse(xmlString);
+    return PropertyList.fromXmlElement(document.rootElement);
+  }
+
+  XmlDocument toXmlDocument() {
+    final builder = XmlBuilder();
+    builder.processing('xml', 'version="1.0"');
+    builder.element('PropertyList', nest: () {
+      scenario.buildXmlElement(builder);
+    });
+    return builder.buildDocument();
   }
 }

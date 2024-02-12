@@ -1,8 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:simulator/utils/routexml.dart';
 import 'package:path_provider/path_provider.dart';
+
+import '../models/route.dart';
 
 class RouteManagementScreen extends StatefulWidget {
   @override
@@ -187,16 +188,13 @@ class _RouteManagementScreenState extends State<RouteManagementScreen> {
       // Add the ScenarioEntry to the scenarioEntries list
       scenarioEntries.add(air);
     }
-    print(scenarioEntries);
 // Create the Scenario object
-    final route = Route(
+    final route = FgRoute(
       scenarioName: scenarioNameController.text,
       description: scenarioDescriptionController.text,
       searchOrder: "DATA_ONLY",
       entries: scenarioEntries,
     );
-
-    print(route);
 
     // Generate the XML content
     final xmlContent = buildRouteXML(route);
@@ -249,44 +247,3 @@ class _RouteManagementScreenState extends State<RouteManagementScreen> {
   }
 }
 
-class Route {
-  String scenarioName;
-  String description;
-  String searchOrder;
-  List<ScenarioEntry> entries;
-
-  Route({
-    required this.scenarioName,
-    required this.description,
-    required this.searchOrder,
-    required this.entries,
-  });
-  @override
-  String toString() {
-    return 'Scenario(scenarioName: $scenarioName, description: $description, searchOrder: $searchOrder, entries: $entries)';
-  }
-}
-
-class ScenarioEntry {
-  final String sno;
-  final String type;
-  final String name; // Auto-generated
-  final String latitude; // Auto-generated based on sourceAirport
-  final String longitude; // Auto-generated based on sourceAirport
-  final String speed;
-  final String altitude;
-
-  ScenarioEntry({
-    required this.sno,
-    required this.type,
-    required this.name,
-    required this.latitude,
-    required this.longitude,
-    required this.speed,
-    required this.altitude,
-  });
-  @override
-  String toString() {
-    return 'ScenarioEntry(sno:$sno, type: $type, name: $name, latitude: $latitude, longitude: $longitude, speed: $speed, altitude: $altitude,)';
-  }
-}

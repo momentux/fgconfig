@@ -1,13 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:simulator/utils/xml.dart';
-import 'package:simulator/utils/protocol.dart';
 import 'package:path_provider/path_provider.dart';
-import 'dart:convert'; // For utf8.encode
-import 'package:xml/xml.dart' as xml;
-import 'package:simulator/utils/airscenario.dart';
-import 'package:simulator/utils/groundscenario.dart';
+
+import '../widgets/ai_scenario/air_targets.dart';
+import '../widgets/ai_scenario/ground_targets.dart';
+import '../widgets/ai_scenario/sea_targets.dart';
 
 class ScenarioManagementScreen extends StatefulWidget {
   @override
