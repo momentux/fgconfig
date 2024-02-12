@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:simulator/utils/data_load.dart';
-import 'package:path/path.dart' as path;
+import '../utils/components.dart';
 import '../utils/file_handlers.dart';
 import '../utils/service_handler.dart';
+import '../widgets/target_options.dart';
 
 class LaunchManagementScreen extends StatefulWidget {
   @override
@@ -19,6 +19,8 @@ final _serviceDisplayNames = {
   Service.hmds: 'HMDS',
   Service.arinc: 'ARINC',
 };
+const String selectedOptionHint = 'Select Flying Mode';
+const String subOptionHint = 'Select Sub Option';
 
 class _LaunchManagementScreenState extends State<LaunchManagementScreen> {
   final ServiceHandler serviceHandler = ServiceHandler();
@@ -26,17 +28,16 @@ class _LaunchManagementScreenState extends State<LaunchManagementScreen> {
   final Map<Service, bool> _visibilityFlags = {
     for (var e in Service.values) e: true
   };
-
-  String? selectedOption = 'Select Flying Mode';
-  String? subOption = 'Select Sub Option';
-  String? targetOption = 'Select Target Option';
-  String? targetSubOption = 'Select Sub Option';
-  String? typeOfTarget = 'Select Target';
-  String? airport;
+  String? selectedOption = 'Autopilot';
+  String? subOption;
+  String? targetOption;
+  String? typeOfTarget;
+  String? targetSubOption;
   double? latitudeValue;
   double? longitudeValue;
   int? altitudeValue = 15000;
   int? headingValue = 120;
+  String? airport = DataLoader().getAllAirportCodes()[0];
   List<String> airports = DataLoader().getAllAirportCodes();
 
   bool socketClosed = false;
@@ -58,26 +59,33 @@ class _LaunchManagementScreenState extends State<LaunchManagementScreen> {
 
   @override
   void dispose() {
-    _timers.values.forEach((timer) => timer.cancel());
+    for (var timer in _timers.values) {
+      timer.cancel();
+    }
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _controllerlat =
+    TextEditingController controllerlat =
         TextEditingController(text: latitudeValue?.toString() ?? '');
-    TextEditingController _controllerlong =
+    TextEditingController controllerlong =
         TextEditingController(text: longitudeValue?.toString() ?? '');
     return Column(
       children: [
-        Container(
-          width: double.infinity,
-          child: buildRouteOptionsCard(_controllerlat, _controllerlong),
-        ),
-        Container(
-          width: double.infinity,
-          child: buildTargetOptionsCard(),
-        ),
+        buildRouteOptionsCard(controllerlat, controllerlong),
+        TargetOptionsCard(
+            targetOption: targetOption,
+            typeOfTarget: typeOfTarget,
+            targetSubOption: targetSubOption,
+            onOptionsChanged:
+                (newTargetOption, newTypeOfTarget, newTargetSubOption) {
+              setState(() {
+                targetOption = newTargetOption;
+                typeOfTarget = newTypeOfTarget;
+                targetSubOption = newTargetSubOption;
+              });
+            }),
         buildServiceStatusRow(),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -88,7 +96,7 @@ class _LaunchManagementScreenState extends State<LaunchManagementScreen> {
                 // Add your launch logic here
                 print('Launching');
 
-                serviceHandler.runAllServices(collectData());
+                serviceHandler.runFlightGear(collectData());
               },
               child: Text('Launch'),
             ),
@@ -99,7 +107,7 @@ class _LaunchManagementScreenState extends State<LaunchManagementScreen> {
                 // Add your stop logic here
                 print('Stopping');
 
-                serviceHandler.stopAllServices();
+                serviceHandler.stopFlightGear();
                 // stopByPass();
                 setState(() {});
               },
@@ -161,141 +169,8 @@ class _LaunchManagementScreenState extends State<LaunchManagementScreen> {
     );
   }
 
-  Card buildTargetOptionsCard() {
-    return Card(
-      margin: EdgeInsets.all(16.0),
-      child: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            buildTitle('Target Options'),
-            buildRow([
-              buildDropdownButton(targetOption, [
-                'Select Target Option',
-                'FG AI Scenario',
-                'Manual AI Scenario'
-              ], (newValue) {
-                setState(() {
-                  targetOption = newValue;
-                  targetSubOption = 'Select Sub Option';
-                });
-              }),
-              if (targetOption == 'FG AI Scenario')
-                buildUploadButton(movefileforfgaiscenario),
-              if (targetOption == 'Manual AI Scenario' ||
-                  targetOption == 'FG AI Scenario')
-                buildDropdownButton(typeOfTarget, [
-                  'Select Target',
-                  'Air Target',
-                  'Sea Target',
-                  'Ground Target'
-                ], (newValue) {
-                  setState(() {
-                    typeOfTarget = newValue;
-                  });
-                }),
-              if (targetOption == 'Manual AI Scenario')
-                buildDropdownButton(targetSubOption, [
-                  'Select Sub Option',
-                  'Replay Recorded Data',
-                  'Bypass FG'
-                ], (newValue) {
-                  setState(() {
-                    targetSubOption = newValue;
-                  });
-                }),
-              if (targetSubOption == 'Replay Recorded Data')
-                buildUploadButton(movefileformanualai),
-              // if (targetSubOption == 'Bypass FG') buildUploadButton(_pickFile),
-            ]),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildTitle(String title) {
-    return Text(
-      title,
-      style: TextStyle(
-        fontSize: 18.0,
-        fontWeight: FontWeight.bold,
-      ),
-    );
-  }
-
-  Widget buildRow(List<Widget> children) {
-    return Row(
-      children: children
-          .expand((child) => [SizedBox(width: 16.0), Expanded(child: child)])
-          .toList(),
-    );
-  }
-
-  Widget buildDropdownButton(
-      String? value, List<String?> items, ValueChanged<String?> onChanged) {
-    return DropdownButton<String>(
-      value: value,
-      onChanged: onChanged,
-      items: items.map<DropdownMenuItem<String>>((String? value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value ?? ''),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildDropdownFormField(String? value, List<String> items,
-      ValueChanged<String?> onChanged, String labelText) {
-    return DropdownButtonFormField<String>(
-      value: value,
-      onChanged: onChanged,
-      items: items.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-      decoration: InputDecoration(
-        labelText: labelText,
-        border: OutlineInputBorder(),
-      ),
-    );
-  }
-
-  Widget buildUploadButton(Future<void> Function(String filePath) onPressed) {
-    return ElevatedButton(
-      onPressed: () async {
-        FilePickerResult? result = await FilePicker.platform.pickFiles();
-        if (result != null) {
-          String filePath = result.files.single.path!;
-          print('Selected file: $filePath');
-          await onPressed(filePath);
-        } else {
-          print('File picking canceled.');
-        }
-      },
-      child: Text('Upload File'),
-    );
-  }
-
-  Widget buildTextFormField(TextEditingController controller,
-      ValueChanged<String> onChanged, String labelText) {
-    return TextFormField(
-      controller: controller,
-      keyboardType: TextInputType.number,
-      onChanged: onChanged,
-      decoration: InputDecoration(
-        labelText: labelText,
-        border: OutlineInputBorder(),
-      ),
-    );
-  }
-
-  Card buildRouteOptionsCard(TextEditingController _controllerlat,
-      TextEditingController _controllerlong) {
+  Card buildRouteOptionsCard(TextEditingController controllerlat,
+      TextEditingController controllerlong) {
     return Card(
       margin: EdgeInsets.all(16.0),
       child: Padding(
@@ -305,47 +180,42 @@ class _LaunchManagementScreenState extends State<LaunchManagementScreen> {
           children: [
             buildTitle('Route Options'),
             buildRow([
-              buildDropdownButton(selectedOption, [
-                'Select Flying Mode',
-                'Autopilot',
-                'Manual Flying'
-              ], (newValue) {
+              buildDropdownFormField(
+                  selectedOption, ['Autopilot', 'Manual Flying'], (newValue) {
                 setState(() {
                   selectedOption = newValue;
-                  subOption = 'Select Sub Option';
+                  subOption = 'On Air';
                 });
-              }),
-              SizedBox(width: 16.0),
+              }, selectedOptionHint),
+              if (selectedOption == 'Autopilot')
+                buildUploadButton(movefileforautopilot),
               if (selectedOption == 'Manual Flying')
-                buildDropdownButton(
-                    subOption, ['Select Sub Option', 'On Air', 'On Airport'],
+                buildDropdownFormField(subOption, ['On Air', 'On Airport'],
                     (newValue) {
                   setState(() {
                     subOption = newValue;
                   });
-                }),
-              if (selectedOption == 'Autopilot')
-                buildUploadButton(movefileforautopilot),
+                }, subOptionHint),
             ]),
-            SizedBox(height: 16.0),
-            if (selectedOption == 'Autopilot')
-              buildRow([
-                buildDropdownFormField(airport, airports, (value) {
-                  setState(() {
-                    airport = value!;
-                    updateLatLongFromAirport(airport!);
-                  });
-                }, "Airport"),
-                buildTextFormField(_controllerlat, (value) {
-                  setState(() {
-                    latitudeValue = double.tryParse(value);
-                  });
-                }, "Latitude"),
-                buildTextFormField(_controllerlong, (value) {
-                  setState(() {
-                    longitudeValue = double.tryParse(value);
-                  });
-                }, "Longitude"),
+            SizedBox(height: 20.0),  // Add a SizedBox widget here
+            buildRow([
+              buildDropdownFormField(airport, airports, (value) {
+                setState(() {
+                  airport = value!;
+                  updateLatLongFromAirport(airport!);
+                });
+              }, "Airport"),
+              buildTextFormField(controllerlat, (value) {
+                setState(() {
+                  latitudeValue = double.tryParse(value);
+                });
+              }, "Latitude"),
+              buildTextFormField(controllerlong, (value) {
+                setState(() {
+                  longitudeValue = double.tryParse(value);
+                });
+              }, "Longitude"),
+              if (selectedOption == 'Autopilot' || subOption == 'On Air')
                 buildTextFormField(
                     TextEditingController(
                         text: altitudeValue?.toString() ?? ''), (value) {
@@ -353,6 +223,7 @@ class _LaunchManagementScreenState extends State<LaunchManagementScreen> {
                     altitudeValue = int.tryParse(value);
                   });
                 }, "Altitude"),
+              if (selectedOption == 'Autopilot')
                 buildTextFormField(
                     TextEditingController(text: headingValue?.toString() ?? ''),
                     (value) {
@@ -360,26 +231,7 @@ class _LaunchManagementScreenState extends State<LaunchManagementScreen> {
                     headingValue = int.tryParse(value);
                   });
                 }, "Heading"),
-              ]),
-            if (subOption == 'On Air' || subOption == 'On Airport')
-              buildRow([
-                buildDropdownFormField(airport, airports, (value) {
-                  setState(() {
-                    airport = value!;
-                    updateLatLongFromAirport(airport!);
-                  });
-                }, "Airport"),
-                buildTextFormField(_controllerlat, (value) {
-                  setState(() {
-                    latitudeValue = double.tryParse(value);
-                  });
-                }, "Latitude"),
-                buildTextFormField(_controllerlong, (value) {
-                  setState(() {
-                    longitudeValue = double.tryParse(value);
-                  });
-                }, "Longitude"),
-              ]),
+            ]),
           ],
         ),
       ),
@@ -418,49 +270,6 @@ class _LaunchManagementScreenState extends State<LaunchManagementScreen> {
   }
 
   Future<void> movefileforautopilot(String filePath) async {
-    moveFile(filePath, r'C:\Users\scl\Flightgear\config', null, (message) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text(message),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text("Close"),
-              ),
-            ],
-          );
-        },
-      );
-    });
-  }
-
-  Future<void> movefileforfgaiscenario(String filePath) async {
-    moveFile(filePath, r'C:\Users\scl\Flightgear\Aircrafts\f16\Scenarios\',
-        (fileName) {
-      setState(() {
-        filename = path.basenameWithoutExtension(fileName);
-      });
-    }, (message) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text(message),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: const Text("Close"),
-              ),
-            ],
-          );
-        },
-      );
-    });
-  }
-
-  Future<void> movefileformanualai(String filePath) async {
     moveFile(filePath, r'C:\Users\scl\Flightgear\config', null, (message) {
       showDialog(
         context: context,

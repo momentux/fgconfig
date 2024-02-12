@@ -1,18 +1,17 @@
 # mac 
-# --download-dir=/Users/rverma2/.fgfs/Downloads
-# --fg-scenery=/Users/rverma2/.fgfs/Scenery
-# --fg-aircraft=/Users/rverma2/.fgfs/Aircrafts
-# --aircraft-dir=/Users/rverma2/.fgfs/Aircrafts/f16
-# --flight-plan=/Users/rverma2/.fgfs/config/modified_vobg.xml
-# --addon=/Users/rverma2/.fgfs/Addons/Bombable
+--download-dir=/Users/rverma2/atlassian/fgconfig/Downloads
+--fg-scenery=/Users/rverma2/atlassian/fgconfig/Scenery
+--fg-aircraft=/Users/rverma2/atlassian/fgconfig/Aircrafts
+--aircraft-dir=/Users/rverma2/atlassian/fgconfig/Aircrafts/f16
+--flight-plan=/Users/rverma2/atlassian/fgconfig/config/modified_vobg.xml
 
 # windows
---download-dir=C:\Users\scl\Flightgear\Downloads
---fg-scenery=C:\Users\scl\Flightgear\Scenery
---fg-aircraft=C:\Users\scl\Flightgear\Aircrafts
---aircraft-dir=C:\Users\scl\Flightgear\Aircraftsf\16
---config=C:\Users\scl\Flightgear\config\camera-views.xml
---flight-plan=C:\Users\scl\Flightgear\config\modified_vobg.xml
+# --download-dir=C:\Users\scl\Flightgear\Downloads
+# --fg-scenery=C:\Users\scl\Flightgear\Scenery
+# --fg-aircraft=C:\Users\scl\Flightgear\Aircrafts
+# --aircraft-dir=C:\Users\scl\Flightgear\Aircraftsf\16
+# --config=C:\Users\scl\Flightgear\config\camera-views.xml
+# --flight-plan=C:\Users\scl\Flightgear\config\modified_vobg.xml
 
 
 ### System
