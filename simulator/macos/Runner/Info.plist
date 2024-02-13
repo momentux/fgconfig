@@ -28,5 +28,9 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSDocumentsFolderUsageDescription</key>
+    <string>$(PRODUCT_NAME) needs access to the documents folder to read configuration files.</string>
+    <key>NSUserDirectoryUsageDescription</key>
+    <string>$(PRODUCT_NAME) needs access to the user directory to read configuration files.</string>
 </dict>
 </plist>

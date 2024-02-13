@@ -33,14 +33,15 @@ class ServiceHandler {
       } else {
         throw Exception('Unsupported operating system');
       }
-      flightGearProcess = await Process.start(fgfsPath, args.getArgString());
+      var argString = args.getArgString();
+      flightGearProcess = await Process.start(fgfsPath,argString );
       _serviceStates[Service.flightGear] = true;
       print('FlightGear process ID: ${flightGearProcess.pid}');
 
       // If serviceOption is "Autopilot", send a command to FlightGear via telnet
       if (args.autoPilot!) {
         await Future.delayed(Duration(seconds: 2), () async {
-          await _flightGearTelnet.connect('localhost', 5401);
+          await _flightGearTelnet.connect('localhost', findTelnetPort(argString));
           _flightGearTelnet.sendCommand('set /f16/fcs/switch-roll-block20 1');
         });
       }
@@ -176,4 +177,12 @@ class ServiceHandler {
     _stopHeadSensor();
     _stopArinc();
   }
+
+  int findTelnetPort(List<String> argString) {
+    String telnetLine = argString.firstWhere((line) => line.startsWith('--telnet='));
+    String portString = telnetLine.split('=')[1];
+    int port = int.parse(portString);
+    return port;
+  }
 }
+

@@ -20,11 +20,11 @@ class RouteOptionsCard extends StatefulWidget {
 class _RouteOptionsCardState extends State<RouteOptionsCard> {
   String? selectedOption = 'Autopilot';
   String? subOption;
-  double? latitudeValue;
-  double? longitudeValue;
+  double? latitudeValue = DataLoader().getFirst()?.latitude;
+  double? longitudeValue = DataLoader().getFirst()?.longitude;
   int? altitudeValue = 15000;
   int? headingValue = 120;
-  String? airport = DataLoader().getAllAirportCodes()[0];
+  String? airport = DataLoader().getFirst()?.code;
   List<String> airports = DataLoader().getAllAirportCodes();
 
   @override
@@ -66,7 +66,10 @@ class _RouteOptionsCardState extends State<RouteOptionsCard> {
               dropdownFormField(airport, airports, (value) {
                 setState(() {
                   airport = value!;
-                  updateLatLongFromAirport(airport!);
+                  Airport temp = DataLoader().getAirport(airport!)!;
+                  latitudeValue = temp.latitude;
+                  longitudeValue = temp.longitude;
+                  widget.onOptionsChanged(latitudeValue, longitudeValue, altitudeValue, headingValue,selectedOption=='Autopilot', airport, subOption == 'On Air');
                 });
               }, "Airport"),
               textFormField(_latController, (value) {
@@ -104,14 +107,6 @@ class _RouteOptionsCardState extends State<RouteOptionsCard> {
         ),
       ),
     );
-  }
-
-  void updateLatLongFromAirport(String selectedAirport) {
-    Airport temp = DataLoader().getAirport(selectedAirport)!;
-    setState(() {
-      latitudeValue = temp.latitude;
-      longitudeValue = temp.longitude;
-    });
   }
 
   Future<void> movefileforautopilot(String filePath) async {

@@ -13,50 +13,47 @@
 # --config=C:\Users\scl\Flightgear\config\camera-views.xml
 # --flight-plan=C:\Users\scl\Flightgear\config\modified_vobg.xml
 
+### Aircraft specifics
+--aircraft=f16-block-60
 
 ### System
 --enable-fullscreen
 --enable-freeze
---disable-sound
 --disable-terrasync
---disable-sentry
---disable-rembrandt
+--disable-distance-attenuation
 --disable-real-weather-fetch
-
-### Aircraft specifics
---aircraft=f16-block-60
-
-### Environment
---timeofday=morning
---prop:/sim/rendering/shaders/skydome=0 #turn off ALS
+--disable-ai-traffic
+--disable-random-objects
+--disable-clouds
+--disable-clouds3d
+--disable-specular-highlight
+--fog-fastest
+--visibility=5000
+--timeofday=noon
+--disable-rembrandt
 --prop:/nasal/local_weather/enabled=false
---prop:/sim/rendering/texture-cache/cache-enabled=true
-
-### Initial position
---in-air
---state=cruise
---vc=600
---heading=10.08
+--launcher=0
+--json-report
 
 ### Rendering
---bpp=32
 --fov=65
---prop:/sim/rendering/multi-sample-buffers=true
+--prop:/sim/rendering/multithreading-mode=CullThreadPerCameraDrawThreadPerContext
+--prop:/sim/rendering/random-vegetation=0
+--prop:/sim/rendering/random-buildings=0
+--prop:/sim/rendering/shaders/skydome=0 #turn off ALS
+--prop:/sim/rendering/particles=0
+--prop:/sim/rendering/multi-samples=1
+--prop:/sim/rendering/texture-cache/cache-enabled=1
+--prop:/sim/rendering/draw-mask/models=0
+--prop:/sim/rendering/draw-mask/clouds=0
+--prop:/sim/rendering/draw-mask/terrain=0
 
 ### AI and Traffic
---disable-ai-traffic
 --enable-ai-models
---prop:/sim/ai/traffic-manager/enabled=false
---prop:/autopilot/route-manager/active=true
+--prop:/sim/traffic-manager/enabled=0
 
 ### Network and logging
 --model-hz=500
 --telnet=5401
 --httpd=8181
-
-### Performance Optimizations
---disable-random-objects
---fog-fastest
---prop:/sim/rendering/multithreading-mode=CullThreadPerCameraDrawThreadPerContext
-
-### Scenarios
+ --max-fps=120

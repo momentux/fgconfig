@@ -48,4 +48,9 @@ class DataLoader {
   List<String> getAllAirportLat() {
     return _airports.keys.toList();
   }
+
+  Airport? getFirst() {
+    return _airports[_airports.keys.first];
+  }
+
 }

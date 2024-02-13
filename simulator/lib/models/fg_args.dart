@@ -31,7 +31,7 @@ class FGArgs {
       this.inAir});
 
   List<String> getArgString() {
-    List<String> fgArgs = ['--launcher=no'];
+    List<String> fgArgs = baseArgs();
 
     if (inAir!) {
       fgArgs.addAll([
@@ -67,6 +67,65 @@ class FGArgs {
     }
 
     return fgArgs;
+  }
+
+  List<String> baseArgs() {
+    return """
+### mac
+--download-dir=/Users/rverma2/atlassian/fgconfig/Downloads
+--fg-scenery=/Users/rverma2/atlassian/fgconfig/Scenery
+--fg-aircraft=/Users/rverma2/atlassian/fgconfig/Aircrafts
+--aircraft-dir=/Users/rverma2/atlassian/fgconfig/Aircrafts/f16
+--flight-plan=/Users/rverma2/atlassian/fgconfig/config/modified_vobg.xml
+
+### Aircraft specifics
+--aircraft=f16-block-60
+
+### System
+--enable-fullscreen
+--enable-freeze
+--disable-terrasync
+--disable-distance-attenuation
+--disable-real-weather-fetch
+--disable-ai-traffic
+--disable-random-objects
+--disable-clouds
+--disable-clouds3d
+--disable-specular-highlight
+--fog-fastest
+--visibility=5000
+--timeofday=noon
+--disable-rembrandt
+--prop:/nasal/local_weather/enabled=false
+--launcher=0
+--json-report
+
+### Rendering
+--fov=65
+--prop:/sim/rendering/multithreading-mode=CullThreadPerCameraDrawThreadPerContext
+--prop:/sim/rendering/random-vegetation=0
+--prop:/sim/rendering/random-buildings=0
+--prop:/sim/rendering/shaders/skydome=0 #turn off ALS
+--prop:/sim/rendering/particles=0
+--prop:/sim/rendering/multi-samples=1
+--prop:/sim/rendering/texture-cache/cache-enabled=1
+--prop:/sim/rendering/draw-mask/models=0
+--prop:/sim/rendering/draw-mask/clouds=0
+--prop:/sim/rendering/draw-mask/terrain=0
+
+### AI and Traffic
+--enable-ai-models
+--prop:/sim/traffic-manager/enabled=0
+
+### Network and logging
+--model-hz=500
+--telnet=5401
+--httpd=8181
+--max-fps=120
+"""
+        .split('\n')
+        .where((line) => line.isNotEmpty && !line.startsWith('#'))
+        .toList();
   }
 }
 
