@@ -34,17 +34,28 @@ class ServiceHandler {
         throw Exception('Unsupported operating system');
       }
       var argString = args.getArgString();
+      print(argString.join(' '));
+
       flightGearProcess = await Process.start(fgfsPath,argString );
       _serviceStates[Service.flightGear] = true;
       print('FlightGear process ID: ${flightGearProcess.pid}');
-      print(argString.join(' '));
 
       // If serviceOption is "Autopilot", send a command to FlightGear via telnet
       if (args.autoPilot!) {
-        await Future.delayed(Duration(seconds: 2), () async {
-          await _flightGearTelnet.connect('localhost', findTelnetPort(argString));
-          _flightGearTelnet.sendCommand('set /f16/fcs/switch-pitch-block20 1');
-        });
+        bool connected = false;
+        while (!connected) {
+          try {
+            await _flightGearTelnet.connect(
+                'localhost', findTelnetPort(argString));
+            _flightGearTelnet.sendCommand(
+                'set /f16/fcs/switch-pitch-block20 1');
+            connected = true;
+          } catch (e) {
+            print(
+                'Failed to connect to telnet server. Retrying in 2 seconds...');
+            await Future.delayed(Duration(seconds: 2));
+          }
+        }
       }
     } catch (e) {
       print('Error running FlightGear: $e');

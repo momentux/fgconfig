@@ -46,8 +46,8 @@ class FGArgs {
         fgArgs.addAll([
           '--heading=$headingValue',
           '--prop:/instrumentation/heading-indicator/heading-bug-deg=$headingValue',
-          '--prop:/f16/fcs/switch-pitch-block20=1',
-          '--prop:/f16/fcs/switch-roll-block20=0',
+          '--prop:/f16/fcs/switch-pitch-block20=0',
+          '--prop:/f16/fcs/switch-roll-block20=-1',
         ]);
       }
     } else {
@@ -98,7 +98,6 @@ class FGArgs {
 --disable-rembrandt
 --prop:/nasal/local_weather/enabled=false
 --launcher=0
---json-report
 
 ### Rendering
 --fov=65

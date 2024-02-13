@@ -18,14 +18,13 @@ class RouteOptionsCard extends StatefulWidget {
 }
 
 class _RouteOptionsCardState extends State<RouteOptionsCard> {
-  String? selectedOption = 'Autopilot';
+  String? selectedOption;
   String? subOption;
-  double? latitudeValue = DataLoader().getFirst()?.latitude;
-  double? longitudeValue = DataLoader().getFirst()?.longitude;
+  double? latitudeValue;
+  double? longitudeValue;
   int? altitudeValue = 15000;
   int? headingValue = 120;
-  String? airport = DataLoader().getFirst()?.code;
-  List<String> airports = DataLoader().getAllAirportCodes();
+  String? airport;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +32,7 @@ class _RouteOptionsCardState extends State<RouteOptionsCard> {
     TextEditingController(text: latitudeValue?.toString() ?? '');
     TextEditingController _longController =
     TextEditingController(text: longitudeValue?.toString() ?? '');
+    List<String> airports = DataLoader().getAllAirportCodes();
     return Card(
       margin: EdgeInsets.all(16.0),
       child: Padding(
@@ -47,6 +47,9 @@ class _RouteOptionsCardState extends State<RouteOptionsCard> {
                 setState(() {
                   selectedOption = newValue;
                   subOption = 'On Air';
+                  airport = DataLoader().getFirst()?.code;
+                  latitudeValue = DataLoader().getFirst()?.latitude;
+                  longitudeValue = DataLoader().getFirst()?.longitude;
                   widget.onOptionsChanged(latitudeValue, longitudeValue, altitudeValue, headingValue,selectedOption=='Autopilot', airport, true);
                 });
               }, selectedOptionHint),

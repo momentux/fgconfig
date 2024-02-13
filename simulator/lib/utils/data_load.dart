@@ -50,7 +50,12 @@ class DataLoader {
   }
 
   Airport? getFirst() {
-    return _airports[_airports.keys.first];
+    if (_airports.isNotEmpty) {
+      return _airports[_airports.keys.first];
+    } else {
+      // Handle the case when the map is empty
+      return null;
+    }
   }
 
 }

@@ -44,8 +44,23 @@ Widget dropdownFormField(String? value, List<String> items,
   );
 }
 
-Widget fileUploadButton(Future<void> Function(String filePath) onPressed) {
+Widget buildButton({
+  required VoidCallback onPressed,
+  required String text,
+  Color color = Colors.green,
+}) {
   return ElevatedButton(
+    onPressed: onPressed,
+    style: ElevatedButton.styleFrom(
+      backgroundColor: color,
+      side: BorderSide(color: Colors.black, width: 1),
+    ),
+    child: Text(text),
+  );
+}
+
+Widget fileUploadButton(Future<void> Function(String filePath) onPressed) {
+  return buildButton(
     onPressed: () async {
       FilePickerResult? result = await FilePicker.platform.pickFiles();
       if (result != null) {
@@ -56,7 +71,8 @@ Widget fileUploadButton(Future<void> Function(String filePath) onPressed) {
         print('File picking canceled.');
       }
     },
-    child: Text('Upload File'),
+    text: 'Upload File',
+    color: Colors.grey,
   );
 }
 

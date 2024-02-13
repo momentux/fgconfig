@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../models/fg_args.dart';
+import '../utils/components.dart';
 import '../utils/service_handler.dart';
 import '../widgets/route_options.dart';
 import '../widgets/target_options.dart';
@@ -141,11 +142,11 @@ class _LaunchManagementScreenState extends State<LaunchManagementScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _buildButton(
+        buildButton(
           onPressed: () => serviceHandler.runFlightGear(_collectData()),
           text: 'Launch',
         ),
-        _buildButton(
+        buildButton(
           onPressed: () {
             serviceHandler.stopFlightGear();
             setState(() {});
@@ -154,20 +155,6 @@ class _LaunchManagementScreenState extends State<LaunchManagementScreen> {
           color: Colors.red,
         ),
       ],
-    );
-  }
-
-  Widget _buildButton({
-    required VoidCallback onPressed,
-    required String text,
-    Color color = Colors.blue,
-  }) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: color,
-      ),
-      child: Text(text),
     );
   }
 
