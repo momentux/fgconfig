@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:simulator/models/fg_args.dart';
 
 import 'fg_telnet.dart';
-import 'fgfsrc.dart';
 
 enum Service {
   flightGear,
@@ -18,11 +18,12 @@ class ServiceHandler {
   final Map<Service, bool> _serviceStates = {
     for (var e in Service.values) e: false
   };
+
   Map<Service, bool> get serviceStates => _serviceStates;
   final String serverUrl = "http://134.32.20.102:5003";
   final FlightGearTelnet _flightGearTelnet = FlightGearTelnet();
 
-  Future<void> runFlightGear(Map<String, dynamic> launchData) async {
+  Future<void> runFlightGear(FGArgs args) async {
     try {
       String fgfsPath;
       if (Platform.isWindows) {
@@ -32,22 +33,17 @@ class ServiceHandler {
       } else {
         throw Exception('Unsupported operating system');
       }
-      await modifyFgSrcFile(launchData);
-
-      flightGearProcess = await Process.start(fgfsPath, []);
+      flightGearProcess = await Process.start(fgfsPath, args.getArgString());
       _serviceStates[Service.flightGear] = true;
       print('FlightGear process ID: ${flightGearProcess.pid}');
 
-
-
       // If serviceOption is "Autopilot", send a command to FlightGear via telnet
-      if (launchData['serviceOption'] == "Autopilot") {
+      if (args.autoPilot!) {
         await Future.delayed(Duration(seconds: 2), () async {
           await _flightGearTelnet.connect('localhost', 5401);
           _flightGearTelnet.sendCommand('set /f16/fcs/switch-roll-block20 1');
         });
       }
-
     } catch (e) {
       print('Error running FlightGear: $e');
     }
@@ -165,22 +161,12 @@ class ServiceHandler {
     }
   }
 
-  void runAllServices(Map<String, dynamic> collectData) {
-    if (collectData['selectedOption'] == 'FlightGear') {
-      runFlightGear(collectData);
-    }
-    if (collectData['selectedOption'] == 'JsApp') {
-      _runJsApp();
-    }
-    if (collectData['selectedOption'] == 'MIL') {
-      _runMil();
-    }
-    if (collectData['selectedOption'] == 'HMDs') {
-      _runHeadSensor();
-    }
-    if (collectData['selectedOption'] == 'ARINC') {
-      _runArinc();
-    }
+  void runAllServices(FGArgs args) {
+    runFlightGear(args);
+    _runJsApp();
+    _runMil();
+    _runHeadSensor();
+    _runArinc();
   }
 
   void stopAllServices() {
@@ -190,5 +176,4 @@ class ServiceHandler {
     _stopHeadSensor();
     _stopArinc();
   }
-
 }

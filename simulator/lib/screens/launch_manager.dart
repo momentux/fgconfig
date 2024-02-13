@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import '../models/fg_args.dart';
 import '../utils/service_handler.dart';
 import '../widgets/route_options.dart';
 import '../widgets/target_options.dart';
@@ -33,6 +34,7 @@ class _LaunchManagementScreenState extends State<LaunchManagementScreen> {
   bool? autoPilot;
   String? airport;
   String? filename;
+  bool? inAir;
 
   @override
   void initState() {
@@ -59,7 +61,7 @@ class _LaunchManagementScreenState extends State<LaunchManagementScreen> {
     return Column(
       children: [
         RouteOptionsCard(onOptionsChanged: (newLatitudeValue, newLongitudeValue,
-            newAltitudeValue, newHeadingValue, isAutoPilot, newAirport) {
+            newAltitudeValue, newHeadingValue, isAutoPilot, newAirport, isInAir) {
           setState(() {
             latitudeValue = newLatitudeValue;
             longitudeValue = newLongitudeValue;
@@ -67,6 +69,7 @@ class _LaunchManagementScreenState extends State<LaunchManagementScreen> {
             headingValue = newHeadingValue;
             autoPilot = isAutoPilot;
             airport = newAirport;
+            inAir = isInAir;
           });
         }),
         TargetOptionsCard(
@@ -168,20 +171,21 @@ class _LaunchManagementScreenState extends State<LaunchManagementScreen> {
     );
   }
 
-  Map<String, dynamic> _collectData() {
-    return {
-      'autopilot': autoPilot,
-      'targetOption': targetOption,
-      'typeOfTarget': typeOfTarget,
-      'targetSubOption': targetSubOption,
-      'airport': airport,
-      'latitudeValue': latitudeValue,
-      'longitudeValue': longitudeValue,
-      'altitudeValue': altitudeValue,
-      'headingValue': headingValue,
-      'serviceStates': serviceHandler.serviceStates,
-      'filename': filename,
-      'state': 'cruise'
-    };
+  FGArgs _collectData() {
+    return FGArgs(
+      autoPilot: autoPilot,
+      targetOption: targetOption,
+      typeOfTarget: typeOfTarget,
+      targetSubOption: targetSubOption,
+      airport: airport,
+      latitudeValue: latitudeValue,
+      longitudeValue: longitudeValue,
+      altitudeValue: altitudeValue,
+      headingValue: headingValue,
+      serviceStates: serviceHandler.serviceStates,
+      filename: filename,
+      state: 'cruise',
+      inAir: inAir,
+    );
   }
 }

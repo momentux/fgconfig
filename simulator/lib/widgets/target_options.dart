@@ -25,7 +25,7 @@ const String typeOfTargetHint = 'Select Type of Target';
 const String targetSubOptionHint = 'Select Target Sub Option';
 
 class _TargetOptionsCardState extends State<TargetOptionsCard> {
-  String? targetOption = 'FG AI Scenario';
+  String? targetOption = 'None';
   String? typeOfTarget;
   String? targetSubOption;
 
@@ -43,7 +43,7 @@ class _TargetOptionsCardState extends State<TargetOptionsCard> {
               titleText('Target Options'),
               sizedRow([
                 dropdownFormField(
-                    targetOption, ['FG AI Scenario', 'Manual AI Scenario'],
+                    targetOption, ['None','FG AI Scenario', 'Manual AI Scenario'],
                     (newValue) {
                   setState(() {
                     targetOption = newValue;

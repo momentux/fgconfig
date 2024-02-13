@@ -8,7 +8,7 @@ const String selectedOptionHint = 'Select Flying Mode';
 const String subOptionHint = 'Select Sub Option';
 
 class RouteOptionsCard extends StatefulWidget {
-  final Function(double? latitudeValue, double? longitudeValue, int? altitudeValue, int? headingValue, bool? autoPilot, String? airport) onOptionsChanged;
+  final Function(double? latitudeValue, double? longitudeValue, int? altitudeValue, int? headingValue, bool? autoPilot, String? airport,bool? inAir) onOptionsChanged;
   RouteOptionsCard({
     required this.onOptionsChanged,
   });
@@ -47,7 +47,7 @@ class _RouteOptionsCardState extends State<RouteOptionsCard> {
                 setState(() {
                   selectedOption = newValue;
                   subOption = 'On Air';
-                  widget.onOptionsChanged(latitudeValue, longitudeValue, altitudeValue, headingValue,selectedOption=='Autopilot', airport);
+                  widget.onOptionsChanged(latitudeValue, longitudeValue, altitudeValue, headingValue,selectedOption=='Autopilot', airport, true);
                 });
               }, selectedOptionHint),
               if (selectedOption == 'Autopilot')
@@ -57,7 +57,7 @@ class _RouteOptionsCardState extends State<RouteOptionsCard> {
                     (newValue) {
                   setState(() {
                     subOption = newValue;
-                    widget.onOptionsChanged(latitudeValue, longitudeValue, altitudeValue, headingValue,selectedOption=='Autopilot', airport);
+                    widget.onOptionsChanged(latitudeValue, longitudeValue, altitudeValue, headingValue,selectedOption=='Autopilot', airport,subOption == 'On Air');
                   });
                 }, subOptionHint),
             ]),
@@ -72,13 +72,13 @@ class _RouteOptionsCardState extends State<RouteOptionsCard> {
               textFormField(_latController, (value) {
                 setState(() {
                   latitudeValue = double.tryParse(value);
-                  widget.onOptionsChanged(latitudeValue, longitudeValue, altitudeValue, headingValue,selectedOption=='Autopilot', airport);
+                  widget.onOptionsChanged(latitudeValue, longitudeValue, altitudeValue, headingValue,selectedOption=='Autopilot', airport, subOption == 'On Air');
                 });
               }, "Latitude"),
               textFormField(_longController, (value) {
                 setState(() {
                   longitudeValue = double.tryParse(value);
-                  widget.onOptionsChanged(latitudeValue, longitudeValue, altitudeValue, headingValue,selectedOption=='Autopilot', airport);
+                  widget.onOptionsChanged(latitudeValue, longitudeValue, altitudeValue, headingValue,selectedOption=='Autopilot', airport, subOption == 'On Air');
                 });
               }, "Longitude"),
               if (selectedOption == 'Autopilot' || subOption == 'On Air')
@@ -87,7 +87,7 @@ class _RouteOptionsCardState extends State<RouteOptionsCard> {
                         text: altitudeValue?.toString() ?? ''), (value) {
                   setState(() {
                     altitudeValue = int.tryParse(value);
-                    widget.onOptionsChanged(latitudeValue, longitudeValue, altitudeValue, headingValue,selectedOption=='Autopilot', airport);
+                    widget.onOptionsChanged(latitudeValue, longitudeValue, altitudeValue, headingValue,selectedOption=='Autopilot', airport, subOption == 'On Air');
                   });
                 }, "Altitude"),
               if (selectedOption == 'Autopilot')
@@ -96,7 +96,7 @@ class _RouteOptionsCardState extends State<RouteOptionsCard> {
                     (value) {
                   setState(() {
                     headingValue = int.tryParse(value);
-                    widget.onOptionsChanged(latitudeValue, longitudeValue, altitudeValue, headingValue,selectedOption=='Autopilot', airport);
+                    widget.onOptionsChanged(latitudeValue, longitudeValue, altitudeValue, headingValue,selectedOption=='Autopilot', airport, subOption == 'On Air');
                   });
                 }, "Heading"),
             ]),
