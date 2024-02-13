@@ -10,6 +10,7 @@ class Scenario1 {
     required this.searchOrder,
     required this.entries,
   });
+
   @override
   String toString() {
     return 'Scenario(scenarioName: $scenarioName, description: $description, searchOrder: $searchOrder, entries: $entries)';
@@ -28,6 +29,7 @@ class Scenario2 {
     required this.searchOrder,
     required this.entries,
   });
+
   @override
   String toString() {
     return 'Scenario(scenarioName: $scenarioName, description: $description, searchOrder: $searchOrder, entries: $entries)';
@@ -46,6 +48,7 @@ class Scenario3 {
     required this.searchOrder,
     required this.entries,
   });
+
   @override
   String toString() {
     return 'Scenario(scenarioName: $scenarioName, description: $description, searchOrder: $searchOrder, entries: $entries)';
@@ -64,6 +67,7 @@ class Protocol {
     required this.searchOrder,
     required this.entries,
   });
+
   @override
   String toString() {
     return 'Scenario(scenarioName: $scenarioName, description: $description, searchOrder: $searchOrder, entries: $entries)';
@@ -82,6 +86,7 @@ class ProtocolEntry {
     required this.format,
     required this.node,
   });
+
   @override
   String toString() {
     return 'ProtocolEntry(type: $type, name: $name, format: $format, node: $node)';
@@ -108,6 +113,7 @@ class ScenarioEntry3 {
     required this.heading,
     required this.altitude,
   });
+
   @override
   String toString() {
     return 'ScenarioEntry(type: $type, model: $model,  speedktas: $speedktas, name: $name, latitude: $latitude, longitude: $longitude,  heading: $heading, altitude: $altitude)';
@@ -132,6 +138,7 @@ class ScenarioEntry2 {
     required this.speed,
     required this.rudder,
   });
+
   @override
   String toString() {
     return 'ScenarioEntry(type: $type, model: $model, name: $name, latitude: $latitude, longitude: $longitude, speed: $speed, rudder: $rudder)';
@@ -153,6 +160,7 @@ class ScenarioEntry1 {
     required this.classi,
     required this.flightplan,
   });
+
   @override
   String toString() {
     return 'ScenarioEntry1(type: $type, model: $model, callsign: $callsign, classi: $classi, flightplan:$flightplan)';
@@ -172,8 +180,7 @@ String buildProtocolXML(Protocol protocol) {
     xml.writeln('    <name>${entry.name}</name>');
     xml.writeln('    <format>${entry.format}</format>');
     xml.writeln('    <type>${entry.type}</type>');
-    xml.writeln(
-        '    <node>${entry.node}</node>');
+    xml.writeln('    <node>${entry.node}</node>');
     xml.writeln('</chunk>');
   }
   xml.writeln('</output>');

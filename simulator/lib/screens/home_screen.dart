@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:simulator/screens/launch_manager.dart';
 import 'package:simulator/screens/route_manager.dart';
 import 'package:simulator/screens/target_generator.dart';
-import 'package:simulator/screens/launch_manager.dart';
 
 class HomeScreen extends StatelessWidget {
   @override

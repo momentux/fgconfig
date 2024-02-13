@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+
 import 'package:http/http.dart' as http;
 import 'package:simulator/models/fg_args.dart';
 
@@ -15,9 +16,7 @@ enum Service {
 
 class ServiceHandler {
   late Process flightGearProcess;
-  final Map<Service, bool> _serviceStates = {
-    for (var e in Service.values) e: false
-  };
+  final Map<Service, bool> _serviceStates = {for (var e in Service.values) e: false};
 
   Map<Service, bool> get serviceStates => _serviceStates;
   final String serverUrl = "http://134.32.20.102:5003";
@@ -36,7 +35,7 @@ class ServiceHandler {
       var argString = args.getArgString();
       print(argString.join(' '));
 
-      flightGearProcess = await Process.start(fgfsPath,argString );
+      flightGearProcess = await Process.start(fgfsPath, argString);
       _serviceStates[Service.flightGear] = true;
       print('FlightGear process ID: ${flightGearProcess.pid}');
 
@@ -45,14 +44,11 @@ class ServiceHandler {
         bool connected = false;
         while (!connected) {
           try {
-            await _flightGearTelnet.connect(
-                'localhost', findTelnetPort(argString));
-            _flightGearTelnet.sendCommand(
-                'set /f16/fcs/switch-pitch-block20 1');
+            await _flightGearTelnet.connect('localhost', findTelnetPort(argString));
+            _flightGearTelnet.sendCommand('set /f16/fcs/switch-pitch-block20 1');
             connected = true;
           } catch (e) {
-            print(
-                'Failed to connect to telnet server. Retrying in 2 seconds...');
+            print('Failed to connect to telnet server. Retrying in 2 seconds...');
             await Future.delayed(Duration(seconds: 2));
           }
         }
@@ -75,8 +71,7 @@ class ServiceHandler {
   Future<void> _runHeadSensor() async {
     try {
       final result = await Process.run(
-          r'C:\Users\scl\AppData\Local\Programs\Python\Python38\python.exe',
-          [r'C:\Users\scl\Flightgear\HMCS\HeadSensorReciever.py']);
+          r'C:\Users\scl\AppData\Local\Programs\Python\Python38\python.exe', [r'C:\Users\scl\Flightgear\HMCS\HeadSensorReciever.py']);
       int pid = result.pid;
       print('Process ID (PID): $pid');
       print('Exit code: ${result.exitCode}');
@@ -91,8 +86,7 @@ class ServiceHandler {
   Future<void> _stopHeadSensor() async {
     try {
       final result = await Process.run(
-          r'C:\Users\scl\AppData\Local\Programs\Python\Python38\python.exe',
-          [r'C:\Users\scl\Flightgear\joystick\killscripts.py']);
+          r'C:\Users\scl\AppData\Local\Programs\Python\Python38\python.exe', [r'C:\Users\scl\Flightgear\joystick\killscripts.py']);
       int pid = result.pid;
       print('Process ID (PID): $pid');
       print('Exit code: ${result.exitCode}');
@@ -108,8 +102,7 @@ class ServiceHandler {
     try {
       const executablePath = r'C:\JsApp\X64\Release\JsApp.exe';
       if (Platform.isWindows) {
-        await Process.start(
-            'cmd', ['/c', 'start', '/min', '""', executablePath]);
+        await Process.start('cmd', ['/c', 'start', '/min', '""', executablePath]);
         print('Process started in a minimized state');
         _serviceStates[Service.jsApp] = true;
       }
@@ -120,13 +113,11 @@ class ServiceHandler {
 
   Future<void> _stopJsApp() async {
     if (_serviceStates[Service.jsApp]!) {
-      Process.run('taskkill', ['/F', '/IM', 'JsApp.exe'])
-          .then((ProcessResult results) {
+      Process.run('taskkill', ['/F', '/IM', 'JsApp.exe']).then((ProcessResult results) {
         if (results.exitCode == 0) {
           print('Process JsApp terminated successfully.');
         } else {
-          print(
-              'Failed to terminate process JsApp. Exit code: ${results.exitCode}');
+          print('Failed to terminate process JsApp. Exit code: ${results.exitCode}');
           print('Error: ${results.stderr}');
         }
       });
@@ -197,4 +188,3 @@ class ServiceHandler {
     return port;
   }
 }
-

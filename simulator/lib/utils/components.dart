@@ -16,31 +16,28 @@ Widget titleText(String title) {
 
 Widget sizedRow(List<Widget> children) {
   return Row(
-    children: children
-        .expand((child) => [SizedBox(width: 16.0), Expanded(child: child)])
-        .toList(),
+    children: children.expand((child) => [SizedBox(width: 16.0), Expanded(child: child)]).toList(),
   );
 }
 
-Widget dropdownFormField(String? value, List<String> items,
-    ValueChanged<String?> onChanged, String labelText) {
+Widget dropdownFormField(String? value, List<String> items, ValueChanged<String?> onChanged, String labelText) {
   return DropdownButtonFormField<String>(
-      value: value,
-      onChanged: onChanged,
-      items: items.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-      decoration: InputDecoration(
-        labelText: labelText,
-        labelStyle: TextStyle(
-          fontSize: 20.0, // Set the size as per your requirement
-        ),
-        border: OutlineInputBorder(),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
+    value: value,
+    onChanged: onChanged,
+    items: items.map<DropdownMenuItem<String>>((String value) {
+      return DropdownMenuItem<String>(
+        value: value,
+        child: Text(value),
+      );
+    }).toList(),
+    decoration: InputDecoration(
+      labelText: labelText,
+      labelStyle: TextStyle(
+        fontSize: 20.0, // Set the size as per your requirement
       ),
+      border: OutlineInputBorder(),
+      floatingLabelBehavior: FloatingLabelBehavior.always,
+    ),
   );
 }
 
@@ -76,8 +73,7 @@ Widget fileUploadButton(Future<void> Function(String filePath) onPressed) {
   );
 }
 
-Widget textFormField(TextEditingController controller,
-    ValueChanged<String> onChanged, String labelText) {
+Widget textFormField(TextEditingController controller, ValueChanged<String> onChanged, String labelText) {
   return TextFormField(
     controller: controller,
     keyboardType: TextInputType.number,

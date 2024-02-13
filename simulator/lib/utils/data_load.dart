@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/services.dart' show rootBundle;
 
 class Airport {
@@ -30,7 +31,6 @@ class DataLoader {
         final double lat = airport['latitude'];
         final double long = airport['longitude'];
         _airports[code] = Airport(code: code, latitude: lat, longitude: long);
-        
       }
     } catch (e) {
       print('Error loading airports from JSON: $e');
@@ -41,10 +41,10 @@ class DataLoader {
     return _airports[code];
   }
 
-
   List<String> getAllAirportCodes() {
     return _airports.keys.toList();
   }
+
   List<String> getAllAirportLat() {
     return _airports.keys.toList();
   }
@@ -57,5 +57,4 @@ class DataLoader {
       return null;
     }
   }
-
 }

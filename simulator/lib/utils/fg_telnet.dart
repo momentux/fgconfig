@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'dart:io';
 import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 
 class FlightGearTelnet {
@@ -8,9 +8,7 @@ class FlightGearTelnet {
 
   Future<void> connect(String host, int port) async {
     _socket = await Socket.connect(host, port);
-    _socket
-        .transform(utf8.decoder as StreamTransformer<Uint8List, dynamic>)
-        .listen((data) {
+    _socket.transform(utf8.decoder as StreamTransformer<Uint8List, dynamic>).listen((data) {
       print('Received: $data');
     });
   }

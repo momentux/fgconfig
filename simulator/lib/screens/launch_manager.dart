@@ -1,5 +1,7 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
+
 import '../models/fg_args.dart';
 import '../utils/components.dart';
 import '../utils/service_handler.dart';
@@ -22,9 +24,7 @@ class LaunchManagementScreen extends StatefulWidget {
 class _LaunchManagementScreenState extends State<LaunchManagementScreen> {
   final ServiceHandler serviceHandler = ServiceHandler();
   final Map<Service, Timer> _timers = {};
-  final Map<Service, bool> _visibilityFlags = {
-    for (var e in Service.values) e: true
-  };
+  final Map<Service, bool> _visibilityFlags = {for (var e in Service.values) e: true};
   String? targetOption;
   String? typeOfTarget;
   String? targetSubOption;
@@ -61,8 +61,8 @@ class _LaunchManagementScreenState extends State<LaunchManagementScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        RouteOptionsCard(onOptionsChanged: (newLatitudeValue, newLongitudeValue,
-            newAltitudeValue, newHeadingValue, isAutoPilot, newAirport, isInAir) {
+        RouteOptionsCard(
+            onOptionsChanged: (newLatitudeValue, newLongitudeValue, newAltitudeValue, newHeadingValue, isAutoPilot, newAirport, isInAir) {
           setState(() {
             latitudeValue = newLatitudeValue;
             longitudeValue = newLongitudeValue;
@@ -77,8 +77,7 @@ class _LaunchManagementScreenState extends State<LaunchManagementScreen> {
             targetOption: targetOption,
             typeOfTarget: typeOfTarget,
             targetSubOption: targetSubOption,
-            onOptionsChanged:
-                (newTargetOption, newTypeOfTarget, newTargetSubOption) {
+            onOptionsChanged: (newTargetOption, newTypeOfTarget, newTargetSubOption) {
               setState(() {
                 targetOption = newTargetOption;
                 typeOfTarget = newTypeOfTarget;

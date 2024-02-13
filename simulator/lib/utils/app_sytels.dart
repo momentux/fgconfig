@@ -6,6 +6,7 @@ class AppTheme {
   static const Color accent = Color(0xFFFFA500);
   static const Color disableBackgroundColor = Colors.black12;
   static const Color disableForegroundColor = Colors.white12;
+
   static ButtonStyle buttonStyle() {
     return ElevatedButton.styleFrom(
         backgroundColor: AppTheme.accent,

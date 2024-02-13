@@ -56,11 +56,8 @@ class FGArgs {
 
     if (targetOption == "FG AI Scenario") {
       fgArgs.add('--ai-scenario=$filename');
-      if (typeOfTarget == "Air Target" ||
-          typeOfTarget == "Sea Target" ||
-          typeOfTarget == "Ground Target") {
-        fgArgs.add(
-            '--generic=socket,out,10,134.32.255.255,5505,udp,${typeOfTarget!.split(' ')[0].toUpperCase()}');
+      if (typeOfTarget == "Air Target" || typeOfTarget == "Sea Target" || typeOfTarget == "Ground Target") {
+        fgArgs.add('--generic=socket,out,10,134.32.255.255,5505,udp,${typeOfTarget!.split(' ')[0].toUpperCase()}');
       }
     } else if (targetSubOption == "Replay Recorded Data") {
       fgArgs.add('--prop:/sim/ai/scenario=$filename');

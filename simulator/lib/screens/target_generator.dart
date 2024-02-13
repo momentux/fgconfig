@@ -1,8 +1,9 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'dart:io';
-import 'package:flutter/material.dart';
+
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../models/protocol.dart';
@@ -12,8 +13,7 @@ import '../widgets/ai_scenario/sea_targets.dart';
 
 class ScenarioManagementScreen extends StatefulWidget {
   @override
-  _ScenarioManagementScreenState createState() =>
-      _ScenarioManagementScreenState();
+  _ScenarioManagementScreenState createState() => _ScenarioManagementScreenState();
 }
 
 class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
@@ -28,8 +28,7 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
   String model = "";
   String classi = "";
 
-  final TextEditingController scenarioDescriptionController =
-      TextEditingController();
+  final TextEditingController scenarioDescriptionController = TextEditingController();
   TextEditingController scenarioNameController = TextEditingController();
   String selectedScenarioType = 'Select';
 
@@ -81,8 +80,7 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
                       selectedScenarioType = newValue;
                     }
                   },
-                  items: <String>['Select', 'Air', 'Sea', 'Ground']
-                      .map<DropdownMenuItem<String>>((String value) {
+                  items: <String>['Select', 'Air', 'Sea', 'Ground'].map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
@@ -315,8 +313,7 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
           ),
           SizedBox(height: 16),
           ElevatedButton(
-            onPressed:
-                isFileUploaded ? () => uploadCoordinates(filePath) : null,
+            onPressed: isFileUploaded ? () => uploadCoordinates(filePath) : null,
             child: Text('Upload Coordinates'),
           ),
           SizedBox(height: 16),
@@ -365,6 +362,7 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
 
   late int rows;
   late int interval;
+
   void uploadCoordinates(String filePath) async {
     try {
       if (filePath.isNotEmpty) {
@@ -457,9 +455,7 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
             final coordinates = _parseCoordinates(data);
             final xmlString = generateXml(target, coordinates);
             final fileName = '$target.xml';
-            final file = File(
-                r'C:\Program Files\FlightGear 2020.3\data\AI\Flightplans\' +
-                    '$fileName');
+            final file = File(r'C:\Program Files\FlightGear 2020.3\data\AI\Flightplans\' + '$fileName');
             file.writeAsStringSync(xmlString);
           });
         }
@@ -493,8 +489,7 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
     for (var entry in data) {
       final parts = entry.split('\t');
       if (parts.length >= 3) {
-        final coordinate =
-            parts.map((value) => double.tryParse(value) ?? 0.0).toList();
+        final coordinate = parts.map((value) => double.tryParse(value) ?? 0.0).toList();
         coordinates.add(coordinate);
       } else {
         // Handle invalid coordinate format
@@ -552,14 +547,12 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
 
     if (selectedScenarioType == "Sea") {
       for (int i = 0; i < targets; i++) {
-        print(
-            'Scenario $i: Latitude: ${latitudes[i]}, Longitude: ${longitudes[i]}, Altitude: ${altitudes[i]}');
+        print('Scenario $i: Latitude: ${latitudes[i]}, Longitude: ${longitudes[i]}, Altitude: ${altitudes[i]}');
 
         // Create a ScenarioEntry for the current scenarioEntry
         ScenarioEntry2 sea = ScenarioEntry2(
           type: type != "" ? type : 'ship',
-          model:
-              model != "" ? model : 'Models/Maritime/Military/Carrier_A01.xml',
+          model: model != "" ? model : 'Models/Maritime/Military/Carrier_A01.xml',
           name: 'ship_$i',
           latitude: '${latitudes[i]}',
           longitude: '${longitudes[i]}',
@@ -596,15 +589,12 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
 
     if (selectedScenarioType == "Ground") {
       for (int i = 0; i < targets; i++) {
-        print(
-            'Scenario $i: Latitude: ${latitudes[i]}, Longitude: ${longitudes[i]}, Altitude: ${altitudes[i]}');
+        print('Scenario $i: Latitude: ${latitudes[i]}, Longitude: ${longitudes[i]}, Altitude: ${altitudes[i]}');
 
         // Create a ScenarioEntry for the current scenarioEntry
         ScenarioEntry3 ground = ScenarioEntry3(
           type: type != "" ? type : 'ship',
-          model: model != ""
-              ? model
-              : 'Models/Military/humvee-pickup-odrab-low-poly.ac',
+          model: model != "" ? model : 'Models/Military/humvee-pickup-odrab-low-poly.ac',
           speedktas: speed.toString(),
           name: 'Hamvee_$i',
           latitude: '${latitudes[i]}',
@@ -685,8 +675,7 @@ class _ScenarioManagementScreenState extends State<ScenarioManagementScreen> {
 
           return AlertDialog(
             title: const Text("Scenario Created"),
-            content: const Text(
-                "Scenario XML file generated successfully! and moved to documents directory"),
+            content: const Text("Scenario XML file generated successfully! and moved to documents directory"),
             actions: [
               TextButton(
                 onPressed: () {

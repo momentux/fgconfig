@@ -3,6 +3,7 @@ class Waypoint {
   double speed;
   double roll;
   bool isExpand;
+
   Waypoint({required this.airport, this.speed = 0.0, this.roll = 0.0, this.isExpand = true});
 }
 
@@ -18,6 +19,7 @@ class FgRoute {
     required this.searchOrder,
     required this.entries,
   });
+
   @override
   String toString() {
     return 'Scenario(scenarioName: $scenarioName, description: $description, searchOrder: $searchOrder, entries: $entries)';
@@ -42,6 +44,7 @@ class ScenarioEntry {
     required this.speed,
     required this.altitude,
   });
+
   @override
   String toString() {
     return 'ScenarioEntry(sno:$sno, type: $type, name: $name, latitude: $latitude, longitude: $longitude, speed: $speed, altitude: $altitude,)';
@@ -55,8 +58,7 @@ String buildRouteXML(FgRoute route) {
   xml.writeln('    <version type="int">2</version>');
   xml.writeln('    <flight-rules type="string">V</flight-rules>');
   xml.writeln('    <flight-type type="string">X</flight-type>');
-  xml.writeln(
-      '    <estimated-duration-minutes type="int">0</estimated-duration-minutes>');
+  xml.writeln('    <estimated-duration-minutes type="int">0</estimated-duration-minutes>');
   xml.writeln('    <route>');
   for (final entry in route.entries) {
     xml.writeln('       <wp n="${entry.sno}">');

@@ -1,6 +1,7 @@
 import 'dart:io';
-import 'package:flutter/material.dart';
+
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../models/route.dart';
@@ -18,8 +19,7 @@ class _RouteManagementScreenState extends State<RouteManagementScreen> {
   bool isFileUploaded = false;
   bool isgeneratescenario = false;
 
-  final TextEditingController scenarioDescriptionController =
-  TextEditingController();
+  final TextEditingController scenarioDescriptionController = TextEditingController();
   TextEditingController scenarioNameController = TextEditingController();
 
   String filePath = '';
@@ -86,8 +86,7 @@ class _RouteManagementScreenState extends State<RouteManagementScreen> {
           ),
           SizedBox(height: 16),
           ElevatedButton(
-            onPressed:
-            isFileUploaded ? () => uploadCoordinates(filePath) : null,
+            onPressed: isFileUploaded ? () => uploadCoordinates(filePath) : null,
             child: Text('Upload Coordinates'),
           ),
           SizedBox(height: 16),
@@ -198,8 +197,7 @@ class _RouteManagementScreenState extends State<RouteManagementScreen> {
 
           return AlertDialog(
             title: const Text("Route Created"),
-            content: const Text(
-                "Route XML file generated successfully! and moved to documents directory"),
+            content: const Text("Route XML file generated successfully! and moved to documents directory"),
             actions: [
               TextButton(
                 onPressed: () {
@@ -222,4 +220,3 @@ class _RouteManagementScreenState extends State<RouteManagementScreen> {
     }
   }
 }
-

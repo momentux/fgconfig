@@ -1,11 +1,13 @@
 import 'dart:io';
+
 import 'package:path/path.dart' as path;
 
 late String destinationPath;
 late String destinationPathforscenario;
 late String destinationPathformanualaiscenario;
 
-Future<void> moveFile(String filePath, String desiredLocation, Function(String)? setStateCallback, Function(String)? showDialogCallback) async {
+Future<void> moveFile(
+    String filePath, String desiredLocation, Function(String)? setStateCallback, Function(String)? showDialogCallback) async {
   try {
     await Directory(desiredLocation).create(recursive: true);
     String fileName = path.basename(filePath);

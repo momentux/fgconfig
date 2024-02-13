@@ -42,12 +42,10 @@ class _TargetOptionsCardState extends State<TargetOptionsCard> {
             children: [
               titleText('Target Options'),
               sizedRow([
-                dropdownFormField(
-                    targetOption, ['None','FG AI Scenario', 'Manual AI Scenario'],
-                    (newValue) {
+                dropdownFormField(targetOption, ['None', 'FG AI Scenario', 'Manual AI Scenario'], (newValue) {
                   setState(() {
                     targetOption = newValue;
-                    if (targetOption == 'Manual AI Scenario'){
+                    if (targetOption == 'Manual AI Scenario') {
                       typeOfTarget = 'Air Target';
                     } else {
                       typeOfTarget = null;
@@ -55,28 +53,22 @@ class _TargetOptionsCardState extends State<TargetOptionsCard> {
                     widget.onOptionsChanged(targetOption, typeOfTarget, targetSubOption);
                   });
                 }, targetOptionHint),
-                if (targetOption == 'FG AI Scenario')
-                  fileUploadButton(movefileforfgaiscenario),
+                if (targetOption == 'FG AI Scenario') fileUploadButton(movefileforfgaiscenario),
                 if (targetOption == 'Manual AI Scenario')
-                  dropdownFormField(
-                      typeOfTarget, ['Air Target', 'Sea Target', 'Ground Target'],
-                      (newValue) {
+                  dropdownFormField(typeOfTarget, ['Air Target', 'Sea Target', 'Ground Target'], (newValue) {
                     setState(() {
                       typeOfTarget = newValue;
                       widget.onOptionsChanged(targetOption, typeOfTarget, targetSubOption);
                     });
                   }, typeOfTargetHint),
                 if (targetOption == 'Manual AI Scenario')
-                  dropdownFormField(
-                      targetSubOption, ['Replay Recorded Data', 'Bypass FG'],
-                      (newValue) {
+                  dropdownFormField(targetSubOption, ['Replay Recorded Data', 'Bypass FG'], (newValue) {
                     setState(() {
                       targetSubOption = newValue;
                       widget.onOptionsChanged(targetOption, typeOfTarget, targetSubOption);
                     });
                   }, targetSubOptionHint),
-                if (targetOption == 'Manual AI Scenario' &&
-                    targetSubOption == 'Replay Recorded Data')
+                if (targetOption == 'Manual AI Scenario' && targetSubOption == 'Replay Recorded Data')
                   fileUploadButton(movefileformanualai),
                 // if (targetSubOption == 'Bypass FG') buildUploadButton(_pickFile),
               ]),
@@ -88,8 +80,7 @@ class _TargetOptionsCardState extends State<TargetOptionsCard> {
   }
 
   Future<void> movefileforfgaiscenario(String filePath) async {
-    moveFile(filePath, r'C:\Users\scl\Flightgear\Aircrafts\f16\Scenarios\',
-        (fileName) {
+    moveFile(filePath, r'C:\Users\scl\Flightgear\Aircrafts\f16\Scenarios\', (fileName) {
       setState(() {
         // filename = path.basenameWithoutExtension(fileName);
       });
