@@ -105,7 +105,7 @@ class FGArgs {
 --prop:/sim/rendering/multithreading-mode=CullThreadPerCameraDrawThreadPerContext
 --prop:/sim/rendering/random-vegetation=0
 --prop:/sim/rendering/random-buildings=0
---prop:/sim/rendering/shaders/skydome=0 #turn off ALS
+--prop:/sim/rendering/shaders/skydome=0
 --prop:/sim/rendering/particles=0
 --prop:/sim/rendering/multi-samples=1
 --prop:/sim/rendering/texture-cache/cache-enabled=1

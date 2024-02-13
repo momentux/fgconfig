@@ -37,12 +37,13 @@ class ServiceHandler {
       flightGearProcess = await Process.start(fgfsPath,argString );
       _serviceStates[Service.flightGear] = true;
       print('FlightGear process ID: ${flightGearProcess.pid}');
+      print(argString.join(' '));
 
       // If serviceOption is "Autopilot", send a command to FlightGear via telnet
       if (args.autoPilot!) {
         await Future.delayed(Duration(seconds: 2), () async {
           await _flightGearTelnet.connect('localhost', findTelnetPort(argString));
-          _flightGearTelnet.sendCommand('set /f16/fcs/switch-roll-block20 1');
+          _flightGearTelnet.sendCommand('set /f16/fcs/switch-pitch-block20 1');
         });
       }
     } catch (e) {
