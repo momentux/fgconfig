@@ -67,13 +67,14 @@ class FGArgs {
   }
 
   List<String> baseArgs() {
+    const BASE_PATH= '/Users/rverma2/atlassian/fgconfig';
     return """
 ### mac
---download-dir=/Users/rverma2/atlassian/fgconfig/Downloads
---fg-scenery=/Users/rverma2/atlassian/fgconfig/Scenery
---fg-aircraft=/Users/rverma2/atlassian/fgconfig/Aircrafts
---aircraft-dir=/Users/rverma2/atlassian/fgconfig/Aircrafts/f16
---flight-plan=/Users/rverma2/atlassian/fgconfig/config/modified_vobg.xml
+--download-dir=$BASE_PATH/Downloads
+--fg-scenery=$BASE_PATH/Scenery
+--fg-aircraft=$BASE_PATH/Aircrafts
+--aircraft-dir=$BASE_PATH/Aircrafts/f16
+--flight-plan=$BASE_PATH/config/modified_vobg.xml
 
 ### Aircraft specifics
 --aircraft=f16-block-60
