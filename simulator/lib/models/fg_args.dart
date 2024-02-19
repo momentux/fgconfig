@@ -79,9 +79,10 @@ class FGArgs {
 ### Aircraft specifics
 --aircraft=f16-block-60
 
+### --enable-freeze
+
 ### System
 --enable-fullscreen
---enable-freeze
 --disable-terrasync
 --disable-distance-attenuation
 --disable-real-weather-fetch
